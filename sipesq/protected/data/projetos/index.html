@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <title>Hiperdocumentos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" >
+    <meta name="author" content="Guilherme Severo, Lucas Magrini Rigo, Diogo Costa" >
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet/less" type="text/css" href="css/main.less">
+
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .hiperdocumento{
+        visibility: hidden;
+      }
+
+      word{
+        font-weight: bold;
+      }
+
+      #menuContos{
+        position: fixed; 
+      }
+
+      img{
+        width: 150px;
+      }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet" />
+    <link href="contos/conto.cnt" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/tru'nk/'html5.js"></script>
+    <![endif]-->
+    </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar" data-twttr-rendered="true">
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="https://github.com/GuiSevero/Hiperdocumentos/tree/master/TrabalhoFinal">Hiperdocumentos - GitHub</a>
+          <div class="nav-collapse collapse">
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3 bs-docs-sidebar">
+          <ul id="menuContos" class="nav nav-list bs-docs-sidenav affix-top">
+            
+          </ul>
+        </div>  
+        <div class="span9 well" id="textos">
+            
+        </div>
+      </div><!--/row-->
+    </div>
+      <hr>
+
+      <footer>
+        <p align="center">&copy; UFRGS - UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+<div class="hiperdocumento" id="hiperdocumento"> <!--TODO O HIPERDOC DEVE SER POSTO DENTRO DESTA TAG -->    
+
+</div> <!-- FIM DO HIPERDOCUMENTO -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>    
+    <script  type="text/javascript">
+
+
+    $('#hiperdocumento').load('contos/conto.cnt', loadContos)
+
+    function loadContos(){
+
+
+          var contos = $('conto');          
+          for(i=0; i<contos.length; i++){
+              
+              //coloca todos os contos na pagina
+             $('#menuContos').append('<li><a href="#' + $(contos[i]).attr('id') + '"><i class="icon-chevron-right"></i>' + $(contos[i]).attr('titulo') + '</a></li>') 
+             $('#textos').append('<h2 id="' + $(contos[i]).attr('id') + '">' + $(contos[i]).attr('titulo') + '</h2>')
+             $('#textos').append('<h4><i>' + $(contos[i]).attr('autor') + '</i></h4>')
+             $('#textos').append('<p id="' + $(contos[i]).attr('id') + '">' + $(contos[i]).html() + '</p>')
+          }
+
+          var significados = $('significado')
+
+
+            for(i=0; i<significados.length; i++){
+
+              var wd = $(significados[i]).attr('word')              
+
+              //coloca os popover em todas as palavras
+              $('.' + wd).popover({
+
+                title: wd,
+                content: $(significados[i]).html(),
+                trigger: 'hover',
+                placement: 'bottom',
+                html: true
+
+              }).css('text-style', 'bold')
+
+          } 
+          
+          var scroll = 50;
+          $('body').animate({scrollTop: 0}, 500 )  
+          setTimeout(function(){
+              setInterval(function(){            
+              $('body').animate({scrollTop: scroll}, 500 )  
+              scroll = scroll + 100
+
+              //volta para o início
+              if(scroll > $('#textos').height() * 0.8){
+                scroll = 0
+              }              
+            }, 4000)
+          }, 3000)        
+      }
+
+          
+    </script>
+
+
+    
+  </body>
+</html>

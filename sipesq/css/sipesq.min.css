@@ -1,0 +1,52 @@
+::-webkit-scrollbar{width:10px;height:13px}
+::-webkit-scrollbar-button:vertical{background-color:#c0c0c0;border:1px solid #808080}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment{display:block}
+::-webkit-scrollbar-button:vertical:start:increment,::-webkit-scrollbar-button:vertical:end:decrement{display:none}
+::-webkit-scrollbar-button:vertical:increment{display:none}
+::-webkit-scrollbar-button:vertical:decrement{display:none}
+::-webkit-scrollbar-button:horizontal:increment{display:none}
+::-webkit-scrollbar-button:horizontal:decrement{display:none}
+::-webkit-scrollbar-track:vertical{background-color:#00f;border:1px dashed #ffc0cb}
+::-webkit-scrollbar-track-piece:vertical:start{border:0}
+::-webkit-scrollbar-track-piece:vertical:end{border:0}
+::-webkit-scrollbar-track-piece{background-color:#c0c0c0}
+::-webkit-scrollbar-thumb:vertical{height:50px;background-color:#808080}
+::-webkit-scrollbar-thumb:horizontal{height:50px;background-color:#808080}
+::-webkit-scrollbar-corner:vertical{background-color:#000}
+::-webkit-scrollbar-resizer:vertical{background-color:#808080}
+body{background-color:#888;margin:0;padding:0;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;background-color:#444;background-image:url(../img/bg-pattern.png);background-repeat:repeat}
+.page{padding:10px;background:#fff}
+#footer{height:60px}
+.main-menu a{font-weight:bold}
+#footer{background-color:#f5f5f5}
+div.view{padding:10px;margin:5px 0;border:1px solid #bbb;background-color:#fff;-webkit-box-shadow:0 1px 3px rgba(0,0,0,0.2);-moz-box-shadow:0 1px 3px rgba(0,0,0,0.2);box-shadow:0 1px 3px rgba(0,0,0,0.2);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;-moz-background-clip:padding;-webkit-background-clip:padding-box;background-clip:padding-box}
+#header{padding:30px;margin-left:auto;margin-right:0}
+.sresult{border-bottom:solid 1px #ccf;margin-bottom:5px;padding:5px}
+.sresult:hover{background-color:#eef}
+div.detalhe_pagamento{display:none;padding-top:5px;padding-bottom:5px;border:1px solid #c9e0ed;padding-left:10px}
+div.info{padding:10px;margin:10px 0;border:1px solid #c9e0ed}
+div.view-esquerda{margin:10px 10px;float:left}
+div.view-direita{margin:10px 10px;float:right}
+div.view ul{list-style:none}
+div.view a{color:#555;text-decoration:none}
+div.view a:hover{color:#09f;text-decoration:underline}
+div.row-projetos label{display:inline}
+tr.livro-emprestado{background:#fe2}
+tr.table-line-over{background:#c3d9ff;cursor:pointer}
+tr.line-last{background:#e3e3e3}
+table.tbl-agenda{border:thin}
+.tarde{background:#e8e8e8;vertical-align:top}
+.manha{vertical-align:top;background:#e8e8e8}
+.livro-emprestado td{font-weight:bold}
+.view-scroll{max-height:350px;overflow:auto}
+.view-left{float:left;width:430px}
+.view-right{float:right;width:430px}
+.button{text-align:justify;position:relative;margin-top:12px;padding:6px;background-color:#c9e0ed;display:inline-block;cursor:pointer;border:none;text-decoration:none;font:12px/100% Arial,sans-serif bold}
+.button:hover{background-color:#a7c0cb;text-decoration:none}
+.button:active{position:relative;top:1px}
+.amarelo{background-color:#ffc;background:#ffc;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #ffc), color-stop(1, #ffa));background:-ms-linear-gradient(bottom, #ffc, #ffa);background:-moz-linear-gradient(center bottom, #ffc 0, #ffa 100%);-webkit-box-shadow:0 1px 1px #999;-moz-box-shadow:0 1px 1px #999;box-shadow:0 1px 1px #999}
+.verde{background-color:#dfd;background:#dfd;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #dfd), color-stop(1, #bfb));background:-ms-linear-gradient(bottom, #dfd, #bfb);background:-moz-linear-gradient(center bottom, #dfd 0, #bfb 100%);-webkit-box-shadow:0 1px 1px #999;-moz-box-shadow:0 1px 1px #999;box-shadow:0 1px 1px #999}
+.vermelho{background-color:#fdd;background:#fdd;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #fdd), color-stop(1, #fcc));background:-ms-linear-gradient(bottom, #fdd, #fcc);background:-moz-linear-gradient(center bottom, #fdd 0, #fcc 100%);-webkit-box-shadow:0 1px 1px #999;-moz-box-shadow:0 1px 1px #999;box-shadow:0 1px 1px #999}
+.bg-view{-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,0.4);-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,0.4);box-shadow:inset 0 1px 2px rgba(0,0,0,0.4)}
+.view-pessoa{border-bottom:solid 1px #ddd;margin-bottom:15px}
+.view-pessoa :hover{background-color:#eee}

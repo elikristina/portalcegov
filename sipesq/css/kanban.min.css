@@ -1,0 +1,11 @@
+.kanban-box{padding:5px}
+.kanban-wrapper{padding-left:5px;padding-right:5px}
+.kanban-header{text-align:center;font-weight:bold;font-size:18px;background-color:#4f9bc6;background:#4f9bc6;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #6fbde8), color-stop(1, #4f9bc6));background:-ms-linear-gradient(bottom, #6fbde8, #4f9bc6);background:-moz-linear-gradient(center bottom, #6fbde8 0, #4f9bc6 100%);background:-o-linear-gradient(#4f9bc6, #6fbde8);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f9bc6', endColorstr='#6fbde8', GradientType=0);color:#fff;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px}
+.kanban-item{font-size:12px;cursor:move}
+.kanban-passo-item{}
+.kanban-passo-item-hover{background-color:#eef}
+.atv-list{min-height:500px;height:100%;padding-bottom:100px}
+.kanban-over{background-color:#cfc}
+.kanban-active{background-color:#eef}
+.hidden{display:none}
+.ui-icon{cursor:pointer}

@@ -1,0 +1,9 @@
+<% for(i in data.items) { %>
+    <li class="ntf <%= (data.items[i].read == true) ? '': 'notif-new'  %>">
+      <a href="<%= data.items[i].notf_url %>">
+      <div class="notif-content">
+         <%= data.items[i].message %>
+      </div>
+      </a>
+    </li>
+  <% } %>

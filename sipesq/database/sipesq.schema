@@ -1,0 +1,2784 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.4
+-- Dumped by pg_dump version 9.2.4
+-- Started on 2013-04-29 15:25:52
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 246 (class 3079 OID 11727)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2403 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 168 (class 1259 OID 16394)
+-- Name: atividade_cod_adividade_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE atividade_cod_adividade_seq
+    START WITH 10
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.atividade_cod_adividade_seq OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 169 (class 1259 OID 16396)
+-- Name: atividade; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE atividade (
+    cod_atividade integer DEFAULT nextval('atividade_cod_adividade_seq'::regclass) NOT NULL,
+    cod_pessoa integer NOT NULL,
+    tipo_vinculo character varying,
+    nome_atividade character varying NOT NULL,
+    descricao text NOT NULL,
+    data_inicio date DEFAULT ('now'::text)::date NOT NULL,
+    data_fim date DEFAULT ('now'::text)::date NOT NULL,
+    turnos_trabalho integer,
+    estagio boolean DEFAULT false NOT NULL,
+    cod_categoria integer DEFAULT 8 NOT NULL,
+    data_criacao date,
+    data_edicao date,
+    data_realizacao date,
+    em_andamento boolean DEFAULT false NOT NULL,
+    status integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.atividade OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 16409)
+-- Name: atividade_categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE atividade_categoria (
+    cod_categoria integer NOT NULL,
+    cod_categoria_pai integer,
+    nome character varying NOT NULL,
+    texto_finalizado text,
+    texto_andamento text,
+    descricao_relatorio text NOT NULL,
+    descricao_adicional text
+);
+
+
+ALTER TABLE public.atividade_categoria OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 16415)
+-- Name: atividade_categoria_cod_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE atividade_categoria_cod_categoria_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.atividade_categoria_cod_categoria_seq OWNER TO postgres;
+
+--
+-- TOC entry 2404 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: atividade_categoria_cod_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE atividade_categoria_cod_categoria_seq OWNED BY atividade_categoria.cod_categoria;
+
+
+--
+-- TOC entry 172 (class 1259 OID 16417)
+-- Name: atividade_financeiro; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE atividade_financeiro (
+    cod_atividade integer NOT NULL,
+    cod_financeiro integer NOT NULL
+);
+
+
+ALTER TABLE public.atividade_financeiro OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 16420)
+-- Name: atividade_passo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE atividade_passo (
+    cod_passo integer NOT NULL,
+    cod_pessoa integer NOT NULL,
+    cod_atividade integer NOT NULL,
+    descricao character varying NOT NULL,
+    data_criacao character varying(10) NOT NULL,
+    data_finalizacao character varying(10),
+    finalizado boolean DEFAULT false NOT NULL,
+    data_prazo date DEFAULT (('now'::text)::date + '1 mon'::interval) NOT NULL
+);
+
+
+ALTER TABLE public.atividade_passo OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16428)
+-- Name: atividade_passo_cod_passo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE atividade_passo_cod_passo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.atividade_passo_cod_passo_seq OWNER TO postgres;
+
+--
+-- TOC entry 2405 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: atividade_passo_cod_passo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE atividade_passo_cod_passo_seq OWNED BY atividade_passo.cod_passo;
+
+
+--
+-- TOC entry 175 (class 1259 OID 16430)
+-- Name: atividade_pessoa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE atividade_pessoa (
+    cod_atividade integer NOT NULL,
+    cod_pessoa integer NOT NULL
+);
+
+
+ALTER TABLE public.atividade_pessoa OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 16433)
+-- Name: atividade_projeto; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE atividade_projeto (
+    cod_atividade integer NOT NULL,
+    cod_projeto integer NOT NULL
+);
+
+
+ALTER TABLE public.atividade_projeto OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 16436)
+-- Name: atividade_secundaria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE atividade_secundaria (
+    cod_atividade integer NOT NULL,
+    titulo character varying NOT NULL,
+    descricao text NOT NULL,
+    tipo character varying NOT NULL,
+    prazo integer NOT NULL,
+    id character varying NOT NULL
+);
+
+
+ALTER TABLE public.atividade_secundaria OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 16442)
+-- Name: atividade_secundaria_cod_atividade_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE atividade_secundaria_cod_atividade_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.atividade_secundaria_cod_atividade_seq OWNER TO postgres;
+
+--
+-- TOC entry 2406 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: atividade_secundaria_cod_atividade_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE atividade_secundaria_cod_atividade_seq OWNED BY atividade_secundaria.cod_atividade;
+
+
+--
+-- TOC entry 179 (class 1259 OID 16444)
+-- Name: contato; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE contato (
+    cod_contato integer NOT NULL,
+    nome character varying NOT NULL,
+    telefone character varying,
+    email character varying,
+    website character varying,
+    endereco character varying,
+    instituicao character varying,
+    descricao text
+);
+
+
+ALTER TABLE public.contato OWNER TO postgres;
+
+--
+-- TOC entry 180 (class 1259 OID 16450)
+-- Name: contato_cod_contato_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE contato_cod_contato_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.contato_cod_contato_seq OWNER TO postgres;
+
+--
+-- TOC entry 2407 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: contato_cod_contato_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE contato_cod_contato_seq OWNED BY contato.cod_contato;
+
+
+--
+-- TOC entry 181 (class 1259 OID 16452)
+-- Name: emprestimo_livro; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE emprestimo_livro (
+    cod_livro integer NOT NULL,
+    data_retirada timestamp without time zone NOT NULL,
+    data_devolucao date,
+    cod_pessoa integer NOT NULL
+);
+
+
+ALTER TABLE public.emprestimo_livro OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 16455)
+-- Name: ferias; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE ferias (
+    cod_pessoa integer NOT NULL,
+    data_inicio date NOT NULL,
+    data_fim date NOT NULL
+);
+
+
+ALTER TABLE public.ferias OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 16458)
+-- Name: financeiro_categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE financeiro_categoria (
+    cod_categoria integer NOT NULL,
+    nome character varying NOT NULL,
+    descricao character varying
+);
+
+
+ALTER TABLE public.financeiro_categoria OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 16464)
+-- Name: financeiro_categoria_cod_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE financeiro_categoria_cod_categoria_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.financeiro_categoria_cod_categoria_seq OWNER TO postgres;
+
+--
+-- TOC entry 2408 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: financeiro_categoria_cod_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE financeiro_categoria_cod_categoria_seq OWNED BY financeiro_categoria.cod_categoria;
+
+
+--
+-- TOC entry 185 (class 1259 OID 16466)
+-- Name: fonte_pagadora; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE fonte_pagadora (
+    cod_fonte_pagadora integer NOT NULL,
+    nome character varying NOT NULL,
+    descricao text
+);
+
+
+ALTER TABLE public.fonte_pagadora OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 16472)
+-- Name: fonte_pagadora_cod_fonte_pagadora_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE fonte_pagadora_cod_fonte_pagadora_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.fonte_pagadora_cod_fonte_pagadora_seq OWNER TO postgres;
+
+--
+-- TOC entry 2409 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: fonte_pagadora_cod_fonte_pagadora_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE fonte_pagadora_cod_fonte_pagadora_seq OWNED BY fonte_pagadora.cod_fonte_pagadora;
+
+
+--
+-- TOC entry 187 (class 1259 OID 16474)
+-- Name: funcoes_pessoa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE funcoes_pessoa (
+    cod_funcao integer NOT NULL,
+    funcao character varying NOT NULL,
+    cod_pessoa integer NOT NULL
+);
+
+
+ALTER TABLE public.funcoes_pessoa OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 16480)
+-- Name: funcoes_pessoa_cod_funcao_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE funcoes_pessoa_cod_funcao_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.funcoes_pessoa_cod_funcao_seq OWNER TO postgres;
+
+--
+-- TOC entry 2410 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: funcoes_pessoa_cod_funcao_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE funcoes_pessoa_cod_funcao_seq OWNED BY funcoes_pessoa.cod_funcao;
+
+
+--
+-- TOC entry 189 (class 1259 OID 16482)
+-- Name: horario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE horario (
+    cod_pessoa integer NOT NULL,
+    dia_semana character varying NOT NULL,
+    turno character varying NOT NULL
+);
+
+
+ALTER TABLE public.horario OWNER TO postgres;
+
+--
+-- TOC entry 190 (class 1259 OID 16488)
+-- Name: links; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE links (
+    cod_link integer NOT NULL,
+    nome character varying NOT NULL,
+    link character varying NOT NULL,
+    tags character varying,
+    descricao text
+);
+
+
+ALTER TABLE public.links OWNER TO postgres;
+
+--
+-- TOC entry 191 (class 1259 OID 16494)
+-- Name: links_cod_link_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE links_cod_link_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.links_cod_link_seq OWNER TO postgres;
+
+--
+-- TOC entry 2411 (class 0 OID 0)
+-- Dependencies: 191
+-- Name: links_cod_link_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE links_cod_link_seq OWNED BY links.cod_link;
+
+
+--
+-- TOC entry 192 (class 1259 OID 16496)
+-- Name: livro; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE livro (
+    cod_livro integer NOT NULL,
+    autor character varying NOT NULL,
+    titulo character varying NOT NULL,
+    subtitulo character varying,
+    editora character varying NOT NULL,
+    cidade_publicacao character varying NOT NULL,
+    nro_edicao character varying NOT NULL,
+    cod_projeto integer DEFAULT 15 NOT NULL,
+    valor character varying DEFAULT 0 NOT NULL,
+    local_compra character varying DEFAULT 'desconhecido'::character varying NOT NULL,
+    nro_nota_fiscal character varying DEFAULT 'desconhecido'::character varying NOT NULL,
+    isbn character varying,
+    ano character varying NOT NULL,
+    nro_patrimonio character varying DEFAULT 1 NOT NULL,
+    cod_pessoa integer,
+    nro_paginas character varying NOT NULL,
+    localizacao_sabi character varying DEFAULT 'desconhecido'::character varying,
+    nro_exemplares integer DEFAULT 1 NOT NULL,
+    volume integer
+);
+
+
+ALTER TABLE public.livro OWNER TO postgres;
+
+--
+-- TOC entry 193 (class 1259 OID 16509)
+-- Name: livro_cod_livro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE livro_cod_livro_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.livro_cod_livro_seq OWNER TO postgres;
+
+--
+-- TOC entry 2412 (class 0 OID 0)
+-- Dependencies: 193
+-- Name: livro_cod_livro_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE livro_cod_livro_seq OWNED BY livro.cod_livro;
+
+
+--
+-- TOC entry 194 (class 1259 OID 16511)
+-- Name: log; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE log (
+    cod_log integer NOT NULL,
+    cod_pessoa integer NOT NULL,
+    mensagem character varying NOT NULL,
+    "timestamp" date DEFAULT now() NOT NULL
+);
+
+
+ALTER TABLE public.log OWNER TO postgres;
+
+--
+-- TOC entry 195 (class 1259 OID 16518)
+-- Name: log_cod_log_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE log_cod_log_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.log_cod_log_seq OWNER TO postgres;
+
+--
+-- TOC entry 2413 (class 0 OID 0)
+-- Dependencies: 195
+-- Name: log_cod_log_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE log_cod_log_seq OWNED BY log.cod_log;
+
+
+--
+-- TOC entry 196 (class 1259 OID 16520)
+-- Name: passos_construcao; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE passos_construcao (
+    id integer NOT NULL,
+    nome character varying NOT NULL,
+    descricao text,
+    prioridade integer NOT NULL,
+    finalizado boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE public.passos_construcao OWNER TO postgres;
+
+--
+-- TOC entry 197 (class 1259 OID 16527)
+-- Name: passos_construcao_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE passos_construcao_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.passos_construcao_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2414 (class 0 OID 0)
+-- Dependencies: 197
+-- Name: passos_construcao_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE passos_construcao_id_seq OWNED BY passos_construcao.id;
+
+
+--
+-- TOC entry 245 (class 1259 OID 24587)
+-- Name: patrimonio; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE patrimonio (
+    cod_patrimonio integer NOT NULL,
+    cod_projeto_despesa integer,
+    nome character varying NOT NULL,
+    nro_patrimonio character varying NOT NULL,
+    valor real DEFAULT 0 NOT NULL,
+    descricao text,
+    localizacao character varying,
+    data_criacao date DEFAULT ('now'::text)::date NOT NULL,
+    data_edicao date DEFAULT ('now'::text)::date NOT NULL,
+    criador character varying NOT NULL,
+    editor character varying NOT NULL,
+    logs text DEFAULT '<li>ITEM CREATED<li>'::text
+);
+
+
+ALTER TABLE public.patrimonio OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1259 OID 16529)
+-- Name: patrimonio_categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE patrimonio_categoria (
+    cod_categoria integer NOT NULL,
+    nome character varying NOT NULL
+);
+
+
+ALTER TABLE public.patrimonio_categoria OWNER TO postgres;
+
+--
+-- TOC entry 199 (class 1259 OID 16535)
+-- Name: patrimonio_categoria_cod_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE patrimonio_categoria_cod_categoria_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.patrimonio_categoria_cod_categoria_seq OWNER TO postgres;
+
+--
+-- TOC entry 2415 (class 0 OID 0)
+-- Dependencies: 199
+-- Name: patrimonio_categoria_cod_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE patrimonio_categoria_cod_categoria_seq OWNED BY patrimonio_categoria.cod_categoria;
+
+
+--
+-- TOC entry 244 (class 1259 OID 24585)
+-- Name: patrimonio_cod_patrimonio_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE patrimonio_cod_patrimonio_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.patrimonio_cod_patrimonio_seq OWNER TO postgres;
+
+--
+-- TOC entry 2416 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: patrimonio_cod_patrimonio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE patrimonio_cod_patrimonio_seq OWNED BY patrimonio.cod_patrimonio;
+
+
+--
+-- TOC entry 200 (class 1259 OID 16537)
+-- Name: patrimonio_item; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE patrimonio_item (
+    cod_item integer NOT NULL,
+    cod_termo integer,
+    nome character varying NOT NULL,
+    nro_patrimonio integer NOT NULL,
+    valor real,
+    descricao text,
+    localizacao character varying,
+    data_aquisicao date,
+    vendedor character varying,
+    cod_categoria integer
+);
+
+
+ALTER TABLE public.patrimonio_item OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 16543)
+-- Name: patrimonio_item_cod_item_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE patrimonio_item_cod_item_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.patrimonio_item_cod_item_seq OWNER TO postgres;
+
+--
+-- TOC entry 2417 (class 0 OID 0)
+-- Dependencies: 201
+-- Name: patrimonio_item_cod_item_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE patrimonio_item_cod_item_seq OWNED BY patrimonio_item.cod_item;
+
+
+--
+-- TOC entry 202 (class 1259 OID 16545)
+-- Name: patrimonio_termo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE patrimonio_termo (
+    cod_termo integer NOT NULL,
+    cod_projeto integer,
+    orgao_responsavel character varying NOT NULL,
+    responsavel character varying NOT NULL,
+    co_responsavel character varying NOT NULL,
+    nro_termo_responsabilidade integer NOT NULL,
+    data_termo date
+);
+
+
+ALTER TABLE public.patrimonio_termo OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 16551)
+-- Name: patrimonio_termo_cod_termo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE patrimonio_termo_cod_termo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.patrimonio_termo_cod_termo_seq OWNER TO postgres;
+
+--
+-- TOC entry 2418 (class 0 OID 0)
+-- Dependencies: 203
+-- Name: patrimonio_termo_cod_termo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE patrimonio_termo_cod_termo_seq OWNED BY patrimonio_termo.cod_termo;
+
+
+--
+-- TOC entry 204 (class 1259 OID 16553)
+-- Name: permissao_projeto; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE permissao_projeto (
+    cod_projeto integer NOT NULL,
+    cod_pessoa integer NOT NULL,
+    nivel_permissao integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.permissao_projeto OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1259 OID 16557)
+-- Name: pessoa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pessoa (
+    cod_pessoa integer NOT NULL,
+    nome character varying NOT NULL,
+    nome_mae character varying,
+    telefone character varying,
+    cpf character varying,
+    rg character varying,
+    cartao_ufrgs character varying,
+    cod_projeto_atuante integer,
+    email character varying,
+    cidade character varying,
+    rua_complemento character varying,
+    bairro character varying,
+    cep character varying,
+    banco character varying,
+    agencia character varying,
+    conta_corrente character varying,
+    lattes character varying,
+    data_nascimento date,
+    cod_vinculo_institucional integer,
+    cod_banco character varying,
+    equipe_atual boolean DEFAULT false NOT NULL,
+    login character varying,
+    nome_curto character varying,
+    cod_categoria integer,
+    password character varying DEFAULT 'bb35c21047c59d2b1c70d428927aa347'::character varying NOT NULL,
+    nivel_acesso integer DEFAULT 0 NOT NULL,
+    first_login boolean DEFAULT true NOT NULL
+);
+
+
+ALTER TABLE public.pessoa OWNER TO postgres;
+
+--
+-- TOC entry 206 (class 1259 OID 16567)
+-- Name: pessoa_categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pessoa_categoria (
+    cod_categoria integer NOT NULL,
+    nome character varying NOT NULL
+);
+
+
+ALTER TABLE public.pessoa_categoria OWNER TO postgres;
+
+--
+-- TOC entry 207 (class 1259 OID 16573)
+-- Name: pessoa_categoria_cod_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pessoa_categoria_cod_categoria_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pessoa_categoria_cod_categoria_seq OWNER TO postgres;
+
+--
+-- TOC entry 2419 (class 0 OID 0)
+-- Dependencies: 207
+-- Name: pessoa_categoria_cod_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pessoa_categoria_cod_categoria_seq OWNED BY pessoa_categoria.cod_categoria;
+
+
+--
+-- TOC entry 208 (class 1259 OID 16575)
+-- Name: pessoa_cod_pessoa_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pessoa_cod_pessoa_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pessoa_cod_pessoa_seq OWNER TO postgres;
+
+--
+-- TOC entry 2420 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: pessoa_cod_pessoa_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pessoa_cod_pessoa_seq OWNED BY pessoa.cod_pessoa;
+
+
+--
+-- TOC entry 209 (class 1259 OID 16577)
+-- Name: pessoa_financeiro; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pessoa_financeiro (
+    cod_financeiro integer NOT NULL,
+    cod_pessoa integer NOT NULL,
+    data_inicio date NOT NULL,
+    data_fim date NOT NULL,
+    data_relatorio date,
+    cod_fonte_pagadora integer,
+    cod_categoria integer,
+    projeto_vinculado integer,
+    valor real,
+    categoria character varying
+);
+
+
+ALTER TABLE public.pessoa_financeiro OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 16583)
+-- Name: pessoa_financeiro_cod_financeiro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pessoa_financeiro_cod_financeiro_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pessoa_financeiro_cod_financeiro_seq OWNER TO postgres;
+
+--
+-- TOC entry 2421 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: pessoa_financeiro_cod_financeiro_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pessoa_financeiro_cod_financeiro_seq OWNED BY pessoa_financeiro.cod_financeiro;
+
+
+--
+-- TOC entry 211 (class 1259 OID 16585)
+-- Name: pessoa_token; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE pessoa_token (
+    cod_token integer NOT NULL,
+    nome character varying NOT NULL
+);
+
+
+ALTER TABLE public.pessoa_token OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 16591)
+-- Name: pessoa_token_cod_token_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pessoa_token_cod_token_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pessoa_token_cod_token_seq OWNER TO postgres;
+
+--
+-- TOC entry 2422 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: pessoa_token_cod_token_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE pessoa_token_cod_token_seq OWNED BY pessoa_token.cod_token;
+
+
+--
+-- TOC entry 213 (class 1259 OID 16593)
+-- Name: projeto; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto (
+    cod_projeto integer NOT NULL,
+    nome character varying NOT NULL,
+    codigo_projeto character varying,
+    data_inicio date,
+    data_fim date,
+    data_relatorio date,
+    cod_pessoa_coordenador integer,
+    descricao text,
+    verba_custeio real,
+    verba_capital real,
+    verba_bolsa real,
+    ultima_modificacao date,
+    finalizado boolean DEFAULT false NOT NULL,
+    cod_categoria integer,
+    cod_bolsista_responsavel integer,
+    cod_professor integer,
+    cod_pos_grad integer,
+    cod_grad integer,
+    nome_curto character varying,
+    sigla character varying,
+    situacao integer
+);
+
+
+ALTER TABLE public.projeto OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 16600)
+-- Name: projeto_arquivo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_arquivo (
+    cod_arquivo integer NOT NULL,
+    cod_projeto integer NOT NULL,
+    href character varying NOT NULL,
+    nome character varying NOT NULL,
+    descricao text,
+    data_inclusao date DEFAULT ('now'::text)::date,
+    filename character varying NOT NULL,
+    type character varying,
+    size character varying,
+    "extensionName" character varying
+);
+
+
+ALTER TABLE public.projeto_arquivo OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16607)
+-- Name: projeto_arquivo_cod_arquivo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_arquivo_cod_arquivo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_arquivo_cod_arquivo_seq OWNER TO postgres;
+
+--
+-- TOC entry 2423 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: projeto_arquivo_cod_arquivo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_arquivo_cod_arquivo_seq OWNED BY projeto_arquivo.cod_arquivo;
+
+
+--
+-- TOC entry 216 (class 1259 OID 16609)
+-- Name: projeto_categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_categoria (
+    cod_categoria integer NOT NULL,
+    nome character varying NOT NULL
+);
+
+
+ALTER TABLE public.projeto_categoria OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16615)
+-- Name: projeto_categoria_cod_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_categoria_cod_categoria_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_categoria_cod_categoria_seq OWNER TO postgres;
+
+--
+-- TOC entry 2424 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: projeto_categoria_cod_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_categoria_cod_categoria_seq OWNED BY projeto_categoria.cod_categoria;
+
+
+--
+-- TOC entry 218 (class 1259 OID 16617)
+-- Name: projeto_cod_projeto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_cod_projeto_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_cod_projeto_seq OWNER TO postgres;
+
+--
+-- TOC entry 2425 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: projeto_cod_projeto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_cod_projeto_seq OWNED BY projeto.cod_projeto;
+
+
+--
+-- TOC entry 219 (class 1259 OID 16619)
+-- Name: projeto_despesa; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_despesa (
+    cod_despesa integer NOT NULL,
+    cod_rubrica integer NOT NULL,
+    valor real NOT NULL,
+    comprador character varying NOT NULL,
+    data_compra date NOT NULL,
+    cod_projeto integer NOT NULL,
+    documento character varying,
+    descricao text,
+    data_inclusao date DEFAULT ('now'::text)::date NOT NULL,
+    cod_criador integer NOT NULL,
+    data_edicao date DEFAULT ('now'::text)::date NOT NULL,
+    quantidade integer DEFAULT 1 NOT NULL,
+    nome character varying NOT NULL
+);
+
+
+ALTER TABLE public.projeto_despesa OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16628)
+-- Name: projeto_despesa_cod_despesa_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_despesa_cod_despesa_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_despesa_cod_despesa_seq OWNER TO postgres;
+
+--
+-- TOC entry 2426 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: projeto_despesa_cod_despesa_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_despesa_cod_despesa_seq OWNED BY projeto_despesa.cod_despesa;
+
+
+--
+-- TOC entry 221 (class 1259 OID 16630)
+-- Name: projeto_despesa_info; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_despesa_info (
+    cod_info integer NOT NULL,
+    cod_despesa integer NOT NULL,
+    chave character varying NOT NULL,
+    valor character varying,
+    tipo integer NOT NULL
+);
+
+
+ALTER TABLE public.projeto_despesa_info OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 16636)
+-- Name: projeto_despesa_info_cod_info_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_despesa_info_cod_info_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_despesa_info_cod_info_seq OWNER TO postgres;
+
+--
+-- TOC entry 2427 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: projeto_despesa_info_cod_info_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_despesa_info_cod_info_seq OWNED BY projeto_despesa_info.cod_info;
+
+
+--
+-- TOC entry 223 (class 1259 OID 16638)
+-- Name: projeto_financeiro; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_financeiro (
+    cod_projeto_financeiro integer NOT NULL,
+    cod_projeto integer NOT NULL,
+    descricao text,
+    tipo integer NOT NULL,
+    responsavel character varying,
+    valor real NOT NULL,
+    arquivo character varying,
+    cod_rubrica integer
+);
+
+
+ALTER TABLE public.projeto_financeiro OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16644)
+-- Name: projeto_financeiro_categoria; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_financeiro_categoria (
+    cod_categoria integer NOT NULL,
+    nome character varying NOT NULL
+);
+
+
+ALTER TABLE public.projeto_financeiro_categoria OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16650)
+-- Name: projeto_financeiro_categoria_cod_categoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_financeiro_categoria_cod_categoria_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_financeiro_categoria_cod_categoria_seq OWNER TO postgres;
+
+--
+-- TOC entry 2428 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: projeto_financeiro_categoria_cod_categoria_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_financeiro_categoria_cod_categoria_seq OWNED BY projeto_financeiro_categoria.cod_categoria;
+
+
+--
+-- TOC entry 226 (class 1259 OID 16652)
+-- Name: projeto_financeiro_cod_projeto_financeiro_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_financeiro_cod_projeto_financeiro_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_financeiro_cod_projeto_financeiro_seq OWNER TO postgres;
+
+--
+-- TOC entry 2429 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: projeto_financeiro_cod_projeto_financeiro_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_financeiro_cod_projeto_financeiro_seq OWNED BY projeto_financeiro.cod_projeto_financeiro;
+
+
+--
+-- TOC entry 227 (class 1259 OID 16654)
+-- Name: projeto_financeiro_rubrica; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_financeiro_rubrica (
+    cod_rubrica integer NOT NULL,
+    nome character varying NOT NULL,
+    numero character varying NOT NULL,
+    descricao text NOT NULL
+);
+
+
+ALTER TABLE public.projeto_financeiro_rubrica OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 16660)
+-- Name: projeto_financeiro_rubrica_cod_rubrica_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_financeiro_rubrica_cod_rubrica_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_financeiro_rubrica_cod_rubrica_seq OWNER TO postgres;
+
+--
+-- TOC entry 2430 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: projeto_financeiro_rubrica_cod_rubrica_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_financeiro_rubrica_cod_rubrica_seq OWNED BY projeto_financeiro_rubrica.cod_rubrica;
+
+
+--
+-- TOC entry 229 (class 1259 OID 16662)
+-- Name: projeto_pessoa_atuante; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_pessoa_atuante (
+    cod_pessoa integer NOT NULL,
+    cod_projeto integer NOT NULL
+);
+
+
+ALTER TABLE public.projeto_pessoa_atuante OWNER TO postgres;
+
+--
+-- TOC entry 230 (class 1259 OID 16665)
+-- Name: projeto_receita; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_receita (
+    cod_receita integer NOT NULL,
+    cod_projeto integer NOT NULL,
+    titulo character varying NOT NULL,
+    valor real NOT NULL,
+    anexo character varying,
+    descricao text,
+    data_criacao date,
+    data_edicao date,
+    cod_criador integer,
+    tipo_receita integer DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.projeto_receita OWNER TO postgres;
+
+--
+-- TOC entry 231 (class 1259 OID 16672)
+-- Name: projeto_receita_cod_receita_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_receita_cod_receita_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_receita_cod_receita_seq OWNER TO postgres;
+
+--
+-- TOC entry 2431 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: projeto_receita_cod_receita_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_receita_cod_receita_seq OWNED BY projeto_receita.cod_receita;
+
+
+--
+-- TOC entry 232 (class 1259 OID 16674)
+-- Name: projeto_verba; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE projeto_verba (
+    cod_verba integer NOT NULL,
+    cod_rubrica integer NOT NULL,
+    cod_projeto integer NOT NULL,
+    data_desembolso date,
+    descricao text,
+    valor real DEFAULT 0 NOT NULL
+);
+
+
+ALTER TABLE public.projeto_verba OWNER TO postgres;
+
+--
+-- TOC entry 233 (class 1259 OID 16681)
+-- Name: projeto_verba_cod_verba_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE projeto_verba_cod_verba_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.projeto_verba_cod_verba_seq OWNER TO postgres;
+
+--
+-- TOC entry 2432 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: projeto_verba_cod_verba_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE projeto_verba_cod_verba_seq OWNED BY projeto_verba.cod_verba;
+
+
+--
+-- TOC entry 234 (class 1259 OID 16683)
+-- Name: rubrica; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE rubrica (
+    cod_rubrica integer NOT NULL,
+    nome character varying NOT NULL,
+    numero character varying,
+    descricao text NOT NULL,
+    cod_rubrica_pai integer
+);
+
+
+ALTER TABLE public.rubrica OWNER TO postgres;
+
+--
+-- TOC entry 235 (class 1259 OID 16689)
+-- Name: rubrica_campo; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE rubrica_campo (
+    cod_campo integer NOT NULL,
+    cod_rubrica integer NOT NULL,
+    chave character varying NOT NULL,
+    tipo integer NOT NULL
+);
+
+
+ALTER TABLE public.rubrica_campo OWNER TO postgres;
+
+--
+-- TOC entry 236 (class 1259 OID 16695)
+-- Name: rubrica_campo_cod_campo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE rubrica_campo_cod_campo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.rubrica_campo_cod_campo_seq OWNER TO postgres;
+
+--
+-- TOC entry 2433 (class 0 OID 0)
+-- Dependencies: 236
+-- Name: rubrica_campo_cod_campo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE rubrica_campo_cod_campo_seq OWNED BY rubrica_campo.cod_campo;
+
+
+--
+-- TOC entry 237 (class 1259 OID 16697)
+-- Name: rubrica_cod_rubrica_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE rubrica_cod_rubrica_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.rubrica_cod_rubrica_seq OWNER TO postgres;
+
+--
+-- TOC entry 2434 (class 0 OID 0)
+-- Dependencies: 237
+-- Name: rubrica_cod_rubrica_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE rubrica_cod_rubrica_seq OWNED BY rubrica.cod_rubrica;
+
+
+--
+-- TOC entry 238 (class 1259 OID 16699)
+-- Name: subscription; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE subscription (
+    id integer NOT NULL,
+    descricao text,
+    preco character varying,
+    login character varying,
+    senha character varying,
+    link character varying,
+    validade date,
+    titulo character varying
+);
+
+
+ALTER TABLE public.subscription OWNER TO postgres;
+
+--
+-- TOC entry 239 (class 1259 OID 16705)
+-- Name: subscription_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE subscription_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.subscription_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2435 (class 0 OID 0)
+-- Dependencies: 239
+-- Name: subscription_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE subscription_id_seq OWNED BY subscription.id;
+
+
+--
+-- TOC entry 240 (class 1259 OID 16707)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE users (
+    cod_usuario integer NOT NULL,
+    username character varying NOT NULL,
+    password character varying NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 241 (class 1259 OID 16713)
+-- Name: users_cod_usuario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_cod_usuario_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_cod_usuario_seq OWNER TO postgres;
+
+--
+-- TOC entry 2436 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: users_cod_usuario_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_cod_usuario_seq OWNED BY users.cod_usuario;
+
+
+--
+-- TOC entry 242 (class 1259 OID 16715)
+-- Name: vinculo_institucional; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE vinculo_institucional (
+    cod_vinculo_institucional integer NOT NULL,
+    nome character varying NOT NULL
+);
+
+
+ALTER TABLE public.vinculo_institucional OWNER TO postgres;
+
+--
+-- TOC entry 243 (class 1259 OID 16721)
+-- Name: vinculo_institucional_cod_vinculo_institucional_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE vinculo_institucional_cod_vinculo_institucional_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.vinculo_institucional_cod_vinculo_institucional_seq OWNER TO postgres;
+
+--
+-- TOC entry 2437 (class 0 OID 0)
+-- Dependencies: 243
+-- Name: vinculo_institucional_cod_vinculo_institucional_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE vinculo_institucional_cod_vinculo_institucional_seq OWNED BY vinculo_institucional.cod_vinculo_institucional;
+
+
+--
+-- TOC entry 2195 (class 2604 OID 16723)
+-- Name: cod_categoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_categoria ALTER COLUMN cod_categoria SET DEFAULT nextval('atividade_categoria_cod_categoria_seq'::regclass);
+
+
+--
+-- TOC entry 2198 (class 2604 OID 16724)
+-- Name: cod_passo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_passo ALTER COLUMN cod_passo SET DEFAULT nextval('atividade_passo_cod_passo_seq'::regclass);
+
+
+--
+-- TOC entry 2199 (class 2604 OID 16725)
+-- Name: cod_atividade; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_secundaria ALTER COLUMN cod_atividade SET DEFAULT nextval('atividade_secundaria_cod_atividade_seq'::regclass);
+
+
+--
+-- TOC entry 2200 (class 2604 OID 16726)
+-- Name: cod_contato; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY contato ALTER COLUMN cod_contato SET DEFAULT nextval('contato_cod_contato_seq'::regclass);
+
+
+--
+-- TOC entry 2201 (class 2604 OID 16727)
+-- Name: cod_categoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY financeiro_categoria ALTER COLUMN cod_categoria SET DEFAULT nextval('financeiro_categoria_cod_categoria_seq'::regclass);
+
+
+--
+-- TOC entry 2202 (class 2604 OID 16728)
+-- Name: cod_fonte_pagadora; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY fonte_pagadora ALTER COLUMN cod_fonte_pagadora SET DEFAULT nextval('fonte_pagadora_cod_fonte_pagadora_seq'::regclass);
+
+
+--
+-- TOC entry 2203 (class 2604 OID 16729)
+-- Name: cod_funcao; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY funcoes_pessoa ALTER COLUMN cod_funcao SET DEFAULT nextval('funcoes_pessoa_cod_funcao_seq'::regclass);
+
+
+--
+-- TOC entry 2204 (class 2604 OID 16730)
+-- Name: cod_link; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY links ALTER COLUMN cod_link SET DEFAULT nextval('links_cod_link_seq'::regclass);
+
+
+--
+-- TOC entry 2212 (class 2604 OID 16731)
+-- Name: cod_livro; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY livro ALTER COLUMN cod_livro SET DEFAULT nextval('livro_cod_livro_seq'::regclass);
+
+
+--
+-- TOC entry 2214 (class 2604 OID 16732)
+-- Name: cod_log; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY log ALTER COLUMN cod_log SET DEFAULT nextval('log_cod_log_seq'::regclass);
+
+
+--
+-- TOC entry 2216 (class 2604 OID 16733)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY passos_construcao ALTER COLUMN id SET DEFAULT nextval('passos_construcao_id_seq'::regclass);
+
+
+--
+-- TOC entry 2251 (class 2604 OID 24590)
+-- Name: cod_patrimonio; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patrimonio ALTER COLUMN cod_patrimonio SET DEFAULT nextval('patrimonio_cod_patrimonio_seq'::regclass);
+
+
+--
+-- TOC entry 2217 (class 2604 OID 16734)
+-- Name: cod_categoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patrimonio_categoria ALTER COLUMN cod_categoria SET DEFAULT nextval('patrimonio_categoria_cod_categoria_seq'::regclass);
+
+
+--
+-- TOC entry 2218 (class 2604 OID 16735)
+-- Name: cod_item; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patrimonio_item ALTER COLUMN cod_item SET DEFAULT nextval('patrimonio_item_cod_item_seq'::regclass);
+
+
+--
+-- TOC entry 2219 (class 2604 OID 16736)
+-- Name: cod_termo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patrimonio_termo ALTER COLUMN cod_termo SET DEFAULT nextval('patrimonio_termo_cod_termo_seq'::regclass);
+
+
+--
+-- TOC entry 2225 (class 2604 OID 16737)
+-- Name: cod_pessoa; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa ALTER COLUMN cod_pessoa SET DEFAULT nextval('pessoa_cod_pessoa_seq'::regclass);
+
+
+--
+-- TOC entry 2226 (class 2604 OID 16738)
+-- Name: cod_categoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_categoria ALTER COLUMN cod_categoria SET DEFAULT nextval('pessoa_categoria_cod_categoria_seq'::regclass);
+
+
+--
+-- TOC entry 2227 (class 2604 OID 16739)
+-- Name: cod_financeiro; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_financeiro ALTER COLUMN cod_financeiro SET DEFAULT nextval('pessoa_financeiro_cod_financeiro_seq'::regclass);
+
+
+--
+-- TOC entry 2228 (class 2604 OID 16740)
+-- Name: cod_token; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_token ALTER COLUMN cod_token SET DEFAULT nextval('pessoa_token_cod_token_seq'::regclass);
+
+
+--
+-- TOC entry 2230 (class 2604 OID 16741)
+-- Name: cod_projeto; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto ALTER COLUMN cod_projeto SET DEFAULT nextval('projeto_cod_projeto_seq'::regclass);
+
+
+--
+-- TOC entry 2232 (class 2604 OID 16742)
+-- Name: cod_arquivo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_arquivo ALTER COLUMN cod_arquivo SET DEFAULT nextval('projeto_arquivo_cod_arquivo_seq'::regclass);
+
+
+--
+-- TOC entry 2233 (class 2604 OID 16743)
+-- Name: cod_categoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_categoria ALTER COLUMN cod_categoria SET DEFAULT nextval('projeto_categoria_cod_categoria_seq'::regclass);
+
+
+--
+-- TOC entry 2237 (class 2604 OID 16744)
+-- Name: cod_despesa; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_despesa ALTER COLUMN cod_despesa SET DEFAULT nextval('projeto_despesa_cod_despesa_seq'::regclass);
+
+
+--
+-- TOC entry 2238 (class 2604 OID 16745)
+-- Name: cod_info; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_despesa_info ALTER COLUMN cod_info SET DEFAULT nextval('projeto_despesa_info_cod_info_seq'::regclass);
+
+
+--
+-- TOC entry 2239 (class 2604 OID 16746)
+-- Name: cod_projeto_financeiro; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_financeiro ALTER COLUMN cod_projeto_financeiro SET DEFAULT nextval('projeto_financeiro_cod_projeto_financeiro_seq'::regclass);
+
+
+--
+-- TOC entry 2240 (class 2604 OID 16747)
+-- Name: cod_categoria; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_financeiro_categoria ALTER COLUMN cod_categoria SET DEFAULT nextval('projeto_financeiro_categoria_cod_categoria_seq'::regclass);
+
+
+--
+-- TOC entry 2241 (class 2604 OID 16748)
+-- Name: cod_rubrica; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_financeiro_rubrica ALTER COLUMN cod_rubrica SET DEFAULT nextval('projeto_financeiro_rubrica_cod_rubrica_seq'::regclass);
+
+
+--
+-- TOC entry 2243 (class 2604 OID 16749)
+-- Name: cod_receita; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_receita ALTER COLUMN cod_receita SET DEFAULT nextval('projeto_receita_cod_receita_seq'::regclass);
+
+
+--
+-- TOC entry 2245 (class 2604 OID 16750)
+-- Name: cod_verba; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_verba ALTER COLUMN cod_verba SET DEFAULT nextval('projeto_verba_cod_verba_seq'::regclass);
+
+
+--
+-- TOC entry 2246 (class 2604 OID 16751)
+-- Name: cod_rubrica; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY rubrica ALTER COLUMN cod_rubrica SET DEFAULT nextval('rubrica_cod_rubrica_seq'::regclass);
+
+
+--
+-- TOC entry 2247 (class 2604 OID 16752)
+-- Name: cod_campo; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY rubrica_campo ALTER COLUMN cod_campo SET DEFAULT nextval('rubrica_campo_cod_campo_seq'::regclass);
+
+
+--
+-- TOC entry 2248 (class 2604 OID 16753)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY subscription ALTER COLUMN id SET DEFAULT nextval('subscription_id_seq'::regclass);
+
+
+--
+-- TOC entry 2249 (class 2604 OID 16754)
+-- Name: cod_usuario; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users ALTER COLUMN cod_usuario SET DEFAULT nextval('users_cod_usuario_seq'::regclass);
+
+
+--
+-- TOC entry 2250 (class 2604 OID 16755)
+-- Name: cod_vinculo_institucional; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY vinculo_institucional ALTER COLUMN cod_vinculo_institucional SET DEFAULT nextval('vinculo_institucional_cod_vinculo_institucional_seq'::regclass);
+
+
+--
+-- TOC entry 2259 (class 2606 OID 16757)
+-- Name: atividade_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY atividade_categoria
+    ADD CONSTRAINT atividade_categoria_pkey PRIMARY KEY (cod_categoria);
+
+
+--
+-- TOC entry 2261 (class 2606 OID 16759)
+-- Name: atividade_financeiro_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY atividade_financeiro
+    ADD CONSTRAINT atividade_financeiro_pkey PRIMARY KEY (cod_atividade, cod_financeiro);
+
+
+--
+-- TOC entry 2263 (class 2606 OID 16761)
+-- Name: atividade_passo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY atividade_passo
+    ADD CONSTRAINT atividade_passo_pkey PRIMARY KEY (cod_passo);
+
+
+--
+-- TOC entry 2265 (class 2606 OID 16763)
+-- Name: atividade_pessoa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY atividade_pessoa
+    ADD CONSTRAINT atividade_pessoa_pkey PRIMARY KEY (cod_atividade, cod_pessoa);
+
+
+--
+-- TOC entry 2257 (class 2606 OID 16765)
+-- Name: atividade_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY atividade
+    ADD CONSTRAINT atividade_pkey PRIMARY KEY (cod_atividade);
+
+
+--
+-- TOC entry 2267 (class 2606 OID 16767)
+-- Name: atividade_projeto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY atividade_projeto
+    ADD CONSTRAINT atividade_projeto_pkey PRIMARY KEY (cod_atividade, cod_projeto);
+
+
+--
+-- TOC entry 2269 (class 2606 OID 16769)
+-- Name: atividade_secundaria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY atividade_secundaria
+    ADD CONSTRAINT atividade_secundaria_pkey PRIMARY KEY (cod_atividade);
+
+
+--
+-- TOC entry 2271 (class 2606 OID 16771)
+-- Name: contato_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY contato
+    ADD CONSTRAINT contato_pkey PRIMARY KEY (cod_contato);
+
+
+--
+-- TOC entry 2273 (class 2606 OID 16773)
+-- Name: emprestimo_livro_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY emprestimo_livro
+    ADD CONSTRAINT emprestimo_livro_pkey PRIMARY KEY (cod_livro, data_retirada);
+
+
+--
+-- TOC entry 2275 (class 2606 OID 16775)
+-- Name: ferias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY ferias
+    ADD CONSTRAINT ferias_pkey PRIMARY KEY (cod_pessoa, data_inicio, data_fim);
+
+
+--
+-- TOC entry 2277 (class 2606 OID 16777)
+-- Name: financeiro_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY financeiro_categoria
+    ADD CONSTRAINT financeiro_categoria_pkey PRIMARY KEY (cod_categoria);
+
+
+--
+-- TOC entry 2279 (class 2606 OID 16779)
+-- Name: fonte_pagadora_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY fonte_pagadora
+    ADD CONSTRAINT fonte_pagadora_pkey PRIMARY KEY (cod_fonte_pagadora);
+
+
+--
+-- TOC entry 2281 (class 2606 OID 16781)
+-- Name: funcoes_pessoas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY funcoes_pessoa
+    ADD CONSTRAINT funcoes_pessoas_pkey PRIMARY KEY (cod_funcao);
+
+
+--
+-- TOC entry 2283 (class 2606 OID 16783)
+-- Name: horario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY horario
+    ADD CONSTRAINT horario_pkey PRIMARY KEY (cod_pessoa, dia_semana, turno);
+
+
+--
+-- TOC entry 2285 (class 2606 OID 16785)
+-- Name: links_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY links
+    ADD CONSTRAINT links_pkey PRIMARY KEY (cod_link);
+
+
+--
+-- TOC entry 2287 (class 2606 OID 16787)
+-- Name: livro_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY livro
+    ADD CONSTRAINT livro_pkey PRIMARY KEY (cod_livro);
+
+
+--
+-- TOC entry 2289 (class 2606 OID 16789)
+-- Name: log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY log
+    ADD CONSTRAINT log_pkey PRIMARY KEY (cod_log);
+
+
+--
+-- TOC entry 2291 (class 2606 OID 16791)
+-- Name: passos_construcao_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY passos_construcao
+    ADD CONSTRAINT passos_construcao_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2293 (class 2606 OID 16793)
+-- Name: patrimonio_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY patrimonio_categoria
+    ADD CONSTRAINT patrimonio_categoria_pkey PRIMARY KEY (cod_categoria);
+
+
+--
+-- TOC entry 2295 (class 2606 OID 16795)
+-- Name: patrimonio_item_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY patrimonio_item
+    ADD CONSTRAINT patrimonio_item_pkey PRIMARY KEY (cod_item);
+
+
+--
+-- TOC entry 2341 (class 2606 OID 24595)
+-- Name: patrimonio_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY patrimonio
+    ADD CONSTRAINT patrimonio_pkey PRIMARY KEY (cod_patrimonio);
+
+
+--
+-- TOC entry 2297 (class 2606 OID 16797)
+-- Name: patrimonio_termo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY patrimonio_termo
+    ADD CONSTRAINT patrimonio_termo_pkey PRIMARY KEY (cod_termo);
+
+
+--
+-- TOC entry 2299 (class 2606 OID 16799)
+-- Name: permissao_projeto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY permissao_projeto
+    ADD CONSTRAINT permissao_projeto_pkey PRIMARY KEY (cod_projeto, cod_pessoa);
+
+
+--
+-- TOC entry 2303 (class 2606 OID 16801)
+-- Name: pessoa_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa_categoria
+    ADD CONSTRAINT pessoa_categoria_pkey PRIMARY KEY (cod_categoria);
+
+
+--
+-- TOC entry 2305 (class 2606 OID 16803)
+-- Name: pessoa_financeiro_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa_financeiro
+    ADD CONSTRAINT pessoa_financeiro_pkey PRIMARY KEY (cod_financeiro);
+
+
+--
+-- TOC entry 2301 (class 2606 OID 16805)
+-- Name: pessoa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa
+    ADD CONSTRAINT pessoa_pkey PRIMARY KEY (cod_pessoa);
+
+
+--
+-- TOC entry 2307 (class 2606 OID 16807)
+-- Name: pessoa_token_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY pessoa_token
+    ADD CONSTRAINT pessoa_token_pkey PRIMARY KEY (cod_token);
+
+
+--
+-- TOC entry 2335 (class 2606 OID 16809)
+-- Name: pkey_subscription; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY subscription
+    ADD CONSTRAINT pkey_subscription PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2311 (class 2606 OID 16811)
+-- Name: projeto_arquivo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_arquivo
+    ADD CONSTRAINT projeto_arquivo_pkey PRIMARY KEY (cod_arquivo);
+
+
+--
+-- TOC entry 2313 (class 2606 OID 16813)
+-- Name: projeto_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_categoria
+    ADD CONSTRAINT projeto_categoria_pkey PRIMARY KEY (cod_categoria);
+
+
+--
+-- TOC entry 2317 (class 2606 OID 16815)
+-- Name: projeto_despesa_info_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_despesa_info
+    ADD CONSTRAINT projeto_despesa_info_pkey PRIMARY KEY (cod_info);
+
+
+--
+-- TOC entry 2315 (class 2606 OID 16817)
+-- Name: projeto_despesa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_despesa
+    ADD CONSTRAINT projeto_despesa_pkey PRIMARY KEY (cod_despesa);
+
+
+--
+-- TOC entry 2321 (class 2606 OID 16819)
+-- Name: projeto_financeiro_categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_financeiro_categoria
+    ADD CONSTRAINT projeto_financeiro_categoria_pkey PRIMARY KEY (cod_categoria);
+
+
+--
+-- TOC entry 2319 (class 2606 OID 16821)
+-- Name: projeto_financeiro_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_financeiro
+    ADD CONSTRAINT projeto_financeiro_pkey PRIMARY KEY (cod_projeto_financeiro);
+
+
+--
+-- TOC entry 2323 (class 2606 OID 16823)
+-- Name: projeto_financeiro_rubrica_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_financeiro_rubrica
+    ADD CONSTRAINT projeto_financeiro_rubrica_pkey PRIMARY KEY (cod_rubrica);
+
+
+--
+-- TOC entry 2325 (class 2606 OID 16825)
+-- Name: projeto_pessoa_atuante_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_pessoa_atuante
+    ADD CONSTRAINT projeto_pessoa_atuante_pkey PRIMARY KEY (cod_pessoa, cod_projeto);
+
+
+--
+-- TOC entry 2309 (class 2606 OID 16827)
+-- Name: projeto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto
+    ADD CONSTRAINT projeto_pkey PRIMARY KEY (cod_projeto);
+
+
+--
+-- TOC entry 2327 (class 2606 OID 16829)
+-- Name: projeto_receita_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_receita
+    ADD CONSTRAINT projeto_receita_pkey PRIMARY KEY (cod_receita);
+
+
+--
+-- TOC entry 2329 (class 2606 OID 16831)
+-- Name: projeto_verba_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY projeto_verba
+    ADD CONSTRAINT projeto_verba_pkey PRIMARY KEY (cod_verba);
+
+
+--
+-- TOC entry 2333 (class 2606 OID 16833)
+-- Name: rubrica_campo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY rubrica_campo
+    ADD CONSTRAINT rubrica_campo_pkey PRIMARY KEY (cod_campo);
+
+
+--
+-- TOC entry 2331 (class 2606 OID 16835)
+-- Name: rubrica_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY rubrica
+    ADD CONSTRAINT rubrica_pkey PRIMARY KEY (cod_rubrica);
+
+
+--
+-- TOC entry 2337 (class 2606 OID 16837)
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (cod_usuario);
+
+
+--
+-- TOC entry 2339 (class 2606 OID 16839)
+-- Name: vinculo_institucional_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY vinculo_institucional
+    ADD CONSTRAINT vinculo_institucional_pkey PRIMARY KEY (cod_vinculo_institucional);
+
+
+--
+-- TOC entry 2394 (class 2620 OID 16841)
+-- Name: RI_ConstraintTrigger_150868; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE CONSTRAINT TRIGGER "RI_ConstraintTrigger_150868" AFTER INSERT ON log NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins"();
+
+
+--
+-- TOC entry 2395 (class 2620 OID 16843)
+-- Name: RI_ConstraintTrigger_150869; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE CONSTRAINT TRIGGER "RI_ConstraintTrigger_150869" AFTER UPDATE ON log NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_upd"();
+
+
+--
+-- TOC entry 2344 (class 2606 OID 16844)
+-- Name: atividade_categoria_cod_categoria_pai_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_categoria
+    ADD CONSTRAINT atividade_categoria_cod_categoria_pai_fkey FOREIGN KEY (cod_categoria_pai) REFERENCES atividade_categoria(cod_categoria) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2342 (class 2606 OID 16849)
+-- Name: atividade_cod_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade
+    ADD CONSTRAINT atividade_cod_categoria_fkey FOREIGN KEY (cod_categoria) REFERENCES atividade_categoria(cod_categoria) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2343 (class 2606 OID 16854)
+-- Name: atividade_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade
+    ADD CONSTRAINT atividade_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- TOC entry 2345 (class 2606 OID 16859)
+-- Name: atividade_financeiro_cod_atividade_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_financeiro
+    ADD CONSTRAINT atividade_financeiro_cod_atividade_fkey FOREIGN KEY (cod_atividade) REFERENCES atividade(cod_atividade) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2346 (class 2606 OID 16864)
+-- Name: atividade_financeiro_cod_financeiro_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_financeiro
+    ADD CONSTRAINT atividade_financeiro_cod_financeiro_fkey FOREIGN KEY (cod_financeiro) REFERENCES pessoa_financeiro(cod_financeiro) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2347 (class 2606 OID 16869)
+-- Name: atividade_passo_cod_atividade_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_passo
+    ADD CONSTRAINT atividade_passo_cod_atividade_fkey FOREIGN KEY (cod_atividade) REFERENCES atividade(cod_atividade) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2348 (class 2606 OID 16874)
+-- Name: atividade_passo_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_passo
+    ADD CONSTRAINT atividade_passo_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2349 (class 2606 OID 16879)
+-- Name: atividade_pessoa_cod_atividade_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_pessoa
+    ADD CONSTRAINT atividade_pessoa_cod_atividade_fkey FOREIGN KEY (cod_atividade) REFERENCES atividade(cod_atividade) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2350 (class 2606 OID 16884)
+-- Name: atividade_pessoa_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_pessoa
+    ADD CONSTRAINT atividade_pessoa_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2351 (class 2606 OID 16889)
+-- Name: atividade_projeto_cod_atividade_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_projeto
+    ADD CONSTRAINT atividade_projeto_cod_atividade_fkey FOREIGN KEY (cod_atividade) REFERENCES atividade(cod_atividade) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2352 (class 2606 OID 16894)
+-- Name: atividade_projeto_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY atividade_projeto
+    ADD CONSTRAINT atividade_projeto_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2353 (class 2606 OID 16899)
+-- Name: emprestimo_livro_cod_livro_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY emprestimo_livro
+    ADD CONSTRAINT emprestimo_livro_cod_livro_fkey FOREIGN KEY (cod_livro) REFERENCES livro(cod_livro) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2354 (class 2606 OID 16904)
+-- Name: emprestimo_livro_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY emprestimo_livro
+    ADD CONSTRAINT emprestimo_livro_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2355 (class 2606 OID 16909)
+-- Name: ferias_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY ferias
+    ADD CONSTRAINT ferias_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2356 (class 2606 OID 16914)
+-- Name: funcoes_pessoas_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY funcoes_pessoa
+    ADD CONSTRAINT funcoes_pessoas_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2357 (class 2606 OID 16919)
+-- Name: horario_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY horario
+    ADD CONSTRAINT horario_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2358 (class 2606 OID 16924)
+-- Name: livro_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY livro
+    ADD CONSTRAINT livro_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE;
+
+
+--
+-- TOC entry 2359 (class 2606 OID 16929)
+-- Name: log_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY log
+    ADD CONSTRAINT log_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2393 (class 2606 OID 24624)
+-- Name: patrimonio_cod_projeto_despesa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patrimonio
+    ADD CONSTRAINT patrimonio_cod_projeto_despesa_fkey FOREIGN KEY (cod_projeto_despesa) REFERENCES projeto_despesa(cod_despesa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2360 (class 2606 OID 16934)
+-- Name: patrimonio_item_cod_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patrimonio_item
+    ADD CONSTRAINT patrimonio_item_cod_categoria_fkey FOREIGN KEY (cod_categoria) REFERENCES patrimonio_categoria(cod_categoria) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2361 (class 2606 OID 16939)
+-- Name: patrimonio_item_cod_termo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patrimonio_item
+    ADD CONSTRAINT patrimonio_item_cod_termo_fkey FOREIGN KEY (cod_termo) REFERENCES patrimonio_termo(cod_termo) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2362 (class 2606 OID 16944)
+-- Name: patrimonio_termo_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY patrimonio_termo
+    ADD CONSTRAINT patrimonio_termo_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2363 (class 2606 OID 16949)
+-- Name: permissao_projeto_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY permissao_projeto
+    ADD CONSTRAINT permissao_projeto_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2364 (class 2606 OID 16954)
+-- Name: permissao_projeto_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY permissao_projeto
+    ADD CONSTRAINT permissao_projeto_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2365 (class 2606 OID 16959)
+-- Name: pessoa_cod_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa
+    ADD CONSTRAINT pessoa_cod_categoria_fkey FOREIGN KEY (cod_categoria) REFERENCES pessoa_categoria(cod_categoria) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
+-- TOC entry 2366 (class 2606 OID 16964)
+-- Name: pessoa_cod_projeto_atuante_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa
+    ADD CONSTRAINT pessoa_cod_projeto_atuante_fkey FOREIGN KEY (cod_projeto_atuante) REFERENCES projeto(cod_projeto);
+
+
+--
+-- TOC entry 2367 (class 2606 OID 16969)
+-- Name: pessoa_cod_vinculo_institucional_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa
+    ADD CONSTRAINT pessoa_cod_vinculo_institucional_fkey FOREIGN KEY (cod_vinculo_institucional) REFERENCES vinculo_institucional(cod_vinculo_institucional);
+
+
+--
+-- TOC entry 2368 (class 2606 OID 16974)
+-- Name: pessoa_financeiro_cod_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_financeiro
+    ADD CONSTRAINT pessoa_financeiro_cod_categoria_fkey FOREIGN KEY (cod_categoria) REFERENCES financeiro_categoria(cod_categoria);
+
+
+--
+-- TOC entry 2369 (class 2606 OID 16979)
+-- Name: pessoa_financeiro_cod_fonte_pagadora_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_financeiro
+    ADD CONSTRAINT pessoa_financeiro_cod_fonte_pagadora_fkey FOREIGN KEY (cod_fonte_pagadora) REFERENCES fonte_pagadora(cod_fonte_pagadora);
+
+
+--
+-- TOC entry 2370 (class 2606 OID 16984)
+-- Name: pessoa_financeiro_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_financeiro
+    ADD CONSTRAINT pessoa_financeiro_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa);
+
+
+--
+-- TOC entry 2371 (class 2606 OID 16989)
+-- Name: pessoa_financeiro_projeto_vinculado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY pessoa_financeiro
+    ADD CONSTRAINT pessoa_financeiro_projeto_vinculado_fkey FOREIGN KEY (projeto_vinculado) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2378 (class 2606 OID 16994)
+-- Name: projeto_arquivo_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_arquivo
+    ADD CONSTRAINT projeto_arquivo_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2372 (class 2606 OID 16999)
+-- Name: projeto_cod_bolsista_responsavel_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto
+    ADD CONSTRAINT projeto_cod_bolsista_responsavel_fkey FOREIGN KEY (cod_bolsista_responsavel) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2373 (class 2606 OID 17004)
+-- Name: projeto_cod_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto
+    ADD CONSTRAINT projeto_cod_categoria_fkey FOREIGN KEY (cod_categoria) REFERENCES projeto_categoria(cod_categoria) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2374 (class 2606 OID 17009)
+-- Name: projeto_cod_grad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto
+    ADD CONSTRAINT projeto_cod_grad_fkey FOREIGN KEY (cod_grad) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2375 (class 2606 OID 17014)
+-- Name: projeto_cod_pessoa_cooredenador_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto
+    ADD CONSTRAINT projeto_cod_pessoa_cooredenador_fkey FOREIGN KEY (cod_pessoa_coordenador) REFERENCES pessoa(cod_pessoa);
+
+
+--
+-- TOC entry 2376 (class 2606 OID 17019)
+-- Name: projeto_cod_pos_grad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto
+    ADD CONSTRAINT projeto_cod_pos_grad_fkey FOREIGN KEY (cod_pos_grad) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2377 (class 2606 OID 17024)
+-- Name: projeto_cod_professor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto
+    ADD CONSTRAINT projeto_cod_professor_fkey FOREIGN KEY (cod_professor) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2379 (class 2606 OID 17029)
+-- Name: projeto_despesa_cod_criador_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_despesa
+    ADD CONSTRAINT projeto_despesa_cod_criador_fkey FOREIGN KEY (cod_criador) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE;
+
+
+--
+-- TOC entry 2380 (class 2606 OID 17034)
+-- Name: projeto_despesa_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_despesa
+    ADD CONSTRAINT projeto_despesa_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2381 (class 2606 OID 17039)
+-- Name: projeto_despesa_cod_rubrica_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_despesa
+    ADD CONSTRAINT projeto_despesa_cod_rubrica_fkey FOREIGN KEY (cod_rubrica) REFERENCES rubrica(cod_rubrica) ON UPDATE CASCADE;
+
+
+--
+-- TOC entry 2382 (class 2606 OID 17044)
+-- Name: projeto_despesa_info_cod_despesa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_despesa_info
+    ADD CONSTRAINT projeto_despesa_info_cod_despesa_fkey FOREIGN KEY (cod_despesa) REFERENCES projeto_despesa(cod_despesa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2383 (class 2606 OID 17049)
+-- Name: projeto_financeiro_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_financeiro
+    ADD CONSTRAINT projeto_financeiro_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2384 (class 2606 OID 17054)
+-- Name: projeto_financeiro_tipo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_financeiro
+    ADD CONSTRAINT projeto_financeiro_tipo_fkey FOREIGN KEY (tipo) REFERENCES projeto_financeiro_categoria(cod_categoria) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2385 (class 2606 OID 17059)
+-- Name: projeto_pessoa_atuante_cod_pessoa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_pessoa_atuante
+    ADD CONSTRAINT projeto_pessoa_atuante_cod_pessoa_fkey FOREIGN KEY (cod_pessoa) REFERENCES pessoa(cod_pessoa) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2386 (class 2606 OID 17064)
+-- Name: projeto_pessoa_atuante_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_pessoa_atuante
+    ADD CONSTRAINT projeto_pessoa_atuante_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2387 (class 2606 OID 17069)
+-- Name: projeto_receita_cod_criador_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_receita
+    ADD CONSTRAINT projeto_receita_cod_criador_fkey FOREIGN KEY (cod_criador) REFERENCES pessoa(cod_pessoa);
+
+
+--
+-- TOC entry 2388 (class 2606 OID 17074)
+-- Name: projeto_receita_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_receita
+    ADD CONSTRAINT projeto_receita_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto);
+
+
+--
+-- TOC entry 2389 (class 2606 OID 17079)
+-- Name: projeto_verba_cod_projeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_verba
+    ADD CONSTRAINT projeto_verba_cod_projeto_fkey FOREIGN KEY (cod_projeto) REFERENCES projeto(cod_projeto) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2390 (class 2606 OID 17084)
+-- Name: projeto_verba_cod_rubrica_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY projeto_verba
+    ADD CONSTRAINT projeto_verba_cod_rubrica_fkey FOREIGN KEY (cod_rubrica) REFERENCES rubrica(cod_rubrica) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2392 (class 2606 OID 17089)
+-- Name: rubrica_campo_cod_rubrica_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY rubrica_campo
+    ADD CONSTRAINT rubrica_campo_cod_rubrica_fkey FOREIGN KEY (cod_rubrica) REFERENCES rubrica(cod_rubrica) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2391 (class 2606 OID 17094)
+-- Name: rubrica_cod_rubrica_pai_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY rubrica
+    ADD CONSTRAINT rubrica_cod_rubrica_pai_fkey FOREIGN KEY (cod_rubrica_pai) REFERENCES rubrica(cod_rubrica) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- TOC entry 2402 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2013-04-29 15:25:52
+
+--
+-- PostgreSQL database dump complete
+--
+

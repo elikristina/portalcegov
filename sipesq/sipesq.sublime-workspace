@@ -1,0 +1,651 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cod",
+				"cod_pessoa"
+			],
+			[
+				"border",
+				"border"
+			],
+			[
+				"sol",
+				"solveRatings"
+			],
+			[
+				"server",
+				"serverStatus"
+			],
+			[
+				"marg",
+				"margin-bottom"
+			],
+			[
+				"paddin",
+				"padding-bottom"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"pa",
+				"padding"
+			],
+			[
+				"google",
+				"googleSearch"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"boots",
+				"bootstrap"
+			],
+			[
+				"em",
+				"em_andamento"
+			],
+			[
+				"fo",
+				"font-size"
+			],
+			[
+				"fon",
+				"font-family"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"n",
+				"NUMQ"
+			],
+			[
+				"ser",
+				"serverStatus"
+			],
+			[
+				"sear",
+				"searchcontrol"
+			],
+			[
+				"margi",
+				"margin-top"
+			],
+			[
+				"ma",
+				"margin-bottom"
+			],
+			[
+				"b",
+				"baseline"
+			],
+			[
+				"wid",
+				"widget-side"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"he",
+				"hex_chars"
+			],
+			[
+				"infoAu",
+				"infoAuditorio"
+			],
+			[
+				"campu",
+				"campus"
+			],
+			[
+				"initializeC",
+				"initializeCampus"
+			],
+			[
+				"camp",
+				"campus"
+			],
+			[
+				"au",
+				"auditorioLocation"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "",
+			"file": "/C/DEV/GitHub/RecQuest/recquest.sublime-project",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"sql",
+				"Set Syntax: SQL"
+			],
+			[
+				"Yii",
+				"Yii Docs Search"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in	",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"cH",
+				"HTML: Encode Special Characters"
+			],
+			[
+				"inst",
+				"Preferences: Settings - Default"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": true,
+		"side_bar_visible": true,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Apache/apache/www/sipesq/protected/controllers/ProjetoOrcamentoController.php",
+		"/C/Apache/apache/www/sipesq/protected/controllers/ProjetoController.php",
+		"/C/Apache/apache/www/sipesq/protected/controllers/PatrimonioController.php",
+		"/C/Apache/apache/www/sipesq/protected/controllers/ProjetoVerbaController.php",
+		"/C/Apache/apache/www/sipesq/protected/models/ProjetoVerba.php",
+		"/C/Apache/apache/www/sipesq/protected/models/ProjetoReceita.php",
+		"/C/Apache/apache/www/sipesq/protected/controllers/ProjetoDespesaController.php",
+		"/C/Apache/apache/www/sipesq/protected/views/projeto/_form.php",
+		"/C/Users/Guilherme/Desktop/auxilio estudante.csv",
+		"/C/Apache/apache/www/sipesq/protected/models/Projeto.php",
+		"/C/Apache/apache/www/sipesq/protected/views/projeto/_form_financeiro.php",
+		"/C/Apache/apache/www/sipesq/protected/views/projeto/new_view.php",
+		"/C/Apache/apache/www/sipesq/protected/views/projetoDespesa/_form.php",
+		"/C/Apache/apache/www/sipesq/protected/models/ProjetoDespesa.php",
+		"/C/Apache/apache/www/sipesq/protected/components/Sipesq.php",
+		"/C/Apache/apache/www/sipesq/protected/views/projeto/_view_documentos.php",
+		"/C/Apache/apache/www/sipesq/protected/views/projeto/view.php",
+		"/C/Users/Guilherme/Desktop/SIPESQ/template.json",
+		"/C/Apache/apache/www/sipesq/protected/models/Grupo.php",
+		"/C/Apache/apache/www/sipesq/js/tiny_mce/tiny_mce_popup.js",
+		"/C/Apache/apache/www/sipesq/sipesq.sublime-project",
+		"/C/Apache/apache/www/sipesq/protected/controllers/AtividadeController.php",
+		"/C/Apache/apache/www/sipesq/sipesq.sublime-workspace",
+		"/C/Apache/apache/www/gtech/protected/views/home/index.php",
+		"/C/Apache/apache/www/gtech/css/main.less",
+		"/C/Apache/apache/www/gtech/protected/views/layouts/main.php",
+		"/C/Apache/apache/www/gtech/css/1140.css",
+		"/C/Apache/apache/www/gtech/css/minimalism.css",
+		"/C/Apache/apache/www/smile-web/js/smile.js",
+		"/C/Apache/apache/www/smile-web/views/solve.php",
+		"/C/Apache/apache/www/smile-web/views/make.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/views/layouts/column1.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/views/layouts/column2.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/views/layouts/main.php",
+		"/C/Apache/apache/www/gtech/css/main.css",
+		"/C/Apache/apache/www/gtech/css/main.css~",
+		"/C/Apache/apache/www/gtech/.gitignore",
+		"/C/Apache/apache/www/gtech/.buildpath",
+		"/C/Apache/apache/www/gtech/.gitattributes",
+		"/C/Apache/apache/www/gtech/.project",
+		"/C/Users/Guilherme/Desktop/GuilhermeSevero171832.txt",
+		"/C/Apache/apache/www/cegov2/protected/views/layouts/main.php",
+		"/C/Apache/apache/www/cegov2/protected/views/pessoa/view.php",
+		"/C/Apache/apache/www/oquetavalendo/css/main.less",
+		"/C/Apache/apache/www/oquetavalendo/protected/views/site/index.php",
+		"/C/Users/Guilherme/.gitconfig",
+		"/C/Apache/apache/www/smile-web/css/main.less",
+		"/C/Apache/apache/www/smile-web/sobek.php",
+		"/C/Apache/apache/www/smile-web/index.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/views/layouts/bkp.php",
+		"/C/Apache/apache/www/cegov2/css/main.css",
+		"/C/Apache/apache/www/oquetavalendo/css/variables.less",
+		"/C/Users/Guilherme/AppData/Local/Temp/7zOFC49.tmp/servidor.c",
+		"/C/Users/Guilherme/GitHub/SISOPII/AP3/exercicio1.txt",
+		"/C/Users/Guilherme/GitHub/SISOPII/AP3/servidor.c",
+		"/C/Apache/apache/www/oquetavalendo/index.php",
+		"/C/Apache/apache/www/valendo/index.html",
+		"/C/Apache/apache/www/oquetavalendo/protected/views/site/contact.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/views/site/login.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/views/site/error.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/controllers/SiteController.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/components/Controller.php",
+		"/C/Apache/apache/www/cegov2/protected/components/Controller.php",
+		"/C/Users/Guilherme/Desktop/BS/css/bootstrap.min.css",
+		"/C/Users/Guilherme/Desktop/BS/css/bootstrap.css",
+		"/C/Apache/apache/www/oquetavalendo/protected/config/console.php",
+		"/C/Apache/apache/www/cegov2/protected/config/main.php",
+		"/C/Apache/apache/www/oquetavalendo/protected/config/main.php",
+		"/C/Apache/apache/www/sipesq/protected/views/atividade/view.php",
+		"/C/Apache/apache/www/modal-form.html",
+		"/C/Apache/apache/www/sipesq/protected/views/atividade/passo/_passo.php",
+		"/C/Apache/apache/www/sipesq/protected/views/atividade/_kanban_item.php",
+		"/C/Apache/apache/www/sipesq/protected/views/atividade/index.php",
+		"/C/Apache/apache/www/sipesq/js/kanban.js",
+		"/C/Apache/apache/www/sipesq/protected/models/Pessoa.php",
+		"/C/Apache/apache/www/sipesq/protected/models/Atividade.php",
+		"/C/Apache/apache/www/sipesq/protected/views/atividade/passo/_passos.php",
+		"/C/Apache/apache/www/sipesq/css/kanban.css",
+		"/C/Apache/apache/www/sipesq/protected/views/atividade/passo/_view.php",
+		"/C/Apache/apache/www/sipesq/protected/views/atividade/passos.php",
+		"/C/Apache/apache/www/sipesq/protected/config/main.php",
+		"/C/Users/Guilherme/Desktop/sipesq/index.html",
+		"/C/Users/Guilherme/Desktop/sipesq/css/main.css",
+		"/C/Apache/apache/www/mail.php",
+		"/C/Apache/apache/www/save/index.html",
+		"/C/Apache/apache/www/save/css/bootstrap.css",
+		"/C/Apache/apache/www/save/css/bootstrap-responsive.css",
+		"/C/Apache/apache/conf/httpd.conf",
+		"/C/Apache/apache/www/smile-web/views/.htacess",
+		"/C/Apache/apache/www/smile-web/js/less.js",
+		"/C/Apache/apache/www/smile-web/views/wait.php",
+		"/C/Apache/apache/www/smile-web/js/view.js",
+		"/C/Apache/apache/www/cegov2/.gitignore",
+		"/C/Users/Guilherme/GitHub/Nico/src/scanner.l",
+		"/C/Apache/apache/www/sipesq/.gitignore",
+		"/C/Users/Guilherme/Desktop/Nico-Claudio-Guilherme-etapa1/src/scanner.l",
+		"/C/Apache/apache/www/seminario/campus.html",
+		"/C/Apache/apache/www/cegov2/css/bootstrap-responsive.css",
+		"/C/Users/Guilherme/Dropbox/COMPILADORES/2012-1/TRABALHO/Nico/src/scanner.l",
+		"/C/Apache/apache/www/cegov2/css/bootswatch.less",
+		"/C/Users/Guilherme/Downloads/jcemer-zepto-range-1ab4ab8/styles.css",
+		"/C/Users/Guilherme/Downloads/jcemer-zepto-range-1ab4ab8/index.html",
+		"/C/Apache/apache/www/cegov2/protected/models/Publicacao.php",
+		"/C/Apache/apache/www/cegov2/protected/views/publicacao/_form.php",
+		"/C/Users/Guilherme/AppData/Local/Temp/7zO4012.tmp/AtividadeController.php",
+		"/C/Apache/apache/www/cegov2/protected/controllers/PublicacaoController.php",
+		"/C/Apache/apache/www/sipesq/index.php",
+		"/C/Apache/apache/www/cegov2/protected/controllers/PublicacaoTipoController.php",
+		"/C/Apache/apache/www/cegov2/protected/views/about/_form.php",
+		"/C/Apache/apache/www/cegov2/protected/controllers/AboutController.php",
+		"/C/Users/Guilherme/Dropbox/COMPILADORES/2012-2/Nico/src/scanner.l",
+		"/C/Users/Guilherme/Dropbox/COMPILADORES/2012-1/Nico-Angelo-Guilherme-Karina-etapa1/Nico/src/scanner.l",
+		"/C/Users/Guilherme/Downloads/ap2_ex1.c",
+		"/C/Apache/apache/www/smile-web/views/login.php",
+		"/C/Users/Guilherme/Desktop/jcemer-telepong-f1fe0f9/lib/utils.js",
+		"/C/Users/Guilherme/Dropbox/COMPILADORES/2012-1/Nico-Angelo-Guilherme-Karina-etapa1/Nico/src/scanner2.l",
+		"/C/Users/Guilherme/Desktop/jcemer-telepong-f1fe0f9/lib/game.js",
+		"/C/Users/Guilherme/Dropbox/COMPILADORES/Nico-Angelo-Guilherme-Karina-etapa1/Nico/src/pico",
+		"/C/Users/Guilherme/Desktop/GTECH/sobek.php",
+		"/C/Apache/apache/www/smile-web/index-old.php",
+		"/C/Apache/apache/www/save/css/main.less",
+		"/C/Users/Guilherme/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Apache/apache/www/cegov2/protected/controllers/SiteController.php",
+		"/C/Apache/apache/www/cegov2/protected/views/site/login.php",
+		"/C/Apache/apache/www/cegov2/protected/models/LoginForm.php",
+		"/C/Apache/apache/www/save/css/main.css",
+		"/C/Apache/apache/www/cegov2/css/custom-theme/jquery-ui-1.8.21.custom.css",
+		"/C/Users/Guilherme/Desktop/application.log.2"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"../views",
+			"../",
+			"./protected",
+			"/protected",
+			"/",
+			".",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"setup",
+			"delete",
+			"isSupport",
+			"isAdmin",
+			"\\n",
+			"49\n50\n51\n52\n54\n59\n60\n61\n71\n72\n73\n74\n75\n76\n79\n80\n83\n84\n85\n86\n87\n88\n100\n101\n102\n103\n106\n107\n108\n109\n114\n116\n118\n123\n409\n",
+			"projetos",
+			"GERENCIAL",
+			"gerencial",
+			"informacoes",
+			"inforubrica",
+			"viewAjax",
+			"downloadFile",
+			"projeto",
+			"projetos",
+			"setupDes",
+			"body",
+			"nav",
+			"checked",
+			"	\n",
+			"check",
+			"oldStatus",
+			"solveObject",
+			" \n",
+			"logo.ico",
+			"                \n",
+			"myCarousel",
+			"	\n",
+			";\n",
+			"	   \n",
+			"rows=\"5\"",
+			"rows=\"10\"",
+			"		\n",
+			"Tittle",
+			"Heading",
+			"span4",
+			"row",
+			">\n",
+			"zone",
+			"time",
+			"\n",
+			"	\n",
+			" font-size: 13.333333969116211px",
+			"            \n",
+			"setCorrectAnswer",
+			"nextSolveQuest",
+			"640",
+			"650",
+			"@640",
+			"@649",
+			"'htmlOptions' => array('enctype'=>'multipart/form-data'),",
+			"sen",
+			"senQuestion",
+			"google",
+			"googlese",
+			"googlesear",
+			"tag",
+			"node",
+			"googleCall",
+			"login.php",
+			"login.pgp",
+			"waitScr",
+			"wait",
+			"	\n",
+			"userName",
+			"=\"\">\n",
+			"connect",
+			"getStatus",
+			"serverIp",
+			"userMsg",
+			"		\n",
+			"sendI",
+			"getPara",
+			"5px",
+			"button",
+			"backgro",
+			"default-state",
+			";\n",
+			"base",
+			".base",
+			"body",
+			"max-wi",
+			"body",
+			"max-wi",
+			"white",
+			"&",
+			"C9",
+			"&",
+			"icon",
+			"Image",
+			"markerImage",
+			"          \n",
+			"	       \n",
+			"				\n",
+			"init()"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			",",
+			"favicon.png",
+			"hottest-carousel",
+			"rows=\"3\"",
+			"rows=\"5\"",
+			"Title",
+			"Event Tittle ",
+			"span4 event-card",
+			"row-form",
+			" font-size: 15px"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/DEV/GitHub/RecQuest/recquest.sublime-project",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"patrimoniocontro",
+				"controllers/PatrimonioController.php"
+			],
+			[
+				"projetoorcamentocontr",
+				"controllers/ProjetoOrcamentoController.php"
+			],
+			[
+				"projetoverbaco",
+				"controllers/ProjetoVerbaController.php"
+			],
+			[
+				"projetoverba",
+				"models/ProjetoVerba.php"
+			],
+			[
+				"projetorece",
+				"models/ProjetoReceita.php"
+			],
+			[
+				"projeto",
+				"models/Projeto.php"
+			],
+			[
+				"projeto/_form",
+				"views/projeto/_form.php"
+			],
+			[
+				"projetodespesacontro",
+				"controllers/ProjetoDespesaController.php"
+			],
+			[
+				"projetodespesaco",
+				"controllers/ProjetoDespesaController.php"
+			],
+			[
+				"projetodespesa",
+				"models/ProjetoDespesa.php"
+			],
+			[
+				"new_vi",
+				"views/projeto/new_view.php"
+			],
+			[
+				"despesacontr",
+				"controllers/ProjetoDespesaController.php"
+			],
+			[
+				"sipesq",
+				"components/Sipesq.php"
+			],
+			[
+				"",
+				"models/Grupo.php"
+			],
+			[
+				"grupo",
+				"models/Grupo.php"
+			],
+			[
+				"contro",
+				"controllers/ProjetoController.php"
+			],
+			[
+				"proj",
+				"models/Projeto.php"
+			],
+			[
+				"tp",
+				"js/tiny_mce/tiny_mce_popup.js"
+			],
+			[
+				"controllers/projet",
+				"controllers/ProjetoController.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/C/Apache/apache/www/sipesq/sipesq.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 201.0,
+	"status_bar_visible": true
+}

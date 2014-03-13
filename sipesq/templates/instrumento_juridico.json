@@ -1,0 +1,22 @@
+"instrumento_juridico": {
+		"nro_inst_juridico":""		
+	,	"tipo_inst_juridico":["Convênio","Contrato de Repasse", "Contrato de Prestação de Serviços", "Termo de Cooperação"]
+	,	"unidade_admin_responsavel":""
+	,	"gestao_repassadora":""
+	,	"gestao_recebedora":""
+	,	"data_assinatura":""
+
+
+}
+
+"convenio_fundacao_apoio":{
+		"nro_convenio":""
+	,	"titulo":""
+	,	"protocolo_convenio":""
+	,	"data_assinatura":""
+	,	"vigencia":""
+	,	"protocolo_financeiro":""
+	,	"nome_proplan":""
+	,	"cod_projeto_faufrgs":""
+	,	"portal_siconv":""
+}

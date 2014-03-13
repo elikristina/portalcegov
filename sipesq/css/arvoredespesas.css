@@ -1,0 +1,50 @@
+ul.arvore{
+	list-style-type: decimal;
+	background-color: #FFF;
+	font-size: 13px;
+
+}
+
+
+ul.arvore a{
+		text-decoration: none;
+		color: #333;
+}
+
+ul.arvore a:hover{
+	color: #00F;	
+}
+
+li.rubrica{
+	background-color: #EEE;
+	
+}
+
+li.despesa{
+	background-color: #FFF;
+	font-weight: bold;	
+	
+}
+
+.rubrica-titulo{
+	font-family: sans-serif;
+	padding: 5px;	
+	font-size: 15px;
+}
+
+.rubrica-valor{
+	font-size: 12px;
+	font-style: italic;	
+}
+
+.link{
+	color: #777;
+	text-decoration: none;	
+}
+
+.link: hover{
+	color: #333;
+	text-decoration: none;	
+}
+
+
