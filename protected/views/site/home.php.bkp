@@ -1,0 +1,35 @@
+<?php
+$this->breadcrumbs=array(
+	$title
+	
+);
+
+
+?>
+<br>
+  <?php $noticias = Noticia::model()->findAll(array('order'=>'cod_noticia DESC, titulo', 'limit'=>5))?>
+<div id="myCarousel" class="carousel slide hidden-phone" >
+  <!-- Carousel items -->
+  <div class="carousel-inner ">
+  
+  <div class="active item ">
+  	<div class="row-fluid">
+  		<div class="span10 offset1">
+  			<?php $this->renderPartial('/new/_view_carousel', array('data'=>$noticias[0]))?>
+  		</div>
+  	</div>
+  </div>
+  <?php for($i=1; $i < count($noticias); $i++):?>
+  <div class="item">
+  	<div class="row-fluid">
+  		<div class="span10 offset1">
+  		<?php $this->renderPartial('/new/_view_carousel', array('data'=>$noticias[$i]))?>
+  		</div>
+  	</div>
+  </div>
+  <?php endfor;?>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>

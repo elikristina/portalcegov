@@ -1,0 +1,14 @@
+
+.hero-unit {
+	text-align: center;
+}
+
+.hero-unit img{
+	height: 250px;
+}
+
+.conteudo p{
+	text-align: left;
+	font-size: 16px;
+	margin: 0px; color: #222222;
+}

@@ -1,0 +1,9 @@
+<div class="row-fluid" id="<?php echo $data->cod_pessoa ?>">
+	<div class="span2">
+		<?php echo CHtml::image($data->imageLink, 'Imagem pessoal'); ?>
+	</div>
+	<div class="span10" align="left">
+		<br>
+		<p><?php echo CHtml::link($data->nome, array('/pessoa/view', 'id'=>$data->cod_pessoa));?></p>
+	</div>
+</div>

@@ -1,0 +1,1 @@
+<?php header('Location: http://143.54.64.104/sipesq'); ?>

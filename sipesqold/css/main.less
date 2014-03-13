@@ -1,0 +1,73 @@
+
+@base-color: #ccc;
+@inner-color: #fff;
+@site-width: 950px;
+
+
+body{
+	max-width: 1024px;
+	margin:0 auto;
+	display: block;
+	background-color: @base-color; 
+	border-left:1px solid #369;
+	border-right:1px solid #369;
+	background-image: url(noise.png);
+	background-repeat: repeat;
+
+
+
+}
+
+.default-container{
+	background-color: @inner-color;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.rounded-corners (@radius: 4px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.widget-borders(@border-color: #147, @bg-color: #FFF){
+
+	.rounded-corners;
+	background-color: @bg-color;
+	border-top: 20px solid @border-color;
+	border-left: 2px solid @border-color;
+	border-right:2px solid @border-color;
+	border-bottom: 10px solid @border-color;
+	padding: 2px 10px 2px 10px;
+	
+	
+}
+
+.widget-shadows(@size: 5px){
+
+	-moz-box-shadow: -@size @size @size #888;
+	-webkit-box-shadow: -@size @size @size #888;
+	box-shadow: -@size @size @size #888;
+
+}
+
+
+
+.widget-news{
+
+	.widget-borders;
+	.widget-shadows(4px);
+
+}
+
+.widget-news-text{
+	height: 250px;
+	overflow: auto;
+	width: 300px;
+
+}
+
+.widget-button{
+	
+}
+

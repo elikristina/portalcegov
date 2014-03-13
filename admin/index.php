@@ -1,0 +1,1 @@
+<?php header("location:http://cegov.com.br/index.php/site/login");?>
