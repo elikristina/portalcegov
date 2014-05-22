@@ -65,7 +65,7 @@ return array(
 			'connectionString' => 'pgsql:host=localhost;port=5432;dbname=portal_cegov',
 			//'emulatePrepare' => true,
 			'username' => 'postgres',
-			'password' => 'cegovbrasil',
+			'password' => 'cegovbrasil2',
 			'charset' => 'utf8',
 		),
 		
