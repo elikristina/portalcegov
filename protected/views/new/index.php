@@ -14,7 +14,7 @@ if (Yii::app()->user->name == 'admin') {
 }
 ?>
 
-<h1><?php echo Yii::t('default','noticias')?></h1>
+<h2><?php echo Yii::t('default','noticias')?></h2>
 
 <div class="container-cegov">
 

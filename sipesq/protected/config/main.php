@@ -102,10 +102,10 @@ return array(
                 */
                 // Banco de dados de desenvolvimento
                 'db'=>array(
-                        'connectionString' => 'pgsql:host=localhost;port=5432;dbname=sipesq',
+                        'connectionString' => 'pgsql:host=localhost;port=5432;dbname=portal_cegov',
                         //'emulatePrepare' => true, //causa bug na conversao de boolean
                         'username' => 'postgres',
-                        'password' => 'password',
+                        'password' => 'cegovbrasil',
                         'charset' => 'utf8',
                 ),
 

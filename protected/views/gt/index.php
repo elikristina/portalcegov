@@ -5,6 +5,7 @@ $this->breadcrumbs=array(
 
 if (Yii::app()->user->name == 'admin') {
 	$this->menu=array(
+		array('label'=>'<i class="icon-pencil"></i> Editar Introdução', 'url'=>array('updateIntro')),
 		array('label'=>'<i class="icon-plus"></i> Adicionar Grupo', 'url'=>array('create')),
 		array('label'=>'<i class="icon-list"></i> Ordenar Grupos', 'url'=>array('sort')),
 		array('label'=>'<i class="icon-tasks"></i> Gerenciar Grupos', 'url'=>array('admin')),
@@ -20,26 +21,28 @@ Yii::app()->clientScript->registerScript('accordion',"
 ");
 ?>
 
-<?php echo $intro_content?>
-
-<?php if(Yii::app()->user->name == 'admin'): //Link para edição da introdução?>
-<div >
-<?php echo CHtml::link("Editar", 
-	array("/gt/updateIntro"),
-	array(
-		'class'=>"btn btn-primary btn-small",
-		)
-	);?>
+<h2>Grupos de Trabalho</h2>
+<div class="row-fluid">
+	<div class="span12">
+		<?php echo $intro_content?>
+	</div>
 </div>
-<?php endif;?>
 
+<br />
 
-<div id="grupos">
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+<?php $gts = GrupoTrabalho::model()->findAll(array('order'=>'nome', 'condition'=>'visible=true'));?>
+<?php foreach($gts as $key=>$gt):?>
+	<?php echo $key%3==0 ? "<div class=\"row-fluid gt-index\">" : "" ;?>
+	<div class="span4" >
+		<h5><?php echo CHtml::link($gt->nome, array('/gt/view', 'id'=>$gt->cod_gt));?></h5>
+	</div>
+	<?php echo $key==2 || $key==5 || $key==8 ? "</div>" : "" ;?>
+<?php endforeach;?>
 </div>
+					
+
+<br />
+
 
 
 <?php if((!Yii::app()->user->isGuest) && (GrupoTrabalho::model()->count('visible = false') > 0)): //Mostra para o usuários os GTs inativos?>
@@ -53,5 +56,7 @@ Yii::app()->clientScript->registerScript('accordion',"
 	 	$this->renderPartial('_inativo', array('data'=>$gt));
 	 }
 ?>
+
+
 <br><br>
 <?php endif;?>

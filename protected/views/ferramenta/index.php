@@ -12,16 +12,26 @@ $this->menu=array(
 );
 ?>
 
-<h3>Ferramentas de Apoio</h3>
-
-<div class="container-cegov">
-
-
-
-	<div class="content">
+<h2><?php echo Yii::t('default', 'ferramentas');?></h2>
+<br />
+<div class="">
 		<?php $this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$dataProvider,
 			'itemView'=>'_view',
+			'summaryText'=>'',
 		)); ?>
-	</div>
 </div>
+
+
+<?php  
+/*
+
+$rows = Yii::app()->db_sipesq->createCommand("SELECT nome FROM pessoa ORDER BY nome ASC")->queryAll(); 
+
+foreach($rows as $r){
+echo $r['nome'];
+echo "<br>";
+}
+*/
+
+?>

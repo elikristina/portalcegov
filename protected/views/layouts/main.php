@@ -15,6 +15,8 @@
 	
 	<!-- Le styles -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
     <link href="<?php echo $baseUrl; ?>/css/bootstrap.css" rel="stylesheet">
     <link href="<?php echo $baseUrl; ?>/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="<?php echo $baseUrl; ?>/css/font-awesome.css" rel="stylesheet">
@@ -126,17 +128,31 @@
 							'htmlOptions'=>array('class'=>'nav'),
              				'items'=>array(
              				array('label'=>'<i class="icon-home icon-large"></i>', 'url'=>array('/site/index')),
-                    array('label'=>Yii::t('default', 'sobre'), 'url'=>array('/about/presentation')),
+                    array('label'=>Yii::t('default', 'sobre') .'&nbsp&nbsp<i class="icon-angle-down"></i>', 'url'=>array(''), 'linkOptions'=> array(
+                            'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown'), 'itemOptions' => array('class'=>'dropdown user'), 'items'=>array(
+                      array('label'=>Yii::t('default', 'apresentacao'), 'url'=>array('/about/presentation')),
+                      array('label'=>Yii::t('default', 'estrutura'), 'url'=>array('/about/structure')),
+                      array('label'=>Yii::t('default', 'gts'), 'url'=>array('/gt/index')),
+                      array('label'=>Yii::t('default', 'equipe'), 'url'=>array('/pessoa/index')),
+                      array('label'=>Yii::t('default', 'parceiros'), 'url'=>array('/about/partners')),
+                      )),
              				//array('label'=>Yii::t('default', 'gts'), 'url'=>array('/gt/index')),
              				//array('label'=>Yii::t('default', 'equipe'), 'url'=>array('/pessoa/index')),
              				array('label'=>Yii::t('default', 'projetos'), 'url'=>array('/projeto/index')),
              				array('label'=>Yii::t('default', 'noticias'), 'url'=>array('/new')),
              				array('label'=>Yii::t('default', 'eventos'), 'url'=>array('/new/events')),
              				array('label'=>Yii::t('default', 'publicacoes'), 'url'=>array('/publicacao/index')),
-             				array('label'=>Yii::t('default', 'Ferramentas de Apoio'), 'url'=>array('/ferramenta')),
+             				array('label'=>Yii::t('default', 'ferramentas'), 'url'=>array('/ferramenta')),
                     //array('label'=>Yii::t('default', 'Contato'), 'url'=>array('/about/partners')),
              
              				),
+                'encodeLabel' => false,
+                'htmlOptions' => array(
+                    'class'=>'nav',
+                        ),
+                'submenuHtmlOptions' => array(
+                    'class' => 'dropdown-menu',
+                )
 						));?>
           </div><!--/.nav-collapse -->
              
@@ -168,13 +184,13 @@
 <footer>
   <div class="row-fluid">
     <div id="base">		  
-      <div class="span6">
+      <div class="span8">
 	      <h4><?php echo Yii::t('default', "cegov")?></h4>
 	      <?php echo Yii::t('default', "endereco")?><br/>
 	      <?php echo Yii::t('default', "cidade")?><br/>
 	      <p>Tel:<a href="tel:+555133089860">+55 51 3308-9860</a></p><br/>
 		  </div>		  
-      <div class="span6 visible-desktop">
+      <div class="span4 visible-desktop">
         <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl .'/images/logo_ufrgsB.png', 'Logo UFRGS'), 'http://www.ufrgs.br')?>
       </div>		
     </div>

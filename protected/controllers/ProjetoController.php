@@ -112,7 +112,8 @@ class ProjetoController extends Controller
 
         if(isset($_POST['Projeto']))
         {
-        	Yii::app()->end();
+        	echo var_dump($_POST['Projeto']);
+        	Yii::app()->end)();
 
         	
             $model->attributes=$_POST['Projeto'];

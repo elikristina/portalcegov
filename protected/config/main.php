@@ -36,19 +36,6 @@ return array(
 
 	// application components
 	'components'=>array(
-		'ftp'=>array(
-          'class'=>'application.extensions.ftp.EFtpComponent',
-          'host'=>'143.54.64.51',
-          //'host'=>'ftp.isape.com.br',
-          'port'=>21,
-          'username'=>'E_CEPIK',
-          //'username'=>'isape',
-          'password'=>'Equipe#2010',
-          //'password'=>'ipesa123ipesa',
-          'ssl'=>false,
-          'timeout'=>90,
-          'autoConnect'=>true,
-    	),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
@@ -75,10 +62,10 @@ return array(
         ),		
 		
 		'db'=>array(
-			'connectionString' => 'pgsql:host=localhost;port=5432;dbname=cegov_site',
+			'connectionString' => 'pgsql:host=localhost;port=5432;dbname=portal_cegov',
 			//'emulatePrepare' => true,
 			'username' => 'postgres',
-			'password' => 'password',
+			'password' => 'cegovbrasil',
 			'charset' => 'utf8',
 		),
 		

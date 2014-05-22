@@ -38,7 +38,7 @@ Yii::app()->clientScript->registerScript('view-pub',"
 ?>
 
 <div class="container-pub">
-<h3><?php echo Yii::t('default', 'publicacoes');?> <?php echo isset($_GET["t"])? " > " .PublicacaoTipo::model()->findByPk($_GET['t'])->t('nome') : ""?></h3>
+<h2><?php echo Yii::t('default', 'publicacoes');?> <?php echo isset($_GET["t"])? " > " .PublicacaoTipo::model()->findByPk($_GET['t'])->t('nome') : ""?></h2>
 
 
 <?php $this->widget('zii.widgets.CListView', array(
