@@ -20,9 +20,7 @@
 								image_advtab: true,
 								nonbreaking_force_tab: true,
 								width: '100%',
-        						height: '300',
-        						relative_urls : false,
-								file_browser_callback : 'filebrowser',		
+        						height: '300'	
 									});
 			");
 		

@@ -1,5 +1,4 @@
 <div class="view">
-
 <h1><?php echo CHtml::encode($data->t('nome')); ?></h1>
 <h4><?php echo CHtml::encode($data->t('subtitulo')); ?></h4>
 

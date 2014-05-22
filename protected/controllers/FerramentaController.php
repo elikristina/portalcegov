@@ -174,7 +174,7 @@ class FerramentaController extends Controller
 			//Pasta onde as imagens serão salvas.
 			$dir = Yii::getPathOfAlias('webroot.images.ferramentas');
 			
-			$file = CUploadedFile::getInstance($model,'imageFile');
+			$file = CUploadedFile::getInstance($model,'imagem');
 			
 			if($file != NULL){
 						$model->save();

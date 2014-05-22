@@ -59,9 +59,9 @@ Yii::app()->clientScript->registerScript('text-areas',"
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'imageFile'); ?>
-		<?php echo $form->fileField($model,'imageFile'); ?>
-		<?php echo $form->error($model,'imageFile'); ?>
+		<?php echo $form->labelEx($model,'imagem'); ?>
+		<?php echo $form->fileField($model,'imagem'); ?>
+		<?php echo $form->error($model,'imagem'); ?>
 	</div>
 
 	<div class="row buttons">

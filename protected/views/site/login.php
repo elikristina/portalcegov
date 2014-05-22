@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 <h1>Login</h1>
 
 	
-<div id="dialog-form" class="form">
+<div class="form">
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'login-form',
 	'enableClientValidation'=>true,
@@ -38,7 +38,7 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login', array('class'=>'btn btn-primary')); ?>
+		<?php echo CHtml::submitButton('Login'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

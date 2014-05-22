@@ -97,7 +97,7 @@ class PessoaController extends Controller
 		//$endereco_pro = new EnderecoProfissional();
 		
 		//Configura uma senha padrão
-		$model->senha = "Cegov#2012";
+		$model->senha = "0cf9b27a1d9867f472006c354890d74f";
 		$model->senha_confirm = $model->senha;
 		
 		//Carrega informações de funções

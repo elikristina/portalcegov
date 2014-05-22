@@ -14,7 +14,7 @@
 	</div> --> 
 	
 	
-	<div class="widget-carousel-text">
+	<div class="carousel-text">
 		<?php echo CHtml::image($data->imageLink, 'Imagem Carrossel'); ?>
 		<div class="carousel-caption">
 			<?php echo CHtml::link($data->t('titulo'), array('/new/view', 'id'=>$data->cod_noticia), array('class'=>'carousel-caption-p')); ?>

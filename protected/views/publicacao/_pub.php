@@ -1,5 +1,4 @@
 <div class="view-pub " id="<?php echo $data->cod_publicacao ?>">
-
 	<div class="span10 view-pub-information">
 	<h4><b><?php echo CHtml::encode($data->titulo);?></b></h4>
 		<div class="view-pub-description">

@@ -55,7 +55,7 @@ class Projeto extends CActiveRecord
 			array('nome, texto, data_inicio, data_fim, financiador, status, cod_gt', 'required'),
 			array('cod_gt', 'numerical', 'integerOnly'=>true),
 			array('subtitulo, tipo_ajuda', 'safe'),
-			array('subtitulo, tipo_ajuda, nome_en, subtitulo_en, texto_en, status_en, financiador_en, coordenador', 'safe'),
+			array('subtitulo, tipo_ajuda, nome_en, subtitulo_en, texto_en, status_en, coordenador, financiador_en', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('cod_projeto, nome, subtitulo, texto, data_inicio, data_fim, financiador, status, tipo_ajuda, cod_gt, projeto_lang, nome_en, subtitulo_en, texto_en, status_en, coordenador', 'safe', 'on'=>'search'),
@@ -96,7 +96,6 @@ class Projeto extends CActiveRecord
 			'texto_en' => Yii::t('Projeto', 'texto'),
 			'status_en' => Yii::t('Projeto', 'status'),
 			'coordenador' => Yii::t('Projeto', 'status'),
-			'financiador_en' => Yii::t('Projeto', 'financiador'),
 		
 		);
 	}
@@ -128,7 +127,6 @@ class Projeto extends CActiveRecord
 		$criteria->compare('texto_en',$this->texto_en,true);
 		$criteria->compare('status_en',$this->status_en,true);
 		$criteria->compare('coordenador',$this->coordenador,true);
-		$criteria->compare('financiador_en',$this->financiador_en,true);
 		
 
 		return new CActiveDataProvider($this, array(

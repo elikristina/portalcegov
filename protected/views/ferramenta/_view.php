@@ -13,7 +13,4 @@
 		<h5><?php echo CHtml::encode($data->nome_completo); ?></h5>
 		<?php //echo CHtml::encode($data->texto); ?>
 	</div>
-
 </div>
-
-</br>

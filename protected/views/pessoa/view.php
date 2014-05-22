@@ -144,7 +144,6 @@ $(function()
 							'endereco_residencial',
 							'instituicao',
 							'orgao_departamento',
-							'info_adicional',
 						
 						),
 					)); ?>

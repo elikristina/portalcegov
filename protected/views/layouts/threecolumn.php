@@ -59,7 +59,7 @@ Yii::app()->clientScript->registerScript("scroll", "
 		  	</li>
 		  	<li class="span4">
 			    <div class="thumbnail scroll">
-			      	<?php echo CHtml::image(Yii::app()->baseUrl .'/images/site/eventos.jpg', 'Imagem dos Eventos')?>
+			    	<?php echo CHtml::image(Yii::app()->baseUrl .'/images/site/eventos.jpg', 'Imagem das Eventos')?>
 			      	<div class="titulo">
 			      		<h3><?php echo CHtml::link(Yii::t('default', 'eventos'), array('/new/events'))?></h3>
 			  		</div>
@@ -68,12 +68,12 @@ Yii::app()->clientScript->registerScript("scroll", "
 						<div class="pub-list" >
 							<?php echo CHtml::link($event->titulo, array('/new/view', 'id'=>$event->cod_noticia));?>
 						</div>
-					<?php endforeach;?>	
+					<?php endforeach;?>
 			    </div>
 		  	</li>
 		  	<li class="span4">
 			    <div class="thumbnail scroll">
-			      	<?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl .'/images/site/banner_mds.jpg', 'Logo do Ciclo de Capacitação do MDS'), 'http://form.jotform.co/form/32935456240858')?>
+			      	<?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl .'/images/site/mds_banner5.png', 'Logo do Ciclo de Capacitação do MDS', array('width'=>'289')), 'http://www.ufrgs.br/cegov/new/n/218?n=Orienta%C3%A7%C3%B5es_de_acesso_ao_Moodle_para_o_curso_em_Diagn%C3%B3stico_do_MDS')?>
 			       <!--	<div class="titulo">
 			      		<h3><?php echo CHtml::link(Yii::t('default', 'publicacoes'), array('/publicacao'))?></h3>
 			  		</div>

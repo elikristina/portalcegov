@@ -21,7 +21,6 @@ Yii::app()->clientScript->registerScript('accordion',"
 ");
 ?>
 
-<h2>Grupos de Trabalho</h2>
 <div class="row-fluid">
 	<div class="span12">
 		<?php echo $intro_content?>
@@ -31,14 +30,14 @@ Yii::app()->clientScript->registerScript('accordion',"
 <br />
 
 <?php $gts = GrupoTrabalho::model()->findAll(array('order'=>'nome', 'condition'=>'visible=true'));?>
-<?php foreach($gts as $key=>$gt):?>
-	<?php echo $key%3==0 ? "<div class=\"row-fluid gt-index\">" : "" ;?>
-	<div class="span4" >
-		<h5><?php echo CHtml::link($gt->nome, array('/gt/view', 'id'=>$gt->cod_gt));?></h5>
-	</div>
-	<?php echo $key==2 || $key==5 || $key==8 ? "</div>" : "" ;?>
-<?php endforeach;?>
-</div>
+					<?php foreach($gts as $key=>$gt):?>
+					<?php echo $key%3==0 ? "<div class=\"row-fluid gt-index\">" : "" ;?>
+						<div class="span4" >
+							<h5><?php echo CHtml::link($gt->nome, array('/gt/view', 'id'=>$gt->cod_gt));?></h5>
+						</div>
+					<?php echo $key==2 || $key==5 || $key==8 ? "</div>" : "" ;?>
+					<?php endforeach;?>
+				</div>
 					
 
 <br />

@@ -16,9 +16,9 @@ $this->menu=array(
 	Yii::app()->clientScript->registerScript('text-areas',"
 		tinyMCE.init({
 								mode : 'textareas',
-								theme : 'advanced',
-								width: '700',
-        						height: '300',
+								theme : 'simple',
+								width: '500',
+        						height: '150',
         						relative_urls : false
 							});
 		$('#detalhamento').hide();

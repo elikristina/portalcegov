@@ -12,6 +12,6 @@ $this->menu=array(
 );
 ?>
 
-<h2><?php echo $model->nome; ?></h2>
+<h1><?php echo $model->nome; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
