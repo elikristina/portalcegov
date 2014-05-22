@@ -26,7 +26,7 @@ return array(
 
                 'gii'=>array(
                         'class'=>'system.gii.GiiModule',
-                        'password'=>'gorder',
+                        'password'=>'******',
                         // If removed, Gii defaults to localhost only. Edit carefully to taste.
                         'ipFilters'=>array('127.0.0.1','::1'),
                 ),
@@ -96,7 +96,7 @@ return array(
                         'connectionString' => 'pgsql:host=143.54.64.104;port=5432;dbname=sipesq',
                         'emulatePrepare' => true,
                         'username' => 'postgres',
-                        'password' => 'ecepik',
+                        'password' => '******',
                         'charset' => 'utf8',
                 ),
                 */
@@ -105,7 +105,7 @@ return array(
                         'connectionString' => 'pgsql:host=localhost;port=5432;dbname=portal_cegov',
                         //'emulatePrepare' => true, //causa bug na conversao de boolean
                         'username' => 'postgres',
-                        'password' => 'cegovbrasil',
+                        'password' => '******',
                         'charset' => 'utf8',
                 ),
 
