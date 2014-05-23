@@ -29,9 +29,8 @@ $this->menu=array(
 
 <div class="view-publicacao" id="<?php echo $model->cod_projeto ?>">
 		<h4><b><?php echo CHtml::encode($model->t('nome'));?></b></h4>
-		<h4><i><?php echo CHtml::encode($model->t('subtitulo'));?></i></h4>
-		
-		<p><?php echo $model->t('texto');?></p>
+			
+		<p><?php echo $model->t('descricao');?></p>
 		
 		<p>
 			
@@ -43,21 +42,9 @@ $this->menu=array(
 			<span class="date"><?php echo CHtml::encode($model->data_fim); ?></span>
 			<br /> -->
 		
-			<b><?php echo CHtml::encode($model->getAttributeLabel('financiador')); ?>:</b>
-			<?php echo CHtml::encode($model->t('financiador')); ?>
+			<b><?php echo CHtml::encode($model->getAttributeLabel('situacao')); ?>:</b>
+			<?php echo CHtml::encode($model->t('situacao')); ?>
 			<br />
 			
-			<b><?php echo CHtml::encode($model->getAttributeLabel('status')); ?>:</b>
-			<?php echo CHtml::encode($model->t('status')); ?>
-			<br />
-			
-			<b><?php if (($model->tipo_ajuda)!=NULL) {
-				echo CHtml::encode($model->getAttributeLabel('tipo_ajuda')).":";
-			} ?></b>
-			<?php if (($model->tipo_ajuda)!=NULL) {
-				echo CHtml::encode($model->tipo_ajuda);
-			} ?>
-			<br />
-
 		</p>
 </div>

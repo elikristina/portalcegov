@@ -13,7 +13,8 @@ class InstrumentoJuridico extends CFormModel
 		,	$gestao_repassadora
 		,	$gestao_recebedora
 		,	$data_assinatura
-		,	$vigencia;
+		,	$vigencia
+		,	$previsao_termino;
 
 
 	/**
@@ -22,7 +23,7 @@ class InstrumentoJuridico extends CFormModel
 	public function rules()
 	{
 		return array(
-			array('nro_inst_juridico, tipo_inst_juridico, unidade_admin_responsavel, gestao_recebedora, gestao_repassadora, data_assinatura' ,'safe'),
+			array('nro_inst_juridico, tipo_inst_juridico, unidade_admin_responsavel, gestao_recebedora, gestao_repassadora, data_assinatura, previsao_termino' ,'safe'),
 		);
 	}
 
@@ -38,9 +39,10 @@ class InstrumentoJuridico extends CFormModel
 			, 'tipo_inst_juridico'=>'Tipo de Instrumento Jurídico'
 			, 'unidade_admin_responsavel'=>'Unidade Administrativa Responsável'
 			, 'gestao_recebedora'=>'U/G Gestão Recebedora'
-			, 'gestao_repassadora'=>'U/G Gestão Recepassadora'
+			, 'gestao_repassadora'=>'U/G Gestão Repassadora'
 			, 'data_assinatura'=>'Data de Assinatura'
-			, 'vigencia'=>'Vigência'
+			, 'vigencia'=>'Vigência (em meses)'
+			, 'previsao_termino'=>'Previsão do Término da Vigência'
 		);
 	}
 	
