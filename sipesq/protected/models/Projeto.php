@@ -172,6 +172,7 @@ class Projeto extends CActiveRecord
                         'verba_orcamentada'=>array(self::STAT, 'ProjetoOrcamento', 'cod_projeto', 'select' => 'SUM(valor)'),
                         'pessoas_permitidas' => array(self::MANY_MANY, 'Pessoa', 'permissao_projeto(cod_projeto, cod_pessoa)'),
 
+
                 );
         }
 
