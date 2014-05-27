@@ -19,7 +19,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($model->getAttributeLabel('gt')); ?>:</b>
-	<?php echo CHtml::encode($model->gt); ?>
+	<?php echo CHtml::encode($model->gt->nome); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($model->getAttributeLabel('codigo_projeto')); ?>:</b>
