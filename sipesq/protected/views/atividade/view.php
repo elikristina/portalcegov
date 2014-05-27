@@ -288,8 +288,6 @@ $this->menu=array(
 		
 		<div class="input">
 			<?php echo $form->labelEx($passo,'cod_pessoa'); ?>
-			<?php $listDataPessoas = CHtml::listData(Pessoa::model()->with('categoria')->findAll(array('order'=>'equipe_atual DESC, t.nome')), 'cod_pessoa', 'nome', 'categoria.nome');?>
-			<?php  //echo $form->dropDownList($passo,'cod_pessoa', $listDataPessoas, array('prompt'=>"Selecione uma Pessoa")); ?>
 			<?php echo $form->textField($passo, 'cod_pessoa')?>
 			<?php echo $form->error($passo,'cod_pessoa'); ?>
 		</div>
