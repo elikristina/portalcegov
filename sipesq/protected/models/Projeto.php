@@ -157,6 +157,9 @@ class Projeto extends CActiveRecord
                         'pessoas' => array(self::MANY_MANY, 'Pessoa', 'projeto_pessoa_atuante(cod_pessoa, cod_projeto)', 'order'=>'pessoas.nome', 'select'=>'cod_pessoa, nome', 'condition'=>'ativo = true'),
                         'pessoas_inativas' => array(self::MANY_MANY, 'Pessoa', 'projeto_pessoa_atuante(cod_pessoa, cod_projeto)', 'order'=>'pessoas_inativas.nome', 'select'=>'cod_pessoa, nome', 'condition'=>'ativo = false'),
 
+                        // Grupo de Trabalho
+                        'gt' => array(self::BELONGS_TO, 'GrupoTrabalho', 'cod_gt', 'select'=>'cod_gt, nome'),
+
                         //Atividades
                         'atividades' => array(self::MANY_MANY, 'Atividade', 'atividade_projeto(cod_atividade, cod_projeto)', 'order'=>'atividades.estagio, atividades.data_fim asc'),
                         'atividades_finalizadas' => array(self::MANY_MANY, 'Atividade', 'atividade_projeto(cod_atividade, cod_projeto)', 'order'=>'atividades_finalizadas.data_fim asc', 'condition'=>'atividades_finalizadas.estagio = true'),
