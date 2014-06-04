@@ -19,7 +19,7 @@ Yii::app()->clientScript->registerScript('token_input_projeto',"
 	});
 ");
 
-$listDataPessoas = CHtml::listData(Pessoa::model()->with('categoria')->findAll(array('order'=>'equipe_atual DESC, t.nome')), 'cod_pessoa', 'nome', 'categoria.nome');
+$listDataPessoas = CHtml::listData(Pessoa::model()->findAll(array('order'=>'equipe_atual DESC, t.nome')), 'cod_pessoa', 'nome');
 
 ?>
 
