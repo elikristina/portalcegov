@@ -56,9 +56,9 @@ Yii::app()->clientScript->registerScript('text-areas',
 					<?php echo $form->error($model,'natureza'); ?>
 				</div>
 				<div class="control-group">
-					<?php echo $form->labelEx($model,'gt', array('class'=>'control-label')); ?>
-					<div class="controls"><?php echo $form->textField($model,'gt', array('class'=>'input-xxlarge')); ?></div>
-					<?php echo $form->error($model,'gt'); ?>
+					<?php echo $form->labelEx($model,'cod_gt', array('class'=>'control-label')); ?>
+					<div class="controls"><?php echo $form->textField($model,'cod_gt', array('class'=>'input-xxlarge')); ?></div>
+					<?php echo $form->error($model,'cod_gt'); ?>
 				</div>
 				<div class="control-group">
 					<?php echo $form->labelEx($model,'skydrive', array('class'=>'control-label')); ?>
