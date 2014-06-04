@@ -36,31 +36,31 @@ class UserIdentity extends CUserIdentity
 		return !$this->errorCode;
 	}
 
-	/**
+	/*
 	 * 
 	 * Autentica o usuário cmo o banco de dados utilizando as tabelas pessoa e user
-	//obsoleto
-	 public function autentica(){
-	
-	$connection=Yii::app()->db;
-	$sql = "select * from pessoa, users where (senha = :password AND email = :username) OR (password = :password AND username = :username)";
-	$command = $connection->createCommand($sql);
+			//obsoleto
+			 public function autentica(){
+			
+			$connection=Yii::app()->db;
+			$sql = "select * from pessoa, users where (password = :password AND email = :username) OR (password = :password AND username = :username)";
+			$command = $connection->createCommand($sql);
 
-	$command->bindParam(":username",$this->username,PDO::PARAM_STR);
-	$command->bindParam(":password",md5($this->password),PDO::PARAM_STR);
-	
-	//Autentica
-	if($command->execute() > 0 || $this->authenticate()){
-		
-		$this->errorCode=self::ERROR_NONE;
-	}
-	else $this->errorCode=self::ERROR_PASSWORD_INVALID;
-				//Atribui os atributos
-	   			$this->_name = $pessoa->email;
-	   			$this->_id = $pessoa->cod_pessoa;
-	   			
-		return !$this->errorCode;
-	} 
+			$command->bindParam(":username",$this->username,PDO::PARAM_STR);
+			$command->bindParam(":password",md5($this->password),PDO::PARAM_STR);
+			
+			//Autentica
+			if($command->execute() > 0 || $this->authenticate()){
+				
+				$this->errorCode=self::ERROR_NONE;
+			}
+			else $this->errorCode=self::ERROR_PASSWORD_INVALID;
+						//Atribui os atributos
+			   			$this->_name = $pessoa->email;
+			   			$this->_id = $pessoa->cod_pessoa;
+			   			
+				return !$this->errorCode;
+			} 
 	 */
 
 	/**
@@ -78,7 +78,7 @@ class UserIdentity extends CUserIdentity
 
 		if($pessoa === null) //Verifica se o username é válido
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		else if($pessoa->senha != md5($this->password)){ //Verifica se o pass é válido
+		else if($pessoa->password != md5($this->password)){ //Verifica se o pass é válido
 
 			    $this->errorCode=self::ERROR_PASSWORD_INVALID;
 
