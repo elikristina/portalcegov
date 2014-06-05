@@ -33,5 +33,6 @@
 			'lattes'=>'Lattes Curriculum',
 			'passaporte'=>'Passport',
 			'ramal'=>'Ramal',
+			'login'=>'Email or Username',
 		);
 ?>

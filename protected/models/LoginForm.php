@@ -39,6 +39,7 @@ class LoginForm extends CFormModel
 			'rememberMe'=>'Continuar conectado',
 		'username'=> 'E-mail',
 		'password' => 'Senha',
+		'login'=>Yii::t('Pessoa', 'login'),
 		);
 	}
 
@@ -52,7 +53,7 @@ class LoginForm extends CFormModel
 		{
 			$this->_identity=new UserIdentity($this->username, $this->password);
 			if(!$this->_identity->auth())
-				$this->addError('password','Usu&aacuterio ou senha incorreto.');
+				$this->addError('password','Usuário ou senha incorreto.');
 		}
 	}
 

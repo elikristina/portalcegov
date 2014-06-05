@@ -154,6 +154,7 @@ class Pessoa extends CActiveRecord
 			'endereco_profissional'=>Yii::t('Pessoa', 'endereco_profissional'),
 			'pagina_pessoal'=>Yii::t('Pessoa', 'pagina_pessoal'),
 			'instituicao'=>Yii::t('Pessoa', 'instituicao'),
+			'login'=>Yii::t('Pessoa', 'login'),
 		);
 	}
 
@@ -311,8 +312,23 @@ public static function getArrayMenuCategoria($id){
 
 		return $model;
 	}
+
+
+    /**
+     *
+     * Encontra uma pessoa a partir do seu login ou email
+     * @param string $username
+     * @return Pessoa $model se encontrar. null se nÃ£o encontrar
+     */
+    public static function findForLogin($username){
+    		if($username == null) return null;
+
+            $model = Pessoa::model()->find(array('condition'=>'login = :user OR email = :user', 'select'=>'cod_pessoa, login, email, nome_curto, nome, password', 'params'=>array('user'=>$username)));
+         
+            return $model;
+    }
 	
-	/**
+	/*
 	 * Aplica a lingagem atual ao modelo
 	 * @see db/ar/CActiveRecord::defaultScope()
 	public function defaultScope(){

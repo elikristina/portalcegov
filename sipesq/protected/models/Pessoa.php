@@ -256,6 +256,20 @@ class Pessoa extends CActiveRecord
 
         /**
          *
+         * Encontra uma pessoa a partir do seu login ou email
+         * @param string $username
+         * @return Pessoa $model se encontrar. null se nÃ£o encontrar
+         */
+        public static function findForLogin($username){
+                if($username == null) return null;
+                
+                $model = Pessoa::model()->find(array('condition'=>'login = :user OR email = :user', 'select'=>'cod_pessoa, login, email, nome_curto, nome, password', 'params'=>array('user'=>$username)));
+             
+                return $model;
+        }
+
+        /**
+         *
          * Dado um identificador do usuÃ¡rio retorna seu nÃ­vel de acesso
          * @param integer $id
          * @return integer $accessLevel

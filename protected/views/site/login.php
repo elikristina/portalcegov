@@ -20,7 +20,7 @@ $this->breadcrumbs=array(
 	<p class="note">Campos com  <span class="required">*</span> são obrigatórios.</p>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
+		<?php echo $form->labelEx($model,'login'); ?>
 		<?php echo $form->textField($model,'username'); ?>
 		<?php echo $form->error($model,'username'); ?>
 	</div>

@@ -33,6 +33,7 @@
 			'info_privadas'=>"Informações Privadas",
 			'lattes'=>'Currículo Lattes',
 			'pais'=>'País',
+			'login'=>'Email ou Nome de Usuário',
 			
 		);
 ?>

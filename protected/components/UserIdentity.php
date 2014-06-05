@@ -38,7 +38,7 @@ class UserIdentity extends CUserIdentity
 
 	/*
 	 * 
-	 * Autentica o usu·rio cmo o banco de dados utilizando as tabelas pessoa e user
+	 * Autentica o usu√°rio cmo o banco de dados utilizando as tabelas pessoa e user
 			//obsoleto
 			 public function autentica(){
 			
@@ -65,20 +65,21 @@ class UserIdentity extends CUserIdentity
 
 	/**
 	 * 
-	 * Autentica conforme o banco de dados - AtulizaÁ„o vinda do SIPESQ
+	 * Autentica conforme o banco de dados - Atuliza√ß√£o vinda do SIPESQ
 	 */
 	public function auth()
-	{		//Se for admin a autenticaÁ„o eh difernte
+	{		//Se for admin a autentica√ß√£o eh difernte
 			if($this->username == 'admin')
 				return $this->authenticate();
 
-			//Carrega atributos do usu·rio
+			//Carrega atributos do usu√°rio
 	   		$pessoa = new Pessoa();
-	   		$pessoa = $pessoa->findByEmail($this->username);
+	   		$pessoa = $pessoa->findForLogin($this->username);
 
-		if($pessoa === null) //Verifica se o username È v·lido
+
+		if($pessoa === null) //Verifica se o username √© v√°lido
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		else if($pessoa->password != md5($this->password)){ //Verifica se o pass È v·lido
+		else if($pessoa->password != md5($this->password)){ //Verifica se o pass √© v√°lido
 
 			    $this->errorCode=self::ERROR_PASSWORD_INVALID;
 
@@ -99,7 +100,7 @@ class UserIdentity extends CUserIdentity
 
 	/**
 	 * 
-	 * Retorna o nome do usu·rio
+	 * Retorna o nome do usu√°rio
 	 * @return string $username
 	 */
 
@@ -110,7 +111,7 @@ class UserIdentity extends CUserIdentity
 
 	/**
 	 * 
-	 * Retorna o nome do usu·rio
+	 * Retorna o nome do usu√°rio
 	 * @return string $id
 	 */
 	public function getId(){

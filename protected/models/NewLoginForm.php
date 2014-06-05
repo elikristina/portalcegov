@@ -40,6 +40,7 @@ class NewLoginForm extends CFormModel
 			'old_password'=>'Senha Atual',	
 			'password_confirm'=>'Confirmação de Nova Senha',
 			'username'=>'E-mail do Usuário',
+			'login'=>Yii::t('Pessoa', 'login'),
 		);
 	}
 
