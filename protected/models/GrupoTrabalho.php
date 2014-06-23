@@ -70,7 +70,7 @@ class GrupoTrabalho extends CActiveRecord
 			'coordenador' => array(self::BELONGS_TO, 'Pessoa', 'cod_coordenador', 'select'=>'cod_pessoa, nome, imagem, email'),
 			'pos_responsavel' => array(self::BELONGS_TO, 'Pessoa', 'cod_pos_responsavel', 'select'=>'cod_pessoa, nome, email, imagem'),
 			'pessoas' => array(self::MANY_MANY, 'Pessoa', 'pessoa_gt(cod_gt, cod_pessoa)',
-							'order'=>'categorias.ordem ASC',
+							'order'=>'pessoas.nome ASC, categorias.ordem ASC',
                             'with'=>'categorias',
                             'select'=>'cod_pessoa, nome, imagem, email'
 		
