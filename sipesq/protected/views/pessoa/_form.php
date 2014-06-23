@@ -95,11 +95,12 @@ Yii::app()->clientScript->registerScript('cep',"
 			<?php echo $form->error($model,'email'); ?>
 		</div>
 		
+		<?php /*
 		<div class="input">
 			<?php echo $form->labelEx($model,'cod_categoria'); ?>
 			<?php  echo $form->dropDownList($model,'cod_categoria', CHtml::listData(PessoaCategoria::model()->findAll(array('order'=>'nome')), 'cod_categoria', 'nome'), array('prompt'=>"Selecione uma Função")); ?>
 			<?php echo $form->error($model,'cod_categoria'); ?>
-		</div>
+		</div> */?>
 	
 		<?php /*
 		<div class="input">
