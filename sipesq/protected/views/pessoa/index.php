@@ -111,3 +111,6 @@ $this->menu=array(
                 'itemView'=>'_view',
         )); ?>
 </div>
+
+
+<?php //$this->renderPartial('/site/script'); ?>
