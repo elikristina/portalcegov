@@ -7,3 +7,5 @@ images/
 *.log
 *.log
 *.log
+protected/config/main.php
+sipesq/protected/config/main.php
