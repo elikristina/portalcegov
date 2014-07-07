@@ -39,6 +39,9 @@ class PessoaController extends Controller
 			}),	
 			
 			array('allow','actions'=>array('update', 'importId', 'restoreRelations', 'importPessoas'), 'expression'=>function(){
+				
+				if(Yii::app()->user->isGuest) return false;
+
 				$user = Yii::app()->user->getId();
 				
 				if (Sipesq::getPermition('pessoa.informacoes_avancadas', $user) >= 2) return true;
@@ -486,7 +489,7 @@ public function actionEquipe()
 	 */
 	public function actionImportId(){
 
-		$pessoas = Pessoa::model()->findAll(array('order'=>'nome'));
+		$pessoas = Pessoa::model()->findAll(array('order'=>'nome', 'condition'=>'old_cod_pessoa IS NULL'));
 
 		if($pessoas == null) 
 			echo 'Pessoas encontradas: 0';
@@ -495,73 +498,90 @@ public function actionEquipe()
 		
 		echo '<hr>';
 
+		
 		$connection = Yii::app()->db; 
 		$transaction=$connection->beginTransaction();
 		try
 		{
+			
 
 		$ids_importados = 0;
 
 		foreach ($pessoas as $key => $pessoa) {
 
-			$command =  Yii::app()->db_cegov->createCommand();
-			$command->from('pessoa')->where("email= :email OR nome = :nome", array('email'=>$pessoa->email, 'nome'=>$pessoa->nome))
-			->select('cod_pessoa')->limit(1, 0);
-			$result = $command->queryAll();
+			if($pessoa->old_cod_pessoa == null) {
 
-			//Verifica se eh um email valido no CEGOV
-			if(count($result) > 0){
+				$command =  Yii::app()->db_cegov->createCommand();
+				$command->from('pessoa')->where("email ILIKE :email OR nome ILIKE :nome"
+					,array(':email'=>'%' .trim($pessoa->email) .'%'
+						, ':nome'=>'%' .trim($pessoa->nome) .'%')
+				)->select('cod_pessoa')->limit(1, 0);
 
-				$ids_importados++;
-				$id = $result[0]['cod_pessoa'];
-				$pessoa->old_cod_pessoa = $id;
+				$result = $command->queryAll();
 
-				if( $pessoa->save(true) ){
-					echo '<span style="background-color: #AFA">';
-					echo $pessoa->cod_pessoa .' - ';
-					echo $pessoa->nome ." salva com id " .$id .'</span>';
-				}else{
+			
+				//Verifica se eh um email valido no CEGOV
+				if(count($result) > 0){
 
-					echo '<div style="background-color: #FCC">';
-					echo 'ERRO ao salvar ' .$pessoa->nome .'<br>';
-					echo 'cod_pessoa :' .$pessoa->cod_pessoa .'<br>';
-					echo 'old_cod_pessoa :' .$pessoa->old_cod_pessoa .'<br>';
-					echo 'ERROS: ';
-					foreach ($pessoa->errors as $err) echo $err[0] ."<br>";
-					echo '</div>';
+					$ids_importados++;
+					$id = $result[0]['cod_pessoa'];
+					$pessoa->old_cod_pessoa = $id;
 
-					//SE o erro nao tem a ver com old_cod_pessoa
-					if( !$pessoa->hasErrors('old_cod_pessoa') && $pessoa->save(false) ){
-						echo '<span style="background-color: #AAF">';
+					if( $pessoa->save(true) ){
+						echo '<span style="background-color: #AFA">';
 						echo $pessoa->cod_pessoa .' - ';
-						echo $pessoa->nome ." salva com alertas no id " .$id .'</span>';
+						echo $pessoa->nome ." salva com id " .$id .'</span>';
+					}else{
+
+						echo '<div style="background-color: #FCC">';
+						echo 'ERRO ao salvar ' .$pessoa->nome .'<br>';
+						echo 'cod_pessoa :' .$pessoa->cod_pessoa .'<br>';
+						echo 'old_cod_pessoa :' .$pessoa->old_cod_pessoa .'<br>';
+						echo 'ERROS: ';
+						foreach ($pessoa->errors as $err) echo $err[0] ."<br>";
+						echo '</div>';
+
+						//SE o erro nao tem a ver com old_cod_pessoa
+						if( !$pessoa->hasErrors('old_cod_pessoa') && $pessoa->save(false) ){
+							echo '<span style="background-color: #AAF">';
+							echo $pessoa->cod_pessoa .' - ';
+							echo $pessoa->nome ." salva com alertas no id " .$id .'</span>';
+						}
+
 					}
+					echo '<br>';
 
+				}else{
+					echo '<span style="background-color: #FFA">';
+					echo $pessoa->cod_pessoa .' - ';
+					echo $pessoa->nome ." nao consta no banco de dados do CEGOV </span><br>";
 				}
-				echo '<br>';
 
-			}else{
-				echo '<span style="background-color: #FFA">';
-				echo $pessoa->cod_pessoa .' - ';
-				echo $pessoa->nome ." nao consta no banco de dados do CEGOV </span><br>";
 			}
 
 			
+
+			
 		
+		}//endforeach
+			$transaction->commit();
+			echo "<h3>Total de IDs importados: " .$ids_importados .' / ' .count($pessoas) .'</h3>';
+
+
 		}
-		echo "<h3>Total de IDs importados: " .$ids_importados .' / ' .count($pessoas) .'</h3>';
+		 catch (CDbException $e){
 
-
-		} catch (CDbException $e)
-		{
 			echo "<h1>Alterações Canceladas - Verifique os erros</h1>";
-			echo $e->errorInfo[2] ."<hr>";
+			echo $e->getMessage() ."<hr>";
 			echo "Comando:<br>";
 			echo $command->getPdoStatement()->queryString ."<hr>";
 			$transaction->rollBack();	
 		}
 
-		
+		catch(Exception $e){
+			echo "<h1> Erro na execução </h1>";
+			echo $e->getMessage();
+		}
 
 		Yii::app()->end();
 
@@ -572,7 +592,13 @@ public function actionEquipe()
 
 		$tabelas = array('pessoa_gt', 'pessoa_categoria', 'pessoa_publicacao');
 
-		$pessoas = Pessoa::model()->findAll(array('order'=>'nome'));
+
+		$connection = Yii::app()->db; 
+		$transaction=$connection->beginTransaction();
+		try
+		{
+
+			$pessoas = Pessoa::model()->findAll(array('order'=>'nome'));
 
 		if($pessoas == null) 
 			echo 'Pessoas encontradas: 0';
@@ -583,19 +609,18 @@ public function actionEquipe()
 		
 		echo '<hr>';
 
-		$connection = Yii::app()->db; 
-		$transaction=$connection->beginTransaction();
-		try
-		{
-
-
-			foreach ($tabelas as $tabela) {
+		foreach ($tabelas as $tabela) {
 				foreach ($pessoas as $pessoa) {
 					$command =  Yii::app()->db->createCommand();
-					//ATUALIZANDO PESSOA_GT
-					$result = $command->update($tabela, array('cod_pessoa'=>$pessoa->cod_pessoa), "cod_pessoa = :old_id", array('old_id'=>$pessoa->old_cod_pessoa));
 
+					//ATUALIZANDO PESSOA_GT
+					$result = $command->update($tabela, array(
+    				'cod_pessoa'=>$pessoa->cod_pessoa,
+    				'migrated'=>true,
+					), 'cod_pessoa=:id AND migrated = FALSE', array(':id'=>$pessoa->old_cod_pessoa)); 
+		
 					if($result > 0){
+						
 						echo '<div style="background-color: #AFA">';
 						echo 'Atualizando ' .$tabela .'<br>';
 						echo 'Pessoa: ' .$pessoa->nome .'<br>';
@@ -603,61 +628,74 @@ public function actionEquipe()
 						echo 'old_cod_pessoa :' .$pessoa->old_cod_pessoa .'<br>';
 						echo 'Itens atualizados :' .$result .'<br>';
 						echo '</div>';
-						echo "<br>";
+						echo "<hr>";
+
 					}
-				}
-			} 
+
+			}
+		}
+
+		$transaction->commit(); 
 			
-		} catch (CDbException $e)
+		} catch (CdbException $e)
 		{
 			echo "<h1>Alterações Canceladas - Verifique os erros</h1>";
-			echo $e->errorInfo[2] ."<hr>";
+			echo $e->getMessage ."<hr>";
 			echo "Comando:<br>";
 			echo $command->getPdoStatement()->queryString ."<hr>";
 		    $transaction->rollBack();	
 		}
+		catch (Exception $e)
+		{
+			echo "<h1>Alterações Canceladas - Verifique os erros</h1>";
+			echo $e->geMessage() ."<hr>";
+		    $transaction->rollBack();	
+		}
+
 		Yii::app()->end();
 	}
 
 
 
 
-	public function actionImportPessoas(){
+	public function actionImportPessoas($id=null){
 
 		$pessoa = new Pessoa();
 		$pessoa->getAttributes('email');
 		$cmd =  Yii::app()->db->createCommand();
 		$cmd->select('email, nome')->from('pessoa');
+
 		$result = $cmd->queryAll();
 
 		$emails = array_map(function($email){
-			return $email['email'];
+			return trim($email['email']);
 		}, $result);
 
 		$nomes = array_map(function($email){
-			return $email['nome'];
+			return trim($email['nome']);
 		}, $result);
 
 		$command =  Yii::app()->db_cegov->createCommand();
 		$command->from('pessoa');
+		
+		
 		$command->where(array(
 			'not in',
 			'email',
 			$emails,
 		));
 
+			
 		$command->andWhere(array(
 			'not in',
 			'nome',
 			$nomes,
-		));
-
+		)); 
 		
 		$command->select('*');
 		$pessoas = $command->queryAll();
 
 		echo "Pessoas encontradas que nao estao no SIPESQ: " .count($pessoas) ."<hr>";
-
 
 		function import_pessoas($err, $pess){
 
@@ -736,11 +774,12 @@ public function actionEquipe()
 		 
 				
 			
-		} catch (CDbException $e)
+		} catch (Exception $e)
 		{
 		    $transaction->rollBack();	
 		    echo "<h1>Alterações Canceladas - Verifique os erros</h1>";
-		    echo $e->errorInfo[2] ."<hr>";
+		    echo $e->message;
+		    //echo $e->errorInfo[2] ."<hr>";
 		}
 
 		

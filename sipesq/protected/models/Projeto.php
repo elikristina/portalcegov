@@ -827,4 +827,8 @@ class Projeto extends CActiveRecord
                 return ($permissao_sipesq > $permissao) ? $permissao_sipesq : $permissao;
         }
 
+        public function t($p){
+            return $this->$p;
+        }
+
 }
