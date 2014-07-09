@@ -5,7 +5,11 @@ protected/config/
 files/
 images/
 *.log
-*.log
-*.log
 protected/config/main.php
 sipesq/protected/config/main.php
+
+#SIPESQ
+
+sipesq/protected/runtime/
+sipesq/protected/config/
+sipesq/protected/assets/
