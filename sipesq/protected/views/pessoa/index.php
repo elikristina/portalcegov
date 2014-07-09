@@ -48,7 +48,7 @@ $this->menu=array(
                                 container = a.children('div');
                                 $(container).show('fast');
 
-                        $.get('/sipesq/index.php/pessoa/ajaxpessoa'     ,
+                        $.get('/portalcegov/sipesq/index.php/pessoa/ajaxpessoa'     ,
 
                                 {id: pessid},function (data){
                                                 $(container).html(data);
@@ -76,7 +76,7 @@ $this->menu=array(
                                 $.each(containers,
                                         function(key,value)
                                         {
-                                                $.get('/sipesq/index.php/pessoa/ajaxpessoa'     ,
+                                                $.get('/portalcegov/sipesq/index.php/pessoa/ajaxpessoa'     ,
 
                                                 {id:  $(value).parent().attr('id')},function (data){
                                                                 $(value).html(data);

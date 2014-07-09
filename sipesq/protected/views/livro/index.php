@@ -37,7 +37,7 @@ $this->menu=array(
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<?php echo $form->textField($model,'titulo', array('onchange'=>'location.href = "/sipesq/index.php/livro/search?Livro%5Btitulo%5D=" + this.value', 'size'=>60, 'class'=>'input-medium search-query')); ?>
+	<?php echo $form->textField($model,'titulo', array('onchange'=>'location.href = "/portalcegov/sipesq/index.php/livro/search?Livro%5Btitulo%5D=" + this.value', 'size'=>60, 'class'=>'input-medium search-query')); ?>
 		<?php echo $form->error($model,'titulo'); ?>
 		<?php echo CHtml::submitButton('Buscar', array('class'=>"btn btn-primary")); ?>
 	

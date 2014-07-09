@@ -27,7 +27,7 @@ $('.icon').tooltip();
 		)); ?>
 			<?php echo $form->errorSummary($model); ?>
 
-				<?php echo $form->textField($model,'nome', array('class'=>"input-medium search-query input-xxlarge", 'onchange'=>'location.href = "/sipesq/index.php/contato/search?Contato%5Bnome%5D=" + this.value', 'size'=>60, 'placeholder'=>'Digite um nome, email, etc')); ?>
+				<?php echo $form->textField($model,'nome', array('class'=>"input-medium search-query input-xxlarge", 'onchange'=>'location.href = "/portalcegov/sipesq/index.php/contato/search?Contato%5Bnome%5D=" + this.value', 'size'=>60, 'placeholder'=>'Digite um nome, email, etc')); ?>
 				<?php echo CHtml::submitButton('Buscar', array('class'=>'btn btn-small')); ?>
 			
 		<?php $this->endWidget(); ?>

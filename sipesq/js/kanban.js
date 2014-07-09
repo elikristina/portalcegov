@@ -1,4 +1,4 @@
-var baseUrl = "/sipesq/index.php/atividade/saveActivity";
+var baseUrl = "/portalcegov/sipesq/index.php/atividade/saveActivity";
 
 function initKanban() {
 
@@ -65,7 +65,7 @@ function initKanban() {
             alert(id);
             //$( "#update-form" ).dialog( "open" );
 
-            $("#update-form").load("/sipesq/index.php/atividade/updateajax/" + id);
+            $("#update-form").load("/portalcegov/sipesq/index.php/atividade/updateajax/" + id);
         });
 }
 
@@ -200,7 +200,7 @@ function todoDrop(event, ui) {
 
 function savePasso() {
     var id = $(this).attr('id');
-    $.post('/sipesq/index.php/atividade/passoConcluido/' + id, {
+    $.post('/portalcegov/sipesq/index.php/atividade/passoConcluido/' + id, {
         finalizado: this.checked
     }, function(data) {
 
@@ -309,7 +309,7 @@ function loadActivity(containerId, status, options) {
     $(containerId).html('');
     $.ajax({
         type: 'POST',
-        url: '/sipesq/index.php/atividade/loadColumn/',
+        url: '/portalcegov/sipesq/index.php/atividade/loadColumn/',
         data: params,
         dataType: 'html',
         success: function(data) {

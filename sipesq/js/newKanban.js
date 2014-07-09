@@ -3,7 +3,7 @@ window.Kanban = {}
 ;
 (function(exports) {
 
-    var baseUrl = "/sipesq/index.php/atividade/saveActivity"
+    var baseUrl = "/portalcegov/sipesq/index.php/atividade/saveActivity"
 
         function initKanban() {
 
@@ -67,7 +67,7 @@ window.Kanban = {}
                     alert(id)
                     //$( "#update-form" ).dialog( "open" )
 
-                    $("#update-form").load("/sipesq/index.php/atividade/updateajax/" + id)
+                    $("#update-form").load("/portalcegov/sipesq/index.php/atividade/updateajax/" + id)
                 })
 
         }
@@ -201,7 +201,7 @@ window.Kanban = {}
 
         function savePasso() {
             var id = $(this).attr('id')
-            $.post('/sipesq/index.php/atividade/passoConcluido/' + id, {
+            $.post('/portalcegov/sipesq/index.php/atividade/passoConcluido/' + id, {
                 finalizado: this.checked
             })
             console.log('Passo ' + id + ' salvo com: ' + (this.checked ? 'true' : 'false'))
@@ -302,7 +302,7 @@ window.Kanban = {}
          * @param options - opções como pessooa, projeto e categoria de atividades
          */
         function Kanban.prototype.loadActivity(containerId, status, options) {
-            $.post('/sipesq/index.php/atividade/loadColumn', {
+            $.post('/portalcegov/sipesq/index.php/atividade/loadColumn', {
                     options: options,
                     status: status
 

@@ -102,7 +102,7 @@ $(document).ready(
 
 $('#sq').change(function(){
 	if($('#sq').val().trim().length > 2)
-		window.location.href = '/sipesq/index.php/site/search/?q=' + $('#sq').val().trim();
+		window.location.href = '/portalcegov/sipesq/index.php/site/search/?q=' + $('#sq').val().trim();
 });
 
 </script>
