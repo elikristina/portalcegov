@@ -828,7 +828,7 @@ class Projeto extends CActiveRecord
         }
 
         public function t($p){
-            return $this->$p;
+            return $this-$p;
         }
 
 }
