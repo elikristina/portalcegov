@@ -127,7 +127,7 @@ class Projeto extends CActiveRecord
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-                        array('nome, nome_curto, cod_categoria, cod_grad, cod_pos_grad, cod_professor, cod_bolsista_responsavel', 'required'),
+                        array('nome, nome_curto, cod_categoria, cod_grad, cod_pos_grad, cod_professor, cod_bolsista_responsavel, cod_gt', 'required'),
                         //array('cod_professor', 'validaResponsavel', 'cod_pos_grad', 'cod_grad'),
                         //array('cod_grad', 'validaResponsavel', 'cod_pos_grad', 'cod_professor'),
                         //array('cod_pos_grad', 'validaResponsavel', 'cod_professor', 'cod_grad'),
