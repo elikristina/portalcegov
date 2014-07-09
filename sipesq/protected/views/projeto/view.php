@@ -36,7 +36,7 @@ Yii::app()->clientScript->registerScript('tab-menu', "
 		
 				$('#tabAtividades').html('Carregando Atividades...');
 		
-				$('#tabAtividades').load('/sipesq/index.php/projeto/tabAtividades/' + cod_projeto, function(){
+				$('#tabAtividades').load('/portalcegov/sipesq/index.php/projeto/tabAtividades/' + cod_projeto, function(){
 					$('#tabAtividades').attr('data-loaded', '1');
 					$('.collapse').collapse();
 					$('.accordion-heading').hover(

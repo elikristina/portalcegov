@@ -902,7 +902,7 @@ class AtividadeController extends Controller
 		$select = array(
 					'atividade.cod_atividade as id'
 				,	'nome_atividade'
-				,	'descricao' 
+				,	'atividade.descricao' 
 				,	'data_inicio'
 				,	'data_fim'
 				,	'atividade.cod_pessoa as responsavel'

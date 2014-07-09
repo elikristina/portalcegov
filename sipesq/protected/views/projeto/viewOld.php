@@ -64,7 +64,7 @@ Yii::app()->clientScript->registerScript('tab-menu', "
 		$('#lnkAtividades').click(
 			function(){
 				$('#tabAtividades').html('Carregando Atividades...');
-				$('#tabAtividades').load('/sipesq/index.php/projeto/tabAtividades/' + cod_projeto);
+				$('#tabAtividades').load('/portalcegov/sipesq/index.php/projeto/tabAtividades/' + cod_projeto);
 
 			}
 		);	

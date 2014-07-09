@@ -259,7 +259,7 @@ $('.tbl-line-financeiro').hover(
 		//Desenha o chart.
         chart.draw(data, chartOptions);
 
-		$.getJSON('/sipesq/index.php/projeto/jsonFinanceiro/<?php echo $model->cod_projeto?>', function(json){
+		$.getJSON('/portalcegov/sipesq/index.php/projeto/jsonFinanceiro/<?php echo $model->cod_projeto?>', function(json){
 			
 
 			 	jsonObj = eval(json);

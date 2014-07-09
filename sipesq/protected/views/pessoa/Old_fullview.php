@@ -62,7 +62,7 @@ $('#menu-tab a').hover(
 				$(this).val('-');
 				
 		
-			$.get('/sipesq/index.php/pessoaFinanceiro/view/'	,
+			$.get('/portalcegov/sipesq/index.php/pessoaFinanceiro/view/'	,
 					
 				{id: id, no_layout: 1},function (data){
 						$(container).append(data );

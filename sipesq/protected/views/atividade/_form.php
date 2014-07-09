@@ -26,7 +26,7 @@ Yii::app()->clientScript->registerCss('label',"
 	$('#drop_categoria_pai').change(
 	function(){
 	 pai = $('#drop_categoria_pai').val();
-	 $.get('/sipesq/index.php/atividadeCategoria/listChildren/'	,
+	 $.get('/portalcegov/sipesq/index.php/atividadeCategoria/listChildren/'	,
 					
 				{id: pai},function (data){
 						$('#Atividade_cod_categoria').html(data);
@@ -67,7 +67,7 @@ Yii::app()->clientScript->registerCss('label',"
 	
 		var th = new TokenHelper();
 		var atvId = " .$model->cod_atividade .";
-		var url = \"/sipesq/index.php/atividade/tokenPessoa/\" + atvId;
+		var url = \"/portalcegov/sipesq/index.php/atividade/tokenPessoa/\" + atvId;
 	
 		
 		$.getJSON(url, function(data){
@@ -137,7 +137,7 @@ Yii::app()->clientScript->registerCss('label',"
 		$('#Atividade_cod_categoria').change(
 		function(){
 		 id = $('#Atividade_cod_categoria').val();
-		 $.get('/sipesq/index.php/atividadeCategoria/getDescription/'	,
+		 $.get('/portalcegov/sipesq/index.php/atividadeCategoria/getDescription/'	,
 						
 					{id: id},function (data){
 							$('#Atividade_descricao').html(data);

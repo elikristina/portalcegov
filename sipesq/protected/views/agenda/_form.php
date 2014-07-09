@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 );?>
 <?php Yii::app()->clientScript->registerScript('renderAgenda',"
 function renderizaAgenda(){
-$.get('/sipesq/index.php/agenda/render/',
+$.get('/portalcegov/sipesq/index.php/agenda/render/',
  					function(data) {
  					$('#agenda').html(data);
 					});
@@ -24,7 +24,7 @@ $(document).ready(function(){renderizaAgenda()});
 		
 		//Marca os horarios
 		var id = $(this).val();
-		$.get('/sipesq/index.php/agenda/ajaxget/', { id: id },
+		$.get('/portalcegov/sipesq/index.php/agenda/ajaxget/', { id: id },
  					function(data) {
  					var horarios = eval(data);
  					
@@ -44,7 +44,7 @@ $(document).ready(function(){renderizaAgenda()});
 			var pessoa = $('#drop-pessoa').val();
 			var dia = $(this).val();
 			
-			$.get('/sipesq/index.php/agenda/ajaxcreate/', { id: pessoa, turno: 'manha', dia_semana: dia },
+			$.get('/portalcegov/sipesq/index.php/agenda/ajaxcreate/', { id: pessoa, turno: 'manha', dia_semana: dia },
  					function() {
  					$('.verde').html('<b>Horário Adicionado com Sucesso</b>');
  					$('.verde').slideDown(300).delay(800).fadeOut(800);
@@ -61,7 +61,7 @@ $(document).ready(function(){renderizaAgenda()});
 			var pessoa = $('#drop-pessoa').val();
 			var dia = $(this).val();
 			
-			$.get('/sipesq/index.php/agenda/ajaxdelete/', { id: pessoa, turno: 'manha', dia_semana: dia },
+			$.get('/portalcegov/sipesq/index.php/agenda/ajaxdelete/', { id: pessoa, turno: 'manha', dia_semana: dia },
  					function() {
  					$('.verde').html('<b>Horário Removido com Sucesso</b>');
  					$('.verde').slideDown(300).delay(800).fadeOut(800);
@@ -84,7 +84,7 @@ $(document).ready(function(){renderizaAgenda()});
 			var pessoa = $('#drop-pessoa').val();
 			var dia = $(this).val();
 			
-			$.get('/sipesq/index.php/agenda/ajaxcreate/', { id: pessoa, turno: 'tarde', dia_semana: dia },
+			$.get('/portalcegov/sipesq/index.php/agenda/ajaxcreate/', { id: pessoa, turno: 'tarde', dia_semana: dia },
  					function() {
  					$('.verde').html('<b>Horário Adicionado com Sucesso</b>');
  					$('.verde').slideDown(300).delay(800).fadeOut(800);
@@ -100,7 +100,7 @@ $(document).ready(function(){renderizaAgenda()});
 			var pessoa = $('#drop-pessoa').val();
 			var dia = $(this).val();
 			
-			$.get('/sipesq/index.php/agenda/ajaxdelete/', { id: pessoa, turno: 'tarde', dia_semana: dia },
+			$.get('/portalcegov/sipesq/index.php/agenda/ajaxdelete/', { id: pessoa, turno: 'tarde', dia_semana: dia },
  					function() {
  					$('.verde').html('<b>Horário Removido com Sucesso</b>');
  					$('.verde').slideDown(300).delay(800).fadeOut(800);

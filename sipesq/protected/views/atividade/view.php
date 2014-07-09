@@ -21,7 +21,7 @@ $this->menu=array(
 <?php Yii::app()->clientScript->registerScript('tokenPasso',"
 
 	
-	var url = \"/sipesq/index.php/pessoa/json/\";
+	var url = \"/portalcegov/sipesq/index.php/pessoa/json/\";
 
 	
 			

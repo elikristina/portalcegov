@@ -25,7 +25,7 @@ Yii::app()->clientScript->registerScript('loadRubrica',
 			$('#campos-adicionais').html('');
 			return;
 			}
-			$.get('/sipesq/index.php/projetoDespesa/formAdicional/' + this.options[this.selectedIndex].value
+			$.get('/portalcegov/sipesq/index.php/projetoDespesa/formAdicional/' + this.options[this.selectedIndex].value
 			, function(data){
 					$('.hidden').hide();
 					var content = document.createElement('div');
@@ -37,7 +37,7 @@ Yii::app()->clientScript->registerScript('loadRubrica',
 			});
 			
 			//Carrega informacoes sobre a rubrica
-			$.getJSON('/sipesq/index.php/projetoDespesa/infoRubrica/'
+			$.getJSON('/portalcegov/sipesq/index.php/projetoDespesa/infoRubrica/'
 			,{
 			 	id: this.options[this.selectedIndex].value,
 				cod_verba: {$verba->cod_verba}
