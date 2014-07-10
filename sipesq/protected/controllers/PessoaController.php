@@ -515,7 +515,7 @@ public function actionEquipe()
 				$command->from('pessoa')->where("email ILIKE :email OR nome ILIKE :nome"
 					,array(':email'=>'%' .trim($pessoa->email) .'%'
 						, ':nome'=>'%' .trim($pessoa->nome) .'%')
-				)->select('cod_pessoa')->limit(1, 0);
+				)->select('*')->limit(1, 0);
 
 				$result = $command->queryAll();
 
@@ -525,7 +525,34 @@ public function actionEquipe()
 
 					$ids_importados++;
 					$id = $result[0]['cod_pessoa'];
+					$pess = $result[0];
+
 					$pessoa->old_cod_pessoa = $id;
+					$pessoa->descricao = $pess['descricao'];
+					$pessoa->descricao_en = $pess['descricao_en'];
+					$pessoa->lattes = $pess['lattes'];
+					$pessoa->imagem = $pess['imagem'];
+					$pessoa->email = $pess['email'];
+					$pessoa->cpf = $pess['CPF'];
+					$pessoa->rg = $pess['RG'];
+					$pessoa->nome = $pess['nome'];
+					$pessoa->nome_mae = $pess['nome_mae'];
+					$pessoa->telefone = $pess['telefone'];
+					$pessoa->celular = $pess['celular'];
+					$pessoa->cartao_ufrgs = $pess['cartao_ufrgs'];
+					$pessoa->orgao_expedidor = $pess['orgao_expedidor'];
+					$pessoa->orgao_departamento = $pess['orgao_departamento'];
+					$pessoa->instituicao = $pess['instituicao'];
+					$pessoa->login = $pess['email']; //adapta login para email
+					$pessoa->endereco_profissional = $pess['endereco_profissional'];
+					$pessoa->first_login = $pess['first_login'];
+					$pessoa->descricao_en = $pess['descricao_en'];
+					$pessoa->siape = $pess['siape'];
+					$pessoa->endereco_residencial = $pess['endereco_residencial'];
+					$pessoa->curso = $pess['curso'];	
+
+
+
 
 					if( $pessoa->save(true) ){
 						echo '<span style="background-color: #AFA">';
@@ -702,6 +729,7 @@ public function actionEquipe()
 			$pessoa = new Pessoa();
 			$pessoa->old_cod_pessoa = $pess['cod_pessoa'];
 			$pessoa->descricao = $pess['descricao'];
+			$pessoa->descricao_en = $pess['descricao_en'];
 			$pessoa->lattes = $pess['lattes'];
 			$pessoa->imagem = $pess['imagem'];
 			$pessoa->email = $pess['email'];
