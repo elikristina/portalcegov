@@ -12,8 +12,8 @@
  * @property string $email
  * @property string $nome
  * @property string $senha
- * @property string $RG
- * @property string $CPF
+ * @property string $rg
+ * @property string $cpf
  * @property string $nome_mae
  * @property string $data_nascimento
  * @property string $telefone
@@ -63,11 +63,11 @@ class Pessoa extends CActiveRecord
 		// will receive user inputs.
 		if(Yii::app()->user->isGuest){
 			return array(
-			array('orgao_expedidor, orgao_departamento, instituicao, curso, email, senha, senha_confirm, nome, RG, CPF, nome_mae, data_nascimento, telefone', 'required'),
+			array('orgao_expedidor, orgao_departamento, instituicao, curso, email, senha, senha_confirm, nome, rg, cpf, nome_mae, data_nascimento, telefone', 'required'),
 			array('email', 'unique'),
 			array('first_login', 'boolean'),
 			array('senha_confirm', 'validaSenha'),
-			array('descricao, lattes, pesquisa, nome, descricao_en, imagem, RG, CPF, nome_mae, data_nascimento, telefone, celular, cartao_ufrgs, siape, orgao_departamento, instituicao, curso, first_login, info_adicional', 'safe'),
+			array('descricao, lattes, pesquisa, nome, descricao_en, imagem, rg, cpf, nome_mae, data_nascimento, telefone, celular, cartao_ufrgs, siape, orgao_departamento, instituicao, curso, first_login, info_adicional', 'safe'),
 			array('imageFile', 'file',
 				 'types'=>'jpg, png, gif', 
 				 'allowEmpty'=>true,
@@ -84,12 +84,12 @@ class Pessoa extends CActiveRecord
 		}else{
 			
 			return array(
-			//array('endereco_profissional, orgao_departamento, instituicao, descricao, email, senha,lattes, senha_confirm, nome, RG, CPF, nome_mae, data_nascimento, nacionalidade, telefone, orgao_expedidor', 'required'),
+			//array('endereco_profissional, orgao_departamento, instituicao, descricao, email, senha,lattes, senha_confirm, nome, rg, cpf, nome_mae, data_nascimento, nacionalidade, telefone, orgao_expedidor', 'required'),
 			array('email, senha, senha_confirm, nome', 'required'),
 			array('email', 'unique'),
 			array('first_login', 'boolean'),
 			array('senha_confirm', 'validaSenha'),
-			array('descricao, lattes, nome, descricao_en, imagem, RG, CPF, nome_mae, data_nascimento, telefone, celular, cartao_ufrgs, orgao_expedidor, siape, orgao_departamento, instituicao, curso, first_login, info_adicional', 'safe'),
+			array('descricao, lattes, nome, descricao_en, imagem, rg, cpf, nome_mae, data_nascimento, telefone, celular, cartao_ufrgs, orgao_expedidor, siape, orgao_departamento, instituicao, curso, first_login, info_adicional', 'safe'),
 			array('imageFile', 'file',
 				 'types'=>'jpg, png, gif', 
 				 'allowEmpty'=>true,
@@ -140,8 +140,8 @@ class Pessoa extends CActiveRecord
 			'senha_confirm' => Yii::t('Pessoa', 'senha_confirm'),
 			'categorias'=>Yii::t('Pessoa', 'categorias'),
 			'imageFile'=>Yii::t('Pessoa', 'imageFile'),
-			'RG' => Yii::t('Pessoa', 'rg'),
-			'CPF' => Yii::t('Pessoa', 'cpf'),
+			'rg' => Yii::t('Pessoa', 'rg'),
+			'cpf' => Yii::t('Pessoa', 'cpf'),
 			'nome_mae' => Yii::t('Pessoa', 'nome_mae'),
 			'data_nascimento' => Yii::t('Pessoa', 'data_nascimento'),
 			'telefone' => Yii::t('Pessoa', 'telefone'),
@@ -176,8 +176,8 @@ class Pessoa extends CActiveRecord
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('senha',$this->senha,true);
 		$criteria->compare('nome',$this->nome,true);
-		$criteria->compare('RG',$this->RG,true);
-		$criteria->compare('CPF',$this->CPF,true);
+		$criteria->compare('rg',$this->rg,true);
+		$criteria->compare('cpf',$this->cpf,true);
 		$criteria->compare('nome_mae',$this->nome_mae,true);
 		$criteria->compare('data_nascimento',$this->data_nascimento,true);
 		$criteria->compare('telefone',$this->telefone,true);
