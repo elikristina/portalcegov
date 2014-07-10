@@ -23,7 +23,6 @@
     <link href="<?php echo $baseUrl; ?>/css/main.css" rel="stylesheet">
 	    
 	<?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
-	
     <!-- Fav Icons -->	
 	<link rel="icon" type="image/x-icon" href="<?php echo $baseUrl; ?>/css/favicon.ico" /> 
 	<link rel="shortcut icon" type="image/x-icon"  href="<?php echo $baseUrl; ?>/css/favicon.ico" />
@@ -128,7 +127,7 @@
 							'htmlOptions'=>array('class'=>'nav'),
              				'items'=>array(
              				array('label'=>'<i class="icon-home icon-large"></i>', 'url'=>array('/site/index')),
-                    array('label'=>Yii::t('default', 'sobre') .'&nbsp&nbsp<i class="icon-angle-down"></i>', 'url'=>array(''), 'linkOptions'=> array(
+                    array('label'=>Yii::t('default', 'sobre') .'&nbsp&nbsp<i class="icon-angle-down"></i>', 'url'=>array('#'), 'linkOptions'=> array(
                             'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown'), 'itemOptions' => array('class'=>'dropdown user'), 'items'=>array(
                       array('label'=>Yii::t('default', 'apresentacao'), 'url'=>array('/about/presentation')),
                       array('label'=>Yii::t('default', 'estrutura'), 'url'=>array('/about/structure')),
@@ -139,10 +138,10 @@
              				//array('label'=>Yii::t('default', 'gts'), 'url'=>array('/gt/index')),
              				//array('label'=>Yii::t('default', 'equipe'), 'url'=>array('/pessoa/index')),
              				array('label'=>Yii::t('default', 'projetos'), 'url'=>array('/projeto/index')),
-             				array('label'=>Yii::t('default', 'noticias'), 'url'=>array('/new')),
-             				array('label'=>Yii::t('default', 'eventos'), 'url'=>array('/new/events')),
+             				array('label'=>Yii::t('default', 'noticias'), 'url'=>array('/new/index')),
+             				array('label'=>Yii::t('default', 'eventos'), 'url'=>array('/new/events/')),
              				array('label'=>Yii::t('default', 'publicacoes'), 'url'=>array('/publicacao/index')),
-             				array('label'=>Yii::t('default', 'ferramentas'), 'url'=>array('/ferramenta')),
+             				array('label'=>Yii::t('default', 'ferramentas'), 'url'=>array('/ferramenta/index')),
                     //array('label'=>Yii::t('default', 'Contato'), 'url'=>array('/about/partners')),
              
              				),
