@@ -26,7 +26,7 @@ return array(
 
                 'gii'=>array(
                         'class'=>'system.gii.GiiModule',
-                        'password'=>'******',
+                        'password'=>'cegovbrasil',
                         // If removed, Gii defaults to localhost only. Edit carefully to taste.
                         'ipFilters'=>array('127.0.0.1','::1'),
                 ),
@@ -92,20 +92,21 @@ return array(
                 /*
 
                 //Banco de dados de produção
-                'db'=>array(
-                        'connectionString' => 'pgsql:host=143.54.64.104;port=5432;dbname=sipesq',
+                'db_cegov'=>array(
+                        'class'=>'CDbConnection',
+                        'connectionString' => 'pgsql:host=143.54.64.104;port=5432;dbname=teste_cegov',
                         'emulatePrepare' => true,
                         'username' => 'postgres',
-                        'password' => '******',
+                        'password' => 'cegovbrasil',
                         'charset' => 'utf8',
                 ),
                 */
                 // Banco de dados de desenvolvimento
                 'db'=>array(
-                        'connectionString' => 'pgsql:host=localhost;port=5432;dbname=portal_cegov',
+                        'connectionString' => 'pgsql:host=localhost;port=5432;dbname=teste_portal',
                         //'emulatePrepare' => true, //causa bug na conversao de boolean
                         'username' => 'postgres',
-                        'password' => '******',
+                        'password' => 'cegovbrasil',
                         'charset' => 'utf8',
                 ),
 

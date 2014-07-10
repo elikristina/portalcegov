@@ -17,6 +17,12 @@ return array(
 
 	// autoloading model and component classes
 	'import'=>array(
+		//SIPESQ
+		'webroot.sipesq.protected.models.*',
+		'webroot.sipesq.protected.models.forms.*',
+		'webroot.sipesq.protected.components.*',
+
+		//CEGOV
 		'application.models.*',
 		'application.components.*',
     	'application.helpers.*',
@@ -27,7 +33,7 @@ return array(
 		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'******',
+			'password'=>'cegovbrasil',
 		 	// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
@@ -62,10 +68,10 @@ return array(
         ),		
 		
 		'db'=>array(
-			'connectionString' => 'pgsql:host=localhost;port=5432;dbname=portal_cegov',
+			'connectionString' => 'pgsql:host=localhost;port=5432;dbname=teste_portal',
 			//'emulatePrepare' => true,
 			'username' => 'postgres',
-			'password' => '*******',
+			'password' => 'cegovbrasil',
 			'charset' => 'utf8',
 		),
 		
