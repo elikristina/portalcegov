@@ -68,9 +68,9 @@ Yii::app()->clientScript->registerScript('multiple-select',"
 	</div>
 	
 	<div class="form-row">
-		<?php echo $form->labelEx($model,'CPF'); ?>
-		<?php echo $form->textField($model,'CPF', array('size'=>'65', 'pattern'=>"\d{3}\.?\d{3}\.?\d{3}\-?\d{2}", 'placeholder'=>"xxx.xxx.xxx-xx ou xxxxxxxxxxx")); ?>
-		<?php echo $form->error($model,'CPF'); ?>
+		<?php echo $form->labelEx($model,'cpf'); ?>
+		<?php echo $form->textField($model,'cpf', array('size'=>'65', 'pattern'=>"\d{3}\.?\d{3}\.?\d{3}\-?\d{2}", 'placeholder'=>"xxx.xxx.xxx-xx ou xxxxxxxxxxx")); ?>
+		<?php echo $form->error($model,'cpf'); ?>
 	</div>
 	
 	
@@ -151,9 +151,9 @@ Yii::app()->clientScript->registerScript('multiple-select',"
 	</div>
 
 	<div class="form-row">
-		<?php echo $form->labelEx($model,'RG'); ?>
-		<?php echo $form->textField($model,'RG', array('size'=>65, 'pattern'=>"\w+", 'placeholder'=>"Ex: xxxxxx...")); ?>
-		<?php echo $form->error($model,'RG'); ?>
+		<?php echo $form->labelEx($model,'rg'); ?>
+		<?php echo $form->textField($model,'rg', array('size'=>65, 'pattern'=>"\w+", 'placeholder'=>"Ex: xxxxxx...")); ?>
+		<?php echo $form->error($model,'rg'); ?>
 	</div>
 	
 		<div class="form-row">
