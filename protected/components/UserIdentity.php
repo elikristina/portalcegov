@@ -69,6 +69,10 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function auth()
 	{		//Se for admin a autenticação eh difernte
+
+
+			return $this->authenticate();
+
 			if($this->username == 'admin')
 				return $this->authenticate();
 
