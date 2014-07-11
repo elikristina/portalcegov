@@ -105,10 +105,14 @@ public function autentica(){
 				return $this->authenticate();
 			*/
 
+			//USUARIO PODE LOGAR TANTO COM O EMAIL QUANTO O LOGIN
 			
-			//Carrega atributos do usuário
-	   		$pessoa = new Pessoa();
-	   		$pessoa = $pessoa->findByUserName($this->username);
+			//Teste se é login valido
+	   		$pessoa = Pessoa::model()->findByAttributes(array('login'=>$this->username));
+
+	   		//Testa se é email valido
+	   		if ($pessoa === null)
+	   			$pessoa = Pessoa::model()->findByAttributes(array('email'=>$this->username));
 	   					
 		
 		if($pessoa === null) //Verifica se o username é válido
