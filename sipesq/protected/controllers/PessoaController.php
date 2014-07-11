@@ -542,17 +542,13 @@ public function actionEquipe()
 					$pessoa->cartao_ufrgs = $pess['cartao_ufrgs'];
 					$pessoa->orgao_expedidor = $pess['orgao_expedidor'];
 					$pessoa->orgao_departamento = $pess['orgao_departamento'];
-					$pessoa->instituicao = $pess['instituicao'];
-					$pessoa->login = $pess['email']; //adapta login para email
+					$pessoa->instituicao = $pess['instituicao'];					
 					$pessoa->endereco_profissional = $pess['endereco_profissional'];
 					$pessoa->first_login = $pess['first_login'];
 					$pessoa->descricao_en = $pess['descricao_en'];
 					$pessoa->siape = $pess['siape'];
 					$pessoa->endereco_residencial = $pess['endereco_residencial'];
 					$pessoa->curso = $pess['curso'];	
-
-
-
 
 					if( $pessoa->save(true) ){
 						echo '<span style="background-color: #AFA">';
