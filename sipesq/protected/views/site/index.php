@@ -53,38 +53,6 @@ Yii::app()->clientScript->registerCssFile($baseUrl ."/jScrollPane/jquery.jscroll
 	</div>
 </div>
 
-
-<?php /*
-
-	<div id="update-form"></div>
-	<div class="row">
-		<div class="kanban-wrapper">
-			<div class="span4 kanban-box" id="atv-todo">
-				<div class="kanban-header">A fazer</div>
-				<div class="kanban atv-list" id="atv-list-todo">		
-				</div>
-			</div>
-			
-			<div class="span3 kanban-box" id="atv-today">
-				<div class="kanban-header">Hoje</div>
-				<div class="kanban atv-list" id="atv-list-today">
-				</div>
-			</div>
-			 
-			<div class="span4 kanban-box last" id="atv-done">
-				<div class="kanban-header">Concluídas</div>
-				<div class="kanban atv-list" id="atv-list-done">
-				</div>
-			</div>
-		</div>
-		
-	</div>
-	<hr>
-	<?php $user = Pessoa::findByUserName(Yii::app()->user->name); ?>
-	<div id="pendencias">
-		<?php  $this->renderPartial("_pendencias", array('user'=>$user)); ?>
-	</div>
-*/?>
 <div class="row">
 	<div class="span12">
 		<div id="agenda-bolsistass">

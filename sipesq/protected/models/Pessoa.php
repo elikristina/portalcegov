@@ -47,7 +47,6 @@ class Pessoa extends CActiveRecord
 {
         //vars
         public $equipe="";
-        public $gravatar;
         public $id;
         public $name;
         /**
@@ -234,39 +233,9 @@ class Pessoa extends CActiveRecord
          */
         public function validaProjetos($attribute,$params){
                          if(count($this->$attribute) < 1)
-                                $this->addError($attribute, 'VocÃª deve especificar pelo menos um projeto.');
+                                $this->addError($attribute, 'Você deve especificar pelo menos um projeto.');
         }
 
-        /**
-         *
-         * Encontra uma pessoa a partir do seu username (login)
-         * @param string $username
-         * @return Pessoa $model se encontrar. null se nÃ£o encontrar
-         */
-        public static function findByUserName($username){
-                $model = Pessoa::model()->find(array('condition'=>'login = :user', 'select'=>'cod_pessoa, login, nome_curto, nome, password', 'params'=>array('user'=>$username)));
-
-                if($username == null){
-                        //Se a pessoa nÃ£o contÃ©m login retorna um array vazio
-                        return null;
-                }
-
-                return $model;
-        }
-
-        /**
-         *
-         * Encontra uma pessoa a partir do seu login ou email
-         * @param string $username
-         * @return Pessoa $model se encontrar. null se nÃ£o encontrar
-         */
-        public static function findForLogin($username){
-                if($username == null) return null;
-                
-                $model = Pessoa::model()->find(array('condition'=>'login = :user OR email = :user', 'select'=>'cod_pessoa, login, email, nome_curto, nome, password', 'params'=>array('user'=>$username)));
-             
-                return $model;
-        }
 
         /**
          *

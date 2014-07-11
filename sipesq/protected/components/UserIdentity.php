@@ -72,8 +72,7 @@ public function autentica(){
 	   	} else {
 	   		
 		   		//Carrega atributos do usuário
-		   		$pessoa = new Pessoa();
-		   		$pessoa = $pessoa->findByUserName($this->username);
+		   		$pessoa = Pessoa::model()->findByAttributes(array('login'=>$this->username));
 		   		
 		   		if($pessoa != null){
 		   			
