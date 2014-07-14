@@ -94,6 +94,7 @@ class Pessoa extends CActiveRecord
                 // NOTE: you may need to adjust the relation name and the related
                 // class name for the relations automatically generated below.
                 return array(
+                    /*
                     'pessoa_financeiro' => array(self::HAS_MANY, 'PessoaFinanceiro', 'cod_pessoa'),
                     'funcoes' => array(self::HAS_MANY, 'FuncoesPessoa', 'cod_pessoa'),
                     'projetos' => array(self::HAS_MANY, 'Projeto', 'cod_professor'),
@@ -104,15 +105,18 @@ class Pessoa extends CActiveRecord
                     'atividades' => array(self::MANY_MANY, 'Atividade', 'atividade_pessoa(cod_pessoa, cod_atividade)'),
                     'atividades_responsavel' => array(self::HAS_MANY, 'Atividade', 'cod_pessoa'),
                     'permissao_projeto' => array(self::MANY_MANY, 'Projeto', 'permissao_projeto(cod_pessoa, cod_projeto)'),
-
-                    //Relações herdadas do CEGOV
-                    'categorias' => array(self::MANY_MANY, 'Categoria', 'pessoa_categoria(cod_pessoa, cod_categoria)'),
-                    'gts_coordenador' => array(self::HAS_MANY, 'GrupoTrabalho', 'cod_coordenador', 'select'=>'cod_gt, nome, nome_en'),
-                    'gts' => array(self::MANY_MANY, 'GrupoTrabalho', 'pessoa_gt(cod_pessoa, cod_gt)', 'select'=>'cod_gt, nome, nome_en'),
-                    'publicacoes_pessoais' => array(self::MANY_MANY, 'Publicacao', 'pessoa_publicacao(cod_pessoa, cod_publicacao)', 'condition'=>'pessoal = true', 'select'=>'cod_publicacao, titulo'),
-                    'publicacoes_cegov' => array(self::MANY_MANY, 'Publicacao', 'pessoa_publicacao(cod_pessoa, cod_publicacao)', 'condition'=>'pessoal = false', 'select'=>'cod_publicacao, titulo'),
-
-
+                    */
+                    'pessoa_financeiro' => array(self::HAS_MANY, 'PessoaFinanceiro', 'cod_pessoa'),
+                    'funcoes' => array(self::HAS_MANY, 'FuncoesPessoa', 'cod_pessoa'),
+                    'projetos' => array(self::HAS_MANY, 'Projeto', 'cod_professor'),
+                    'vinculo_institucional' => array(self::BELONGS_TO, 'VinculoInstitucional', 'cod_vinculo_institucional'),
+                    //OBSOLETO 'categoria' => array(self::BELONGS_TO, 'PessoaCategoria', 'cod_categoria'),
+                    //'projeto_atuante' => array(self::BELONGS_TO, 'Projeto', 'cod_projeto_atuante'),
+                    'projetos_atuante' => array(self::MANY_MANY, 'Projeto', 'projeto_pessoa_atuante(cod_pessoa, cod_projeto)'),
+                    'grupos' => array(self::MANY_MANY, 'Grupo', 'pessoa_grupo(cod_pessoa, cod_grupo)'),
+                    'atividades' => array(self::MANY_MANY, 'Atividade', 'atividade_pessoa(cod_pessoa, cod_atividade)'),
+                    'atividades_responsavel' => array(self::HAS_MANY, 'Atividade', 'cod_pessoa'),
+                    'permissao_projeto' => array(self::MANY_MANY, 'Projeto', 'permissao_projeto(cod_pessoa, cod_projeto)'),
                 );
         }
 
@@ -290,5 +294,46 @@ class Pessoa extends CActiveRecord
 
                 return $atividades;
         }
+
+        /**
+         * 
+         * Traduz o parametro $p para a lingua da aplicacao
+         * @param $p
+         */
+        public function t($p){
+
+            if(Yii::app()->language == 'en'){
+                $parm = $p .'_' .Yii::app()->language;
+                return $this->$parm;    
+            }
+            
+            return $this->$p;
+        }
+
+       /**
+         *
+         * Valida se o usuario especificou pelo menos um projeto
+         * @param unknown_type $attribute
+         * @param unknown_type $params
+         */
+        public function validaProjetos($attribute,$params){
+                         if(count($this->$attribute) < 1)
+                                $this->addError($attribute, 'Você deve especificar pelo menos um projeto.');
+        }
+
+
+        /**
+         *
+         * Dado um identificador do usuÃ¡rio retorna seu nÃ­vel de acesso
+         * @param integer $id
+         * @return integer $accessLevel
+         */
+        public static function getAccessLevel($id){
+                if(Yii::app()->user->isGuest)
+                        return Sipesq::DENIED_PERMITION;
+                $pessoa = Pessoa::model()->findByPk($id);
+                return $pessoa->nivel_acesso;
+        }
+
 
 }
