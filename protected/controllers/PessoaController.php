@@ -434,12 +434,7 @@ class PessoaController extends Controller
 	{
 		
 		//Pasta para arquivo
-		$dir = Yii::getPathOfAlias('application.data.pages');
-		
-		if(Yii::app()->language == 'en'){
-			//Pasta para arquivo em ingles
-			$dir = Yii::getPathOfAlias('application.data.pages.en');	
-		}
+		$dir = Yii::getPathOfAlias('application.data.pages.' .Yii::app()->language);
 		
 		//local do arquivo
 		$file = $dir .DIRECTORY_SEPARATOR ."_intro-equipe.html";
