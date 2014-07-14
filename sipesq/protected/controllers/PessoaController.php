@@ -679,8 +679,6 @@ public function actionEquipe()
 	}
 
 
-
-
 	public function actionImportPessoas($id=null){
 
 		$pessoa = new Pessoa();
