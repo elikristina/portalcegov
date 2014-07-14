@@ -114,11 +114,11 @@ $(function()
 				<?php endif;?>
 			</div>
 			<div class="tab-pane" id="gts" >
-				<?php if(count($model->grupos) > 0):?>
+				<?php if(count($model->gts) > 0):?>
 					<h4><?php //echo Yii::t('Pessoa', 'gts')?></h4>
-						<?php foreach($model->grupos as $grupo):?>
+						<?php foreach($model->gts as $gt):?>
 							<div class="pub-list">
-							<?php echo CHtml::link(CHtml::encode($grupo->t('nome')), array('/gt/view', 'id'=>$grupo->cod_gt));?>
+							<?php echo CHtml::link(CHtml::encode($gt->t('nome')), array('/gt/view', 'id'=>$gt->cod_gt));?>
 							</div>
 						<?php endforeach;?>
 				<?php else:?>

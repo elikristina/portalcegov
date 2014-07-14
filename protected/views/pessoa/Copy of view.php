@@ -51,11 +51,11 @@ $this->menu=array(
 	<?php echo $model->descricao;?>
 </div>
 
-<?php if(count($model->grupos) > 0):?>
+<?php if(count($model->gts) > 0):?>
 <h4 align="center">Grupos de Trabalho</h4>
 <div class="view">
 	<ul>
-		<?php foreach($model->grupos as $grupo):?>
+		<?php foreach($model->gts as $grupo):?>
 		<li><?php echo CHtml::link(CHtml::encode($grupo->nome), array('/gt/view', 'id'=>$grupo->cod_gt));?></li>
 		<?php endforeach;?>
 	</ul>

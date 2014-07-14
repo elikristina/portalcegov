@@ -163,7 +163,7 @@ class GtController extends Controller
 	
 	
 	/**
-	 * Ordena os grupos
+	 * Ordena os grupos de trabalho
 	 * Acontece via requisição ajax
 	 */
 	public function actionSort()
@@ -181,8 +181,8 @@ class GtController extends Controller
 			
 		}else{
 			//Renderiza a pagina
-			$grupos = GrupoTrabalho::model()->findAll(array('order'=>'ordem'));
-			$this->render('sort',array('grupos'=>$grupos,));
+			$gts = GrupoTrabalho::model()->findAll(array('order'=>'ordem'));
+			$this->render('sort',array('gts'=>$gts,));
 		}
 	}
 	

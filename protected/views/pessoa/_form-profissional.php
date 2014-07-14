@@ -73,11 +73,11 @@
 	</div>
 	<div class="span10">
 		<?php if (Yii::app()->user->name == 'admin'):?>
-			<?php  echo $form->listBox($model,'grupos', CHtml::listData(GrupoTrabalho::model()->findAll(array('order'=>'nome')), 'cod_gt', 'nome'), array("multiple"=>"multiple", "size"=>GrupoTrabalho::model()->count(), 'class'=>'span12')); ?>
-			<?php echo $form->error($model,'grupos'); ?>
+			<?php  echo $form->listBox($model,'gts', CHtml::listData(GrupoTrabalho::model()->findAll(array('order'=>'nome')), 'cod_gt', 'nome'), array("multiple"=>"multiple", "size"=>GrupoTrabalho::model()->count(), 'class'=>'span12')); ?>
+			<?php echo $form->error($model,'gts'); ?>
 		<?php else:?>
-			<?php echo $form->checkBoxList($model,'grupos', CHtml::listData(GrupoTrabalho::model()->findAll(array('order'=>'nome', 'condition'=>'cod_gt <> 12')), 'cod_gt', 'nome'), array('separator'=>'', 'template'=>'<div class="checkBoxList">{input}{label}</div>'));?>
-			<?php echo $form->error($model,'grupos'); ?>
+			<?php echo $form->checkBoxList($model,'gts', CHtml::listData(GrupoTrabalho::model()->findAll(array('order'=>'nome', 'condition'=>'cod_gt <> 12')), 'cod_gt', 'nome'), array('separator'=>'', 'template'=>'<div class="checkBoxList">{input}{label}</div>'));?>
+			<?php echo $form->error($model,'gts'); ?>
 		<?php endif; ?>
 	</div>
 </div>

@@ -19,7 +19,7 @@
 			'celular' => 'Celular',
 			'cartao_ufrgs' => 'Nº Matrícula',
 			'siape' => 'Nº SIAPE',
-			'grupos' => 'Grupos de Trabalho',
+			'gts' => 'Grupos de Trabalho',
 			'orgao_expedidor' => 'Órgão Emissor',
 			'orgao_departamento'=>"Órgão/Departamento",
 			'endereco_profissional'=>"Endereço Profissional",

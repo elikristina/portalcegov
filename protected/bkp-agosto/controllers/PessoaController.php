@@ -177,12 +177,12 @@ class PessoaController extends Controller
 			$model = $this->loadModel($id);
 			//Monta um array com os GTs que ela atua 
 			$gts = array();
-			foreach($model->grupos_coordenador as $gt){
+			foreach($model->gts_coordenador as $gt){
 				$gts[] = $gt->nome;
 			}
 			
 			//Só deleta se não for coordenador de nenhum GT
-			if(count($model->grupos_coordenador)){
+			if(count($model->gts_coordenador)){
 				//throw new CHttpException(400, $model->nome . ' não pode ser deletado, pois é coordenador do(s) GT(s): ' .implode(', ', $gts));
 				//echo $model->nome . ' não pode ser deletado, pois é coordenador do(s) GT(s): ' .implode(', ', $gts);
 				$this->render('error',array('model'=>$model));

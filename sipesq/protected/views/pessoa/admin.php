@@ -24,7 +24,7 @@ $('.search-form form').submit(function(){
 
 <h1>Gerenciar</h1>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Busca Avançada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,

@@ -105,8 +105,8 @@ class PessoaController extends Controller
 		 $model->categorias = $_POST["Pessoa"]["categorias"];
 		 
 		 //Carrega informações dos GTs
-		if(isset($_POST["Pessoa"]["grupos"]))
-		 $model->grupos = $_POST["Pessoa"]["grupos"];
+		if(isset($_POST["Pessoa"]["gts"]))
+		 $model->gts = $_POST["Pessoa"]["gts"];
 
 
 		if(isset($_POST["EnderecoResidencial"])){
@@ -180,8 +180,8 @@ class PessoaController extends Controller
 		 $model->categorias = $_POST["Pessoa"]["categorias"];
 		 
 		 //Carreta informações dos GTs
-		if(isset($_POST["Pessoa"]["grupos"]))
-		 $model->grupos = $_POST["Pessoa"]["grupos"];
+		if(isset($_POST["Pessoa"]["gts"]))
+		 $model->gts = $_POST["Pessoa"]["gts"];
 
 		if(isset($_POST["EnderecoResidencial"])){
 			$model->endereco_residencial = json_encode($_POST["EnderecoResidencial"]);
@@ -230,12 +230,12 @@ class PessoaController extends Controller
 			$model = $this->loadModel($id);
 			//Monta um array com os GTs que ela atua 
 			$gts = array();
-			foreach($model->grupos_coordenador as $gt){
+			foreach($model->gts_coordenador as $gt){
 				$gts[] = $gt->nome;
 			}
 			
 			//Só deleta se não for coordenador de nenhum GT
-			if(count($model->grupos_coordenador)){
+			if(count($model->gts_coordenador)){
 				//throw new CHttpException(400, $model->nome . ' não pode ser deletado, pois é coordenador do(s) GT(s): ' .implode(', ', $gts));
 				//echo $model->nome . ' não pode ser deletado, pois é coordenador do(s) GT(s): ' .implode(', ', $gts);
 				$this->render('error',array('model'=>$model));
@@ -617,9 +617,9 @@ class PessoaController extends Controller
 		protected function saveGts($model){
 				
 				PessoaGT::model()->deleteAll('cod_pessoa = '.$model->cod_pessoa);
-				for($i=0;$i<count($model->grupos);$i++){
+				for($i=0;$i<count($model->gts);$i++){
 							$gt = new PessoaGT();
-							$gt->cod_gt = $model->grupos[$i];
+							$gt->cod_gt = $model->gts[$i];
 							$gt->cod_pessoa = $model->cod_pessoa;
 							$gt->save();
 							unset($gt);

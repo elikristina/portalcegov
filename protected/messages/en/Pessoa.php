@@ -18,7 +18,7 @@
 			'telefone' => 'Phone',
 			'celular' => 'Mobile',
 			'cartao_ufrgs' => 'UFRGS Card',
-			'grupos' => 'Working Group',
+			'gts' => 'Working Group',
 			'orgao_expedidor' => 'Department Dispatcher',
 			'orgao_departamento'=>"University Department",
 			'endereco_profissional'=>"Professional Address",

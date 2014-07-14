@@ -26,8 +26,8 @@
  *
  * The followings are the available model relations:
  * @property Categoria[] $categorias
- * @property GrupoTrabalho[] $grupos_coordenador - GTs que esta pessoa coordena
- * @property GrupoTrabalho[] $grupos - GTs que esta pessoa atua
+ * @property GrupoTrabalho[] $gts_coordenador - GTs que esta pessoa coordena
+ * @property GrupoTrabalho[] $gts - GTs que esta pessoa atua
  * @property Publicacao[] $publicacoes_cegov - Publicacoes desta pessoa no CEGOV
  * @property Publicacao[] $publicacoes_pessoais - Publicacoes pessoais desta pessoa
  */
@@ -75,7 +75,7 @@ class Pessoa extends CActiveRecord
 				 'maxSize'=> 1024*420 //400kb
 					),
 			array('categorias', 'validaCategoria'),
-			array('grupos', 'validaGrupos'),
+			array('gts', 'validaGrupos'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('cod_pessoa, descricao_en, descricao, pesquisa, lattes, nome, email, senha, curso', 'safe', 'on'=>'search'),
@@ -97,7 +97,7 @@ class Pessoa extends CActiveRecord
 				 'maxSize'=> 1024*420 //400kb
 					),
 			array('categorias', 'validaCategoria'),
-			array('grupos', 'validaGrupos'),
+			array('gts', 'validaGrupos'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('cod_pessoa, descricao, pesquisa, lattes, nome, email, senha, curso', 'safe', 'on'=>'search'),
@@ -116,8 +116,8 @@ class Pessoa extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'categorias' => array(self::MANY_MANY, 'Categoria', 'pessoa_categoria(cod_pessoa, cod_categoria)'),
-			'grupos_coordenador' => array(self::HAS_MANY, 'GrupoTrabalho', 'cod_coordenador', 'select'=>'cod_gt, nome, nome_en'),
-			'grupos' => array(self::MANY_MANY, 'GrupoTrabalho', 'pessoa_gt(cod_pessoa, cod_gt)', 'select'=>'cod_gt, nome, nome_en'),
+			'gts_coordenador' => array(self::HAS_MANY, 'GrupoTrabalho', 'cod_coordenador', 'select'=>'cod_gt, nome, nome_en'),
+			'gts' => array(self::MANY_MANY, 'GrupoTrabalho', 'pessoa_gt(cod_pessoa, cod_gt)', 'select'=>'cod_gt, nome, nome_en'),
 			'publicacoes_pessoais' => array(self::MANY_MANY, 'Publicacao', 'pessoa_publicacao(cod_pessoa, cod_publicacao)', 'condition'=>'pessoal = true', 'select'=>'cod_publicacao, titulo'),
 			'publicacoes_cegov' => array(self::MANY_MANY, 'Publicacao', 'pessoa_publicacao(cod_pessoa, cod_publicacao)', 'condition'=>'pessoal = false', 'select'=>'cod_publicacao, titulo'),
 		);
@@ -147,7 +147,7 @@ class Pessoa extends CActiveRecord
 			'telefone' => Yii::t('Pessoa', 'telefone'),
 			'celular' => Yii::t('Pessoa', 'celular'),
 			'cartao_ufrgs' => Yii::t('Pessoa', 'cartao_ufrgs'),
-			'grupos' => Yii::t('Pessoa', 'grupos'),
+			'gts' => Yii::t('Pessoa', 'gts'),
 			'orgao_expedidor' => Yii::t('Pessoa', 'orgao_expedidor'),
 			'orgao_departamento'=>Yii::t('Pessoa', 'orgao_departamento'),
 			'curso'=>Yii::t('Pessoa', 'curso'),

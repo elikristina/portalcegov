@@ -15,7 +15,7 @@ $this->menu=array(
 <h1>Erro</h1>
 <hr>
 <p><b><?php echo CHtml::encode($model->nome)?></b> não pode ser excluído, pois é coordenador dos seguintes GTs:</p>
-<p><?php foreach($model->grupos_coordenador as $gt):?>
+<p><?php foreach($model->gts_coordenador as $gt):?>
 	<?php echo CHtml::link($gt->nome, array('/gt/view', 'id'=>$gt->cod_gt))?><br>
 <?php endforeach;?>
 </p>

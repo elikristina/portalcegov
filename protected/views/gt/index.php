@@ -33,7 +33,7 @@ Yii::app()->clientScript->registerScript('accordion',"
 					<?php foreach($gts as $key=>$gt):?>
 					<?php echo $key%3==0 ? "<div class=\"row-fluid gt-index\">" : "" ;?>
 						<div class="span4" >
-							<h5><?php echo CHtml::link($gt->nome, array('/gt/view', 'id'=>$gt->cod_gt));?></h5>
+							<h5><?php echo CHtml::link($gt->t('nome'), array('/gt/view', 'id'=>$gt->cod_gt));?></h5>
 						</div>
 					<?php echo $key==2 || $key==5 || $key==8 ? "</div>" : "" ;?>
 					<?php endforeach;?>

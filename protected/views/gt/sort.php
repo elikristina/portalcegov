@@ -58,7 +58,7 @@ Arraste os GTs conforme queira ordená-los.
 </p>
 
 <ul id="sortable">
-<?php foreach($grupos as $gt):?>
+<?php foreach($gts as $gt):?>
 	<?php $this->renderPartial("_sort", $gt); ?>
 <?php endforeach;?>
 </ul>
