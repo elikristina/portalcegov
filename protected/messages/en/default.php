@@ -24,6 +24,7 @@ return array(
 	'inscricoes'=>'Enrollment',
 	'estrutura'=>'Structure',
 	'contato'=>'Contact',
+	'ferramentas'=>'Tools',
 	
 
 	//Comandos

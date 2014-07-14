@@ -24,6 +24,7 @@ return array(
 	'inscricoes'=>'Inscrições',
 	'estrutura'=>'Estrutura',
 	'contato'=>'Contato',
+	'ferramentas'=>'Ferramentas',
 
 	//Comandos
 	'editar'=>'Editar',
