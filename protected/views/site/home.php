@@ -29,8 +29,6 @@ Yii::app()->clientScript->registerScript('semi-carousel',"
 <?php $noticias = Noticia::model()->findAll(array('order'=>'cod_noticia DESC, titulo', 'limit'=>5))?>
 <div id="myCarousel" class="carousel slide hidden-phone" >
   
-
-  
   <div class="carousel-inner ">
   
   <div class="active item ">
