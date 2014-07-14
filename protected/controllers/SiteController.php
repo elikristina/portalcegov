@@ -282,7 +282,7 @@ public function actionAcervoDigital(){
 	{
 		
 		//Pasta para arquivo
-		$dir = Yii::getPathOfAlias('application.data.pages');
+		$dir = Yii::getPathOfAlias('application.data.pages.' .Yii::app()->language);
 		//local do arquivo
 		$file = $dir .DIRECTORY_SEPARATOR ."_home.html";
 
