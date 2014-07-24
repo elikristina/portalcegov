@@ -5,7 +5,6 @@ themes/classic/views/
 files/
 images/
 *.log
-protected/config/main.php
 sipesq/protected/config/main.php
 
 #SIPESQ
