@@ -11,4 +11,4 @@ $this->menu=array(
 
 <h1>Adicionar Pessoa</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'endereco_res'=>$endereco_res)); ?>

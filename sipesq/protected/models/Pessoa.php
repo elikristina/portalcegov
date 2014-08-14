@@ -74,8 +74,8 @@ class Pessoa extends CActiveRecord
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-                        array('nome, login,  nome_mae, password', 'required'),
-                        array('login', 'unique', 'message'=>'O login {value} já foi utilizado por outra pessoa. Escolha outro login.'),
+                        array('nome, nome_mae, endereco_residencial, email', 'required'),
+                        array('email', 'unique', 'message'=>'O e-mail {value} já está em uso.'),
                         array('first_login, equipe_atual', 'boolean'),
                         //array('projetos_atuante', 'validaProjetos'),
                         array('cod_projeto_atuante, cod_vinculo_institucional, nivel_acesso', 'numerical', 'integerOnly'=>true),
@@ -130,7 +130,7 @@ class Pessoa extends CActiveRecord
                 'nome' => 'Nome Completo',
                 'nome_curto'=>'Apelido',
                 'nome_mae' => 'Nome Completo da Mãe',
-                'telefone' => 'Código de Área e Telefone',
+                'telefone' => 'Telefone',
                 'cpf' => 'CPF',
                 'rg' => 'RG',
                 'cartao_ufrgs' => 'Número de Matrícula',

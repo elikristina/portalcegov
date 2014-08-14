@@ -97,11 +97,11 @@ class PessoaController extends Controller
 	 */
 	public function actionView($id)
 	{
-		
-		
-		$this->render('_fullview',array(
-			'data'=>$this->loadModel($id),
-		));
+		$model=$this->loadModel($id);
+		$model->endereco_residencial =EnderecoResidencial::load(json_decode($model->endereco_residencial));
+ 		$this->render('_fullview',array(
+			'data'=>$model,
+ 		));
 	}
 
 	/**
@@ -111,6 +111,12 @@ class PessoaController extends Controller
 	public function actionCreate()
 	{
 		$model=new Pessoa;
+
+		$endereco_res = new EnderecoResidencial();
+ 		
+		if(isset($_POST["EnderecoResidencial"])){
+			$model->endereco_residencial = json_encode($_POST["EnderecoResidencial"]);
+		}
 		
 		$model->password = '';			
 		if(isset($_POST['Pessoa']))
@@ -142,6 +148,7 @@ class PessoaController extends Controller
 		
 		$this->render('create',array(
 			'model'=>$model,
+			'endereco_res'=>$endereco_res,
 		));
 	}
 	
@@ -172,7 +179,11 @@ class PessoaController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-		
+		$endereco_res=EnderecoResidencial::load(json_decode($model->endereco_residencial));
+
+		if(isset($_POST["EnderecoResidencial"])){
+			$model->endereco_residencial = json_encode($_POST["EnderecoResidencial"]);
+		}		
 		
 		if(isset($_POST['Pessoa']))
 		{
@@ -209,6 +220,7 @@ class PessoaController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'endereco_res'=>$endereco_res,
 		));
 	}
 

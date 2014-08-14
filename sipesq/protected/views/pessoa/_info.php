@@ -27,25 +27,54 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('rg')); ?>:</b>
 	<?php echo CHtml::encode($data->rg); ?>
 	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('cidade')); ?>:</b>
-	<?php echo CHtml::encode($data->cidade); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('rua_complemento')); ?>:</b>
-	<?php echo CHtml::encode($data->rua_complemento); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('bairro')); ?>:</b>
-	<?php echo CHtml::encode($data->bairro); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('cep')); ?>:</b>
-	<?php echo CHtml::encode($data->cep); ?>
-	<br />
 	
 	</div> <!-- Informações Pessoais -->
-	
+
+	<h5>Endereço</h5>
+	<div class="view">
+		<?php if ($data->endereco_residencial->tipo == 'residencial'): ?>
+			<b><?php echo CHtml::encode($data->getAttributeLabel('logradouro')); ?>:</b>
+			<?php echo CHtml::encode($data->endereco_residencial->logradouro . ', ' . $data->endereco_residencial->numero); ?>
+			<br />
+
+			<b><?php echo CHtml::encode($data->getAttributeLabel('complemento')); ?>:</b>
+			<?php echo CHtml::encode($data->endereco_residencial->complemento); ?>
+			<br />
+
+			<b><?php echo CHtml::encode($data->getAttributeLabel('bairro')); ?>:</b>
+			<?php echo CHtml::encode($data->endereco_residencial->bairro); ?>
+			<br />
+
+			<b><?php echo CHtml::encode($data->getAttributeLabel('Cidade')); ?>:</b>
+			<?php echo CHtml::encode($data->endereco_residencial->cidade); ?>
+			<br />
+
+			<b><?php echo CHtml::encode($data->getAttributeLabel('Estado')); ?>:</b>
+			<?php echo CHtml::encode($data->endereco_residencial->estado); ?>
+			<br />
+
+			<b><?php echo CHtml::encode($data->getAttributeLabel('cep')); ?>:</b>
+			<?php echo CHtml::encode($data->endereco_residencial->cep); ?>
+			<br />
+		<?php else:?>
+			<b><?php echo CHtml::encode($data->getAttributeLabel('Logradouro')); ?>:</b>
+			<?php echo CHtml::encode($data->rua_complemento); ?>
+			<br />
+
+			<b><?php echo CHtml::encode($data->getAttributeLabel('bairro')); ?>:</b>
+			<?php echo CHtml::encode($data->bairro); ?>
+			<br />
+
+			<b><?php echo CHtml::encode($data->getAttributeLabel('cidade')); ?>:</b>
+			<?php echo CHtml::encode($data->cidade); ?>
+			<br />
+
+			<b><?php echo CHtml::encode($data->getAttributeLabel('cep')); ?>:</b>
+			<?php echo CHtml::encode($data->cep); ?>
+			<br />
+		<?php endif;?>
+	</div>
+
 	<h5>Informações Bancárias</h5>
 	<div class="view">
 
