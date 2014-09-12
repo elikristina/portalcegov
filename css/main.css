@@ -611,6 +611,21 @@ span.more-info a:hover
 	background-repeat: repeat;
 }
 
+.vagas {
+	border-top: 1px dotted;
+	padding-top: 20px;
+}
+
+.home-list {
+	padding: 5px 0;
+}
+
+.home-list a{
+	color: #555555;
+	font-weight: 400;
+	line-height: 150%;
+}
+
 
 div#map_canvas{
         width:100%;
@@ -1076,4 +1091,9 @@ div.row-fluid {
 
 #offline h4 {
 	font-weight: 300;
+}
+
+.table-projetos td{
+	height: 70px;
+	vertical-align: middle;
 }
