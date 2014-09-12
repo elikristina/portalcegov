@@ -43,15 +43,23 @@ class ProjetoController extends Controller
 	
 	public function actionIndex()
 	{
-		
+
 		$dataProvider=new CActiveDataProvider('Projeto', array(
 			'criteria'=>array(
-				'order'=>'t.nome'
+				'order'=>'t.nome',
+			),
+		));
+
+		$dataGts=new CActiveDataProvider('Projeto', array(
+			'criteria'=>array(
+				'order'=>'t.nome',
+				'condition'=>'cod_gt!=12 and (situacao=3 or situacao=4 or situacao=5)',
 			),
 		));
 		
 		$this->render('index', array(
-			'dataProvider'=>$dataProvider
+			'dataProvider'=>$dataProvider,
+			'dataGts'=>$dataGts
 		));
 	}
 	

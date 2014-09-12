@@ -43,7 +43,16 @@ $this->menu=array(
 			<br /> -->
 		
 			<b><?php echo CHtml::encode($model->getAttributeLabel('situacao')); ?>:</b>
-			<?php echo CHtml::encode($model->t('situacao')); ?>
+			<?php switch ($model->t('situacao')) {
+				case '3' || '4':
+					echo 'Andamento';
+					break;
+
+				case '5':
+					echo 'Finalizado';
+					break;
+			}
+			//echo CHtml::encode($model->t('situacao')); ?>
 			<br />
 			
 		</p>
