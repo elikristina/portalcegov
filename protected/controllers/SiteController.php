@@ -6,7 +6,7 @@ class SiteController extends Controller
 	/**
 	 * Declares class-based actions.
 	 */
-	public $layout='//layouts/threecolumn';
+	public $layout='//layouts/onecolumn';
 	public $id_pagina="home";
 	
 	public function actions()
