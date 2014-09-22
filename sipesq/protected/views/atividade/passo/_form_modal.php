@@ -4,17 +4,18 @@
 /* @var $form CActiveForm */
 ?>
 
+
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'atividade-passo-form',
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
+	'enableClientValidation'=>true,
 )); ?>
-
 
 	<div class="input">
 		<?php echo $form->labelEx($model,'cod_pessoa'); ?>
-		<?php $listDataPessoas = CHtml::listData(Pessoa::model()->with('categoria')->findAll(array('order'=>'equipe_atual DESC, t.nome')), 'cod_pessoa', 'nome', 'categoria.nome');?>
+		<?php $listDataPessoas = CHtml::listData(Pessoa::model()->findAll(array('order'=>'equipe_atual DESC, t.nome')), 'cod_pessoa', 'nome');?>
 		<?php  echo $form->dropDownList($model,'cod_pessoa', $listDataPessoas, array('prompt'=>"Selecione uma Pessoa")); ?>
 		<?php echo $form->error($model,'cod_pessoa'); ?>
 	</div>	

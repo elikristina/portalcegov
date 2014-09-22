@@ -40,6 +40,7 @@ $this->menu=array(
 			theme: 'facebook',
 			searchingText: 'Buscando',
 			hintText: 'Digite um nome',
+			noResultsText: 'Nenhum resultado',
 			tokenLimit: 1
 			
 		});
@@ -327,17 +328,25 @@ $this->menu=array(
 	<div class="span6">
 		<h4>Passos em Aberto</h4>
 		<div class="panel-passos" id="panel-passos-abertos">
-			<?php foreach($model->passos_abertos as $p):?>
-				<?php $this->renderPartial('/atividade/passo/_view', array('model'=>$p))?>
-			<?php endforeach;?>
+			<?php if($model->passos_abertos == NULL):?>
+				<p>Não há passos em aberto<p>
+			<?php else:?>
+				<?php foreach($model->passos_abertos as $p):?>
+					<?php $this->renderPartial('/atividade/passo/_view', array('model'=>$p))?>
+				<?php endforeach;?>
+			<?php endif;?>
 		</div>
 	</div>
 	<div class="span6">
 		<h4>Passos Finalizados</h4>
 		<div class="panel-passos" id="panel-passos-finalizados">
-			<?php foreach($model->passos_finalizados as $p):?>
-				<?php $this->renderPartial('/atividade/passo/_view', array('model'=>$p))?>
-			<?php endforeach;?>
+			<?php if($model->passos_finalizados == NULL):?>
+				<p>Não há passos finalizados</p>
+			<?php else:?>
+				<?php foreach($model->passos_finalizados as $p):?>
+					<?php $this->renderPartial('/atividade/passo/_view', array('model'=>$p))?>
+				<?php endforeach;?>
+			<?php endif;?>
 		</div>
 	</div>
 </div>    
