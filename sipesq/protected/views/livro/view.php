@@ -32,7 +32,7 @@ $this->menu=array(
  	$historico_emprestimos = EmprestimoLivro::model()->findAll('cod_livro = '.$model->cod_livro .' ORDER BY data_retirada DESC');
  ?>
  	
-<h1><?php echo $model->titulo; ?></h1>
+<h3><?php echo $model->titulo; ?></h3>
 
 <?php if(count($emprestimo_atual) > 0):?>
 	<h4><label><b>Emprestado a: </b></label><?php echo CHtml::encode($emprestimo_atual[0]->pessoa->nome);?></h4>
@@ -40,7 +40,7 @@ $this->menu=array(
 	
 
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php /*$this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'autor',
@@ -62,7 +62,86 @@ $this->menu=array(
         'nro_paginas',
         'localizacao_sabi',
 	),
-)); ?>
+)); */?>
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('autor')); ?>:</b>
+	<?php echo CHtml::encode($model->autor); ?>
+	<br />
+
+	
+	<b><?php echo CHtml::encode($model->getAttributeLabel('ano')); ?>:</b>
+	<?php echo CHtml::encode($model->ano); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('volume')); ?>:</b>
+	<?php echo CHtml::encode($model->volume); ?>
+	<br />
+
+	
+	<b><?php echo CHtml::encode($model->getAttributeLabel('titulo_abnt')); ?>:</b>
+	<?php echo CHtml::encode($model->titulo_abnt); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('subtitulo')); ?>:</b>
+	<?php echo CHtml::encode($model->subtitulo); ?>
+	<br />
+
+	
+	<b><?php echo CHtml::encode($model->getAttributeLabel('editora')); ?>:</b>
+	<?php echo CHtml::encode($model->editora); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('cidade_publicacao')); ?>:</b>
+	<?php echo CHtml::encode($model->cidade_publicacao); ?>
+	<br />
+
+	
+	<b><?php echo CHtml::encode($model->getAttributeLabel('nro_edicao')); ?>:</b>
+	<?php echo CHtml::encode($model->nro_edicao); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('nro_patrimonio')); ?>:</b>
+	<?php echo CHtml::encode($model->nro_patrimonio); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('cod_projeto')); ?>:</b>
+	<?php if (empty($model->cod_projeto)):?>
+	<?php echo 'Não vinculado a projeto';?>
+	<?php else:?>
+	<?php echo CHtml::encode($model->projeto->nome);?>
+	<?php endif;?>
+	<br/>
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('valor')); ?>:</b>
+	<?php echo CHtml::encode($model->valor); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('local_compra')); ?>:</b>
+	<?php echo CHtml::encode($model->local_compra); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('nro_nota_fiscal')); ?>:</b>
+	<?php echo CHtml::encode($model->nro_nota_fiscal); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('isbn')); ?>:</b>
+	<?php echo CHtml::encode($model->isbn); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('nro_exemplares')); ?>:</b>
+	<?php echo CHtml::encode($model->nro_exemplares); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('nro_paginas')); ?>:</b>
+	<?php echo CHtml::encode($model->nro_paginas); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($model->getAttributeLabel('localizacao_sabi')); ?>:</b>
+	<?php echo CHtml::encode($model->localizacao_sabi); ?>
+	<br />
+
+<br/>
+
 <?php if($model->estaEmprestado()):?>
 	<?php echo CHtml::submitButton('Devolver', array('submit'=>array('devolucao','id'=>$model->cod_livro),'confirm'=>'Deseja devolver este livro?')); ?>
 <?php else:?>

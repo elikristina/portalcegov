@@ -119,7 +119,7 @@
 	
 	<div class="input">
 	<?php echo $form->labelEx($model,'cod_projeto'); ?>
-	<?php echo $form->dropDownList($model,'cod_projeto', CHtml::listData(Projeto::model()->findAll(array('order'=>'nome')), 'cod_projeto', 'nome')); ?>
+	<?php echo $form->dropDownList($model,'cod_projeto', CHtml::listData(Projeto::model()->findAll(array('order'=>'nome')), 'cod_projeto', 'nome'), array('empty'=>'-- Selecione um projeto --')); ?>
 	<?php echo $form->error($model,'cod_projeto'); ?>
 	</div>
 

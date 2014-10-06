@@ -63,13 +63,14 @@ class Livro extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('autor, ano, titulo, editora, cidade_publicacao, nro_edicao, cod_projeto, nro_paginas, nro_exemplares', 'required'),
+			array('autor, ano, titulo, editora, cidade_publicacao, nro_edicao, nro_paginas, nro_exemplares', 'required'),
 			array('nro_patrimonio, nro_exemplares, cod_projeto, ano, volume', 'numerical', 'integerOnly'=>true),
 			array('valor', 'numerical'),
 			array('ano', 'length', 'max'=>4),
 			array('ano', 'numerical', 'min'=>1900),
 			array('volume', 'length', 'max'=>2),
 			array('volume', 'numerical', 'min'=>1),
+			array('cod_projeto', 'default', 'setOnEmpty' => true, 'value' => NULL),
 			array('subtitulo, local_compra, nro_nota_fiscal, isbn, localizacao_sabi, volume', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
