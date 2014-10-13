@@ -19,9 +19,9 @@ class AgendaController extends Controller
 	 * @throws CHttpException
 	 */
 	
-public function actionAjaxDelete($id, $turno, $dia_semana)
+public function actionAjaxDelete($id, $turno, $dia_semana, $local)
 	{
-			Horario::model()->deleteByPk(array('cod_pessoa'=>$id, 'turno'=>$turno, 'dia_semana'=>$dia_semana));
+			Horario::model()->deleteByPk(array('cod_pessoa'=>$id, 'turno'=>$turno, 'dia_semana'=>$dia_semana, 'local'=>$local));
 
 	}
 	
@@ -30,12 +30,13 @@ public function actionAjaxDelete($id, $turno, $dia_semana)
 	 * Adiciona um horario na agenda a partir de requisições ajax
 	 * @throws CHttpException
 	 */
-	public function actionAjaxCreate($id, $turno, $dia_semana){
+	public function actionAjaxCreate($id, $turno, $dia_semana, $local){
 
 		$horario = new Horario();
 		$horario->cod_pessoa = $id;
 		$horario->turno = $turno;
 		$horario->dia_semana = $dia_semana;
+		$horario->local = $local;
 		$horario->save();
 	}
 	
@@ -49,7 +50,7 @@ public function actionAjaxDelete($id, $turno, $dia_semana)
 			$horarios = Horario::model()->findAll('cod_pessoa = ' .$id);
 		
 			
-		$response = CJSON::encode($horarios, 'cod_pessoa', 'dia_semana', 'turno');
+		$response = CJSON::encode($horarios, 'cod_pessoa', 'dia_semana', 'turno', 'local');
 			echo $response;
 			
 	

@@ -13,6 +13,7 @@
  */
 class Horario extends CActiveRecord
 {
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Horario the static model class
@@ -38,11 +39,11 @@ class Horario extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cod_pessoa, dia_semana, turno', 'required'),
+			array('cod_pessoa, dia_semana, turno, local', 'required'),
 			array('cod_pessoa', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cod_pessoa, dia_semana, turno', 'safe', 'on'=>'search'),
+			array('cod_pessoa, dia_semana, turno, local', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,6 +68,7 @@ class Horario extends CActiveRecord
 			'cod_pessoa' => 'Cod Pessoa',
 			'dia_semana' => 'Dia Semana',
 			'turno' => 'Turno',
+			'local' => 'Local',
 		);
 	}
 
@@ -84,6 +86,7 @@ class Horario extends CActiveRecord
 		$criteria->compare('cod_pessoa',$this->cod_pessoa);
 		$criteria->compare('dia_semana',$this->dia_semana,true);
 		$criteria->compare('turno',$this->turno,true);
+		$criteria->compare('local',$this->local,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

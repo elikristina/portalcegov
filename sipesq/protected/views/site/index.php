@@ -53,10 +53,12 @@ Yii::app()->clientScript->registerCssFile($baseUrl ."/jScrollPane/jquery.jscroll
 	</div>
 </div>
 
+<hr/>
+
 <div class="row">
 	<div class="span12">
 		<div id="agenda-bolsistass">
-	<h4><b>Horário dos Bolsistas</b></h4>
+	<h4 style="text-align:center; background-color:gray; padding: 10px 0; color: #FFFFFF;"><b>Horário de Trabalho</b></h4>
 	<?php  $this->renderPartial("/agenda/_agenda"); ?>
 	<!-- Ferias -->
 	<?php $ferias = Ferias::findAllInVacation();?>

@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1><i>Sistema de Apoio ao Pesquisador - Agenda</i></h1>
+<h1>Agenda</h1>
 <hr>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

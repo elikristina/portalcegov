@@ -1,95 +1,174 @@
-		<table class="table table-bordered">
-		<thead>
-		<tr><th>Segunda</th><th>Terça</th><th>Quarta</th><th>Quinta</th><th>Sexta</th></tr>
-		</thead>
-		<tbody>
+<?php $salas = Horario::model()->findAll(array('select'=>'local', 'condition'=>"local != '' ",  'group'=>'local', 'order'=>'local'));?>
+
+<table class="table agenda">
+	<thead>
 		<tr>
-			<td class="manha segunda">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'segunda' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<th>Turnos/Dias</th>
+			<th>Segunda</th>
+			<th>Terça</th>
+			<th>Quarta</th>
+			<th>Quinta</th>
+			<th>Sexta</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><p class="turno">Manhã</p></td>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'segunda' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
-			<td class="manha terca">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'terca' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'terca' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
-			<td class="manha quarta">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'quarta' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'quarta' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
-			<td class="manha quinta">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'quinta' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'quinta' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
-			<td class="manha sexta">
-				<b>Reunião Equipe</b><br>
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'sexta' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php echo $p->pessoa->nome_curto;?><br>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'manha' AND dia_semana = 'sexta' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
 		</tr>
-		
-		<tr class="info" align="center"><td colspan="5" align="center" >
-		<div align="center"><b>Horário de Almoço</b></div>
-		</td></tr>
 		<tr>
-			<td class="tarde segunda">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'segunda' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<td><p class="turno">Tarde</p></td>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'segunda' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
-			<td class="tarde terca">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'terca' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'terca' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
-			<td class="tarde quarta">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'quarta' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'quarta' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
-			<td class="tarde quinta">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'quinta' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'quinta' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
-			<td class="tarde sexta">
-				<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'sexta' ", 'order'=>'pessoa.nome'))?>
-				<?php foreach($pessoas as $p):?>
-					<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
-						<?php echo $p->pessoa->nome_curto; ?><br>
-					<?php endif;?>
+			<td>
+				<?php foreach($salas as $s):?>
+					<?php echo "<p class='sala'>" . $s->local . "</p>";?>
+					<?php $pessoas = Horario::model()->with('pessoa')->findAll(array('condition'=>"turno = 'tarde' AND dia_semana = 'sexta' AND local='$s->local' ", 'order'=> 'local, pessoa.nome'))?>
+					<?php if (empty($pessoas)):?>
+						<?php echo "<p class='sala-pessoa'>-</p>";?>
+					<?php else:?>
+					<?php foreach($pessoas as $p):?>
+						<?php if(!$p->pessoa->isInVacation($p->cod_pessoa)):?>
+							<?php echo "<p class='sala-pessoa'>" . $p->pessoa->nome . "</p>"; ?>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
 				<?php endforeach;?>
 			</td>
 		</tr>
-		</tbody>
+	</tbody>
+</table>
+
 		
-		</table>
